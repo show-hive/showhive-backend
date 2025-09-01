@@ -14,3 +14,4 @@ include 'showhive-infra:infra-persistence'
 
 // config
 include 'showhive-common:config'
+include 'showhive-common:common-core'
