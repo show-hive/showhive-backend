@@ -1,5 +1,9 @@
-package com.showhive.apis;
+package com.showhive.member.api;
 
+import com.showhive.member.api.dto.MemberResponse;
+import com.showhive.member.api.dto.MemberSignUpRequest;
+import com.showhive.member.application.MemberFindUseCase;
+import com.showhive.member.application.MemberSignUpUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,10 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.showhive.apis.dto.MemberResponse;
-import com.showhive.apis.dto.MemberSignUpRequest;
-import com.showhive.application.MemberFindUseCase;
-import com.showhive.application.MemberSignUpUseCase;
 
 @RestController
 @RequestMapping("member")

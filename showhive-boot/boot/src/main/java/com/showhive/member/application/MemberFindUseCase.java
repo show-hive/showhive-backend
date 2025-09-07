@@ -1,10 +1,10 @@
-package com.showhive.application;
+package com.showhive.member.application;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import com.showhive.apis.dto.MemberResponse;
+import com.showhive.member.api.dto.MemberResponse;
 import com.showhive.member.domain.Member;
 import com.showhive.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

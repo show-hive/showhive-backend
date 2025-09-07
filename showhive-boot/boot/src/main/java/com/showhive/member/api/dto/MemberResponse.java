@@ -1,4 +1,4 @@
-package com.showhive.apis.dto;
+package com.showhive.member.api.dto;
 
 import com.showhive.member.domain.Member;
 
