@@ -7,7 +7,7 @@ jar { enabled = true }
 
 dependencies {
     implementation project(':showhive-data:data')
-    implementation project(':showhive-common:common-core')
+    
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     runtimeOnly 'com.h2database:h2'

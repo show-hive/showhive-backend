@@ -1,6 +1,6 @@
-package com.showhive.exception.member;
+package com.showhive.member.exception;
 
-import com.showhive.exception.ShowHiveException;
+import com.showhive.ShowHiveException;
 import lombok.Getter;
 
 @Getter

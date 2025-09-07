@@ -1,4 +1,4 @@
-package com.showhive.exception;
+package com.showhive;
 
 import lombok.Getter;
 

@@ -9,6 +9,3 @@ include 'showhive-data:data'
 // infra
 include 'showhive-infra:infra-import'
 include 'showhive-infra:infra-persistence'
-
-// config
-include 'showhive-common:common-core'

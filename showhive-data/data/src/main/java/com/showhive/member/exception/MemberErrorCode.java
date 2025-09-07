@@ -1,4 +1,4 @@
-package com.showhive.exception.member;
+package com.showhive.member.exception;
 
 import lombok.Getter;
 

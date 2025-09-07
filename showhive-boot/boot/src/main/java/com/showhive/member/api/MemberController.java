@@ -4,6 +4,7 @@ import com.showhive.member.api.dto.MemberResponse;
 import com.showhive.member.api.dto.MemberSignUpRequest;
 import com.showhive.member.application.MemberFindUseCase;
 import com.showhive.member.application.MemberSignUpUseCase;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class MemberController {
     private final MemberFindUseCase memberFindUseCase;
 
     @PostMapping
-    public ResponseEntity<Void> createMember(@RequestBody MemberSignUpRequest request) {
+    public ResponseEntity<Void> createMember(@RequestBody @Valid MemberSignUpRequest request) {
         memberSignUpUseCase.signUp(request.toCommand());
         return ResponseEntity.ok().build();
     }

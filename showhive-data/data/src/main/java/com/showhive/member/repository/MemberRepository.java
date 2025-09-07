@@ -2,8 +2,10 @@ package com.showhive.member.repository;
 
 import com.showhive.member.domain.Member;
 
+import java.util.Optional;
+
 public interface MemberRepository {
     void signUp(Member member);
 
-    Member findById(long memberId);
+    Optional<Member> findById(long memberId);
 }

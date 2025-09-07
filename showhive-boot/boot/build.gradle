@@ -9,4 +9,5 @@ dependencies {
     implementation project(':showhive-infra:infra-persistence')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
