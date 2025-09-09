@@ -14,9 +14,9 @@ public class MemberFindUseCase {
 
     private final MemberRepository memberRepository;
 
-    public MemberResponse findMember(long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
-        return MemberResponse.from(member);
-    }
+//    public MemberResponse findMember(long memberId) {
+//        Member member = memberRepository.findById(memberId)
+//                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
+//        return MemberResponse.from(member);
+//    }
 }

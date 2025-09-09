@@ -5,7 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 
 public record MemberSignUpRequest(
         @NotBlank
-        String name
+        String email,
+        String username,
+        String password,
+        String name,
+        String role
 ) {
     public MemberSignUpCommand toCommand() {
         return new MemberSignUpCommand(name);
