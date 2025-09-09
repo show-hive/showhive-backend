@@ -1,0 +1,58 @@
+package com.showhive.code.domain;
+
+import com.showhive.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Table(name = "codes")
+@Entity
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+public class Code extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "code_id")
+    private Long id;
+
+    @Column(name = "group_code")
+    private String groupCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Code parent;
+
+    @Column(name = "code")
+    private String value;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "level")
+    private Short level;
+
+    @Column(name = "sort_order")
+    private Short sortOrder;
+
+    @Column(name = "is_active")
+    private Boolean isActive;
+
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
+    private List<Code> children = new ArrayList<>();
+}

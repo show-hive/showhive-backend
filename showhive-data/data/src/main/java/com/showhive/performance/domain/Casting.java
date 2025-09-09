@@ -3,52 +3,42 @@ package com.showhive.performance.domain;
 import com.showhive.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "performances")
+@Table(name = "castings")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Performance extends BaseEntity {
+public class Casting extends BaseEntity {
 
-    @Column(name = "performance_id")
+    @Column(name = "casting_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO Venue 매핑하기
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "session_id", nullable = false)
+    private PerformanceSession performanceSession;
 
-    @Column(name = "running_time")
-    private Duration runningTime;
+    @Column(name = "actor_name")
+    private String actorName;
 
-    @Column(name = "age")
-    private Short age;
+    @Column(name = "cast_role")
+    private String castRole;
 
-    @Column(name = "price")
-    private Integer price;
-
-    @Column(name = "advantage")
-    private String advantageText;
-
-    @Column(name = "performance_info")
-    private String performanceInfo;
-
-    @Column(name = "book_started_at")
-    private LocalDateTime bookStartedAt;
-
-    @Column(name = "book_ended_at")
-    private LocalDateTime bookEndedAt;
 }
