@@ -3,9 +3,12 @@ package com.showhive.performance.domain;
 import com.showhive.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -16,39 +19,29 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "performances")
+@Table(name = "performance_sessions")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Performance extends BaseEntity {
+public class PerformanceSession extends BaseEntity {
 
-    @Column(name = "performance_id")
+    @Column(name = "session_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO Venue 매핑하기
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "performance_id", nullable = false)
+    private Performance performance;
 
-    @Column(name = "running_time")
-    private Duration runningTime;
+    @Column(name = "start_at")
+    private LocalTime startAt;
 
-    @Column(name = "age")
-    private Short age;
+    @Column(name = "end_at")
+    private LocalTime endAt;
 
-    @Column(name = "price")
-    private Integer price;
-
-    @Column(name = "advantage")
-    private String advantageText;
-
-    @Column(name = "performance_info")
-    private String performanceInfo;
-
-    @Column(name = "book_started_at")
-    private LocalDateTime bookStartedAt;
-
-    @Column(name = "book_ended_at")
-    private LocalDateTime bookEndedAt;
+    @Column(name = "session_name")
+    private Short sessionName;
 }
