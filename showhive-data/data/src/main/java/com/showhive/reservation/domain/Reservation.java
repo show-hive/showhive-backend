@@ -2,6 +2,7 @@ package com.showhive.reservation.domain;
 
 import com.showhive.BaseEntity;
 import com.showhive.member.domain.Member;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class Reservation extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

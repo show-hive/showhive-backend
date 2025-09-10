@@ -1,6 +1,7 @@
 package com.showhive.performance.domain;
 
 import com.showhive.BaseEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class PerformanceSeat extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "performance_seat_id")
     private Long id;
 
 // TODO: PerformanceSession 연결
