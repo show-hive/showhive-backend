@@ -1,6 +1,7 @@
 package com.showhive.performance.domain;
 
 import com.showhive.BaseEntity;
+import com.showhive.file.domain.File;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,10 +36,12 @@ public class Casting extends BaseEntity {
     @JoinColumn(name = "session_id", nullable = false)
     private PerformanceSession performanceSession;
 
-    @Column(name = "actor_name")
     private String actorName;
 
-    @Column(name = "cast_role")
     private String castRole;
+
+    @ManyToOne
+    @JoinColumn(name = "file_id")
+    private File profileFile;
 
 }

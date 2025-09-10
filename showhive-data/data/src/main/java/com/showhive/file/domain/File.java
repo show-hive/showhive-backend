@@ -27,33 +27,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class File extends BaseEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_id")
     private Long id;
 
-    @Column(name = "origin_name")
     private String originName;
 
-    @Column(name = "stored_name")
     private String storedName;
 
-    @Column(name = "ext")
     private String ext;
 
-    @Column(name = "file_size")
     private Long fileSize;
 
-    @Column(name = "mime_type")
     private String mimeType;
 
-    @Column(name = "is_active")
     private Boolean isActive;
 
     @Column(name = "storage_path")
     private String path;
 
-    @Column(name = "url")
     private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)

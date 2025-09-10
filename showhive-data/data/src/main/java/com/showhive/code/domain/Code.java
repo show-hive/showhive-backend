@@ -27,11 +27,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Code extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code_id")
     private Long id;
 
-    @Column(name = "group_code")
     private String groupCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,18 +40,15 @@ public class Code extends BaseEntity {
     @Column(name = "code")
     private String value;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "level")
     private Short level;
 
-    @Column(name = "sort_order")
     private Short sortOrder;
 
-    @Column(name = "is_active")
     private Boolean isActive;
 
+    @Builder.Default
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Code> children = new ArrayList<>();
 }

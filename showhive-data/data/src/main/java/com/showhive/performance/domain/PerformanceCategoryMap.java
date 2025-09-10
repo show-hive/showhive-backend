@@ -40,7 +40,7 @@ public class PerformanceCategoryMap extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("codeId")
     @JoinColumn(name = "code_id")
-    private Code code;
+    private Code categoryCode;
 
     @Column(name = "priority")
     private Integer priority;
