@@ -32,13 +32,11 @@ public class Seat extends BaseEntity {
     @JoinColumn(name = "venue_id")
     private Venue venue;
 
-    @Column(name = "`column`")
-    private String column;
+    private String seatColumn;
 
-    @Column(name = "`row`")
-    private Integer row;
+    private Integer seatRow;
 
-    private Integer floor;
+    private Integer seatFloor;
 
     @NotBlank
     private String seatType;
