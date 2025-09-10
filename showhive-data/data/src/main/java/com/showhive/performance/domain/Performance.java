@@ -31,24 +31,18 @@ public class Performance extends BaseEntity {
 
     // TODO Venue 매핑하기
 
+    private String period;
+
     @Column(name = "running_time")
     private Duration runningTime;
 
-    @Column(name = "age")
     private Short age;
 
-    @Column(name = "price")
-    private Integer price;
+    private String advantage;
 
-    @Column(name = "advantage")
-    private String advantageText;
-
-    @Column(name = "performance_info")
     private String performanceInfo;
 
-    @Column(name = "book_started_at")
     private LocalDateTime bookStartedAt;
 
-    @Column(name = "book_ended_at")
     private LocalDateTime bookEndedAt;
 }

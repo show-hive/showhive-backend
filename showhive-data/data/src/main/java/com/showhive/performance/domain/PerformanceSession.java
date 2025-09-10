@@ -36,12 +36,9 @@ public class PerformanceSession extends BaseEntity {
     @JoinColumn(name = "performance_id", nullable = false)
     private Performance performance;
 
-    @Column(name = "start_at")
     private LocalTime startAt;
 
-    @Column(name = "end_at")
     private LocalTime endAt;
 
-    @Column(name = "session_name")
     private Short sessionName;
 }
