@@ -1,6 +1,7 @@
 package com.showhive.performance.domain;
 
 import com.showhive.BaseEntity;
+import com.showhive.code.domain.Code;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,16 +13,18 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Table(name = "performance_seats")
 @Entity
 @Getter
-@Table(name = "performance_seats")
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class PerformanceSeat extends BaseEntity {
 
     @Id
@@ -29,19 +32,17 @@ public class PerformanceSeat extends BaseEntity {
     @Column(name = "performance_seat_id")
     private Long id;
 
-// TODO: PerformanceSession 연결
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "session_id")
-//    private PerformanceSession performanceSession;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "session_id")
+    private PerformanceSession performanceSession;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seat_id")
     private Seat seat;
 
-// TODO: Code 연결
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "code_id")
-//    private Code seatStatusCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "code_id")
+    private Code seatStatusCode;
 
     private int price;
 
