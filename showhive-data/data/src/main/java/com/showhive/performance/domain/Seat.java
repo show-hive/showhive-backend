@@ -34,9 +34,9 @@ public class Seat extends BaseEntity {
 
     private String seatColumn;
 
-    private Integer seatRow;
+    private Short seatRow;
 
-    private Integer seatFloor;
+    private Short seatFloor;
 
     @NotBlank
     private String seatType;
