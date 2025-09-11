@@ -1,7 +1,8 @@
 rootProject.name = 'show-hive'
 
 // boot
-include 'showhive-boot:boot'
+include 'showhive-boot:api'
+include 'showhive-boot:admin'
 
 // data
 include 'showhive-data:data'
