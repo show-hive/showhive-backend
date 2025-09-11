@@ -7,6 +7,7 @@ public enum MemberErrorCode {
 
     //4XX
     MEMBER_NOT_FOUND(400, "존재하지 않는 회원입니다."),
+    UNAUTHORIZED_MEMBER(401, "접근 권한이 없습니다.")
     ;
 
     private final int statusCode;

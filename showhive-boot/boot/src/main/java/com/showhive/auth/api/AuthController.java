@@ -2,7 +2,9 @@ package com.showhive.auth.api;
 
 import com.showhive.auth.api.dto.AuthRequest;
 import com.showhive.auth.api.dto.LoginResponse;
+import com.showhive.auth.application.LogoutUsecase;
 import com.showhive.auth.application.TokenManager;
+import com.showhive.member.domain.Member;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +27,13 @@ public class AuthController {
     private static final String REFRESH_TOKEN_COOKIE_KEY = "refreshToken";
 
     private final SocialLoginUsecase socialLoginUseCase;
+    private final LogoutUsecase logoutUsecase;
     private final CookieManager cookieManager;
 
     @PostMapping("/google")
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid AuthRequest request) {
 
         LoginResponse response = socialLoginUseCase.googleLogin(request.toAuthDto());
-
-        // refresh 쿠키 설정
         ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
                 response.refreshToken(),
                 TokenManager.REFRESH_TOKEN_EXP);
@@ -42,5 +44,15 @@ public class AuthController {
                 .build();
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(@AuthMember Member member,
+                                         @CookieValue(REFRESH_TOKEN_COOKIE_KEY) String refreshToken) {
+        logoutUsecase.logout(member, refreshToken);
+        ResponseCookie expiredRefreshTokenCookie = cookieManager.deleteCookie(REFRESH_TOKEN_COOKIE_KEY);
+
+        return ResponseEntity.noContent()
+                .header(HttpHeaders.SET_COOKIE, expiredRefreshTokenCookie.toString())
+                .build();
+    }
 
 }

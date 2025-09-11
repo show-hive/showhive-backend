@@ -1,5 +1,7 @@
 package com.showhive.auth.application;
 
+import static javax.crypto.Cipher.SECRET_KEY;
+
 import com.showhive.ShowHiveException;
 import com.showhive.exception.ErrorCode;
 import com.showhive.member.domain.Member;
@@ -9,6 +11,8 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.WeakKeyException;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +44,7 @@ public class TokenManager {
                 //.claim("role", member.getRole()) // TODO : member role 추가해야됨
                 .claim("token_type", tokenType)
                 .setExpiration(expirationDate)
-                .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                .signWith(createSigningKey())
                 .compact();
     }
 
@@ -51,7 +55,8 @@ public class TokenManager {
 
     public long parseToken(String token) {
         try {
-            Claims claims = parseClaims(token);
+//            String substring = token.substring(7);
+            Claims claims = parseClaims(token); // Bearer 접두사 빼기
             return Long.parseLong(claims.getSubject());
         } catch (ExpiredJwtException exception) {
             throw new ShowHiveException(ErrorCode.EXPIRED_TOKEN.getMessage(), ErrorCode.EXPIRED_TOKEN.getStatusCode());
@@ -62,9 +67,14 @@ public class TokenManager {
 
     private Claims parseClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                .setSigningKey(createSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    private Key createSigningKey() {
+        byte[] secretKeyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(secretKeyBytes);
     }
 }

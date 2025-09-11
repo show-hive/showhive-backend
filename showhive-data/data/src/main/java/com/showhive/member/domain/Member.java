@@ -58,4 +58,8 @@ public class Member extends BaseEntity {
     public void deleteRefreshToken() {
         this.refreshToken = null;
     }
+
+    public boolean isSameMember(long memberId) {
+        return this.id == memberId;
+    }
 }
