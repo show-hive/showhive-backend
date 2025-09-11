@@ -1,7 +1,9 @@
 package com.showhive.reservation.domain;
 
 import com.showhive.BaseEntity;
+import com.showhive.code.domain.Code;
 import com.showhive.member.domain.Member;
+import com.showhive.performance.domain.PerformanceSession;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,14 +15,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Table(name = "reservations")
 @Entity
 @Getter
-@Table(name = "reservations")
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation extends BaseEntity {
 
     @Id
@@ -32,13 +36,11 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    // TODO: Code 연결
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "code_id")
-//    private Code reservationStatusCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "code_id")
+    private Code reservationStatusCode;
 
-    // TODO: PerformanceSession 연결
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "session_id")
-//    private PerformanceSession performanceSession;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "session_id")
+    private PerformanceSession performanceSession;
 }
