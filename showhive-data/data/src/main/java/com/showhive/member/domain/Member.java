@@ -29,8 +29,6 @@ public class Member extends BaseEntity {
 
     private String username;
 
-    private String name;
-
     private String email;
 
     // TODO : file 조인 걸어야됨
@@ -53,14 +51,14 @@ public class Member extends BaseEntity {
 //    private List<SocialInfo> socialInfos = new ArrayList<>();
 
     // 소셜 프로필 정보로 사용자 프로필을 병합 (이메일/이름이 비어있거나 다르면 갱신)
-    public void mergeProfileFromSocial(String name, String email) {
-        if (email != null && (this.email == null || !this.email.equalsIgnoreCase(email))) {
-            this.email = email;
-        }
-        if (name != null && (this.name == null || !this.name.equals(name))) {
-            this.name = name;
-        }
-    }
+//    public void mergeProfileFromSocial(String name, String email) {
+//        if (email != null && (this.email == null || !this.email.equalsIgnoreCase(email))) {
+//            this.email = email;
+//        }
+//        if (name != null && (this.name == null || !this.name.equals(name))) {
+//            this.name = name;
+//        }
+//    }
 
 //    public void addSocialInfo(SocialInfo social_Info) {
 //        if (social_Info == null) {
@@ -72,13 +70,12 @@ public class Member extends BaseEntity {
 //        }
 //    }
 
-//    public static Member signUp(String email, String password, String username, String name, String encodedPassword) {
-//        return Member.builder()
-//                .email(email)
-//                .username(username)  // username을 이메일 기반으로 지정
-//                .name(name)
-//                .build();
-//    }
+    public static Member create(String email, String username) {
+        return Member.builder()
+                .email(email)
+                .username(username)
+                .build();
+    }
 //
 //    public static Member signUpSocial(Provider provider, String providerUserId, String email, String name) {
 //        if (provider == null) {

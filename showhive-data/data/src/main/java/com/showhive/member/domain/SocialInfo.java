@@ -20,11 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "social_infos", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_provider_pid", columnNames = {"provider", "provider_user_id"})
-},
-        indexes = {
-                @Index(name = "idx_social_user", columnList = "user_id")})
+@Table(name = "social_infos")
 @Entity
 @Getter
 @Builder
@@ -37,23 +33,22 @@ public class SocialInfo extends BaseEntity {
     @Column(name = "social_info_id")
     private Long id;
 
-    // TODO : code로 바꿔야됨
-    @Enumerated(EnumType.STRING)
-    private ProviderType providerType;                  // GOOGLE/KAKAO/NAVER
-
-    private String providerId;                  // 소셜의 고유 ID (예: kakao id)
-
-    // private String email;                       // 소셜이 준 이메일(동의 없으면 null)
-
-    private String username;                    // 소셜 닉네임/이름
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Member member;
 
-    public static SocialInfo of(ProviderType providerType, String providerId, String username) {
+    // TODO : code로 바꿔야됨
+    @Enumerated(EnumType.STRING)
+    private ProviderType providerType;
+
+    private String providerId;
+
+    private String username;
+
+    public static SocialInfo create(Member member, ProviderType providerType, String providerId, String username) {
 
         return SocialInfo.builder()
+                .member(member)
                 .providerType(providerType)
                 .providerId(providerId)
                 .username(username)

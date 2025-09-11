@@ -14,8 +14,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     private final JpaMemberRepository jpaMemberRepository;
 
     @Override
-    // TODO: 사용 안 할 시 삭제 예정
-    public void signUp(Member member) {
+    public void save(Member member) {
         jpaMemberRepository.save(member);
     }
 
