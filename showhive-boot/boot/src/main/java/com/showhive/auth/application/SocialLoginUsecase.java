@@ -24,42 +24,41 @@ public class SocialLoginUsecase {
     private final MemberRepository memberRepository;
     private final SocialInfoRepository socialInfoRepository;
     // private final KakaoClient kakaoClient;
+    private final TokenManager tokenManager;
 
     @Transactional
     public LoginResponse googleLogin(AuthDto authDto) {
 
         GoogleTokenResponse googleTokenResponse = googleClient.requestToken(authDto);
-
         GoogleUserInfo googleUserInfo = googleClient.requestUserInfo(googleTokenResponse);
+        Optional<SocialInfo> socialAccount = socialInfoRepository.findByProviderTypeAndProviderId(ProviderType.GOOGLE,
+                googleUserInfo.sub());
 
-        Optional<SocialInfo> socialAccount = socialInfoRepository
-                .findByProviderTypeAndProviderId(ProviderType.GOOGLE, googleUserInfo.sub());
+        if (socialAccount.isPresent()) {
+            return issueTokens(socialAccount.get().getMember());
+        }
+        Member member = createMember(googleUserInfo);
+        createSocialInfo(member, googleUserInfo);
+        return issueTokens(member);
+    }
 
-//        if (socialAccount.isPresent()) {
-//            return issueTokens(socialAccount.get().getMember());
-//        }
-
+    private Member createMember(GoogleUserInfo googleUserInfo) {
         Member member = Member.create(googleUserInfo.email(), googleUserInfo.name());
         memberRepository.save(member);
+        return member;
+    }
 
+    private void createSocialInfo(Member member, GoogleUserInfo googleUserInfo) {
         SocialInfo socialInfo = SocialInfo.create(member, ProviderType.GOOGLE, googleUserInfo.sub(),
                 googleUserInfo.name());
         socialInfoRepository.save(socialInfo);
-
-        // 4) 토큰 발급 및 저장
-
-        return new LoginResponse(null, null);
     }
 
-//    private LoginResponse issueTokens(Member member) {
-//
-////        String accessToken = jwt.generateAccessToken(member.getUsername(), member.getRole());
-////        String refreshToken = jwt.generateRefreshToken(member.getUsername());
-////        member.makeRefreshToken(refreshToken);
-////        memberRepository.save(member);
-//
-//        return new LoginResponse(accessToken, refreshToken);
-//    }
-
+    private LoginResponse issueTokens(Member member) {
+        String accessToken = tokenManager.createAccessToken(member);
+        String refreshToken = tokenManager.createRefreshToken(member);
+        member.saveRefreshToken(refreshToken);
+        return new LoginResponse(accessToken, refreshToken);
+    }
 }
 

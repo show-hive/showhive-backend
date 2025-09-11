@@ -32,8 +32,7 @@ public class GoogleClient {
                     .retrieve()
                     .body(GoogleTokenResponse.class);
         } catch (RestClientException exception) {
-            throw new ShowHiveException(ErrorCode.INTERNAL_SERVER_ERROR.getMessage(), ErrorCode.INTERNAL_SERVER_ERROR.getStatusCode()) {
-            };
+            throw new ShowHiveException(ErrorCode.INTERNAL_SERVER_ERROR.getMessage(), ErrorCode.INTERNAL_SERVER_ERROR.getStatusCode());
         }
     }
 

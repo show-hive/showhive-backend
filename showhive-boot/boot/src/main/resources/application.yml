@@ -49,3 +49,6 @@ pringdoc:
 
 cors:
   origin: http://localhost:5173
+
+jwt:
+  secret: ${JWT_SECRET_KEY}
