@@ -19,7 +19,8 @@ public class RefreshUseCase {
 
     @Transactional
     public LoginResponse refresh(String refreshToken) {
-        Member member = memberRepository.findByRefreshToken(refreshToken)
+        long memberId = tokenManager.parseToken(refreshToken);
+        Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
 
         return issueTokens(member);
