@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -27,14 +29,18 @@ public class Performance extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO Venue 매핑하기
+    private String title;
+
+    @OneToOne
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
 
     private String period;
-
     @Column(name = "running_time")
     private Long runningTime;
 
-    private Short age;
+    @Column(name = "age")
+    private Short ageRating;
 
     private String advantage;
 

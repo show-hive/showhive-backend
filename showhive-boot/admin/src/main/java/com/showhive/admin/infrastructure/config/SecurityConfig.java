@@ -1,4 +1,4 @@
-package com.showhive.admin.infrastructure;
+package com.showhive.admin.infrastructure.config;
 
 import org.springframework.context.annotation.Configuration;
 
