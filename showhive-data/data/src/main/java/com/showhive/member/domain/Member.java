@@ -24,7 +24,7 @@ public class Member extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "profile_file_id")
-    private File file;
+    private File profileFile;
 
     protected Member() {
     }
