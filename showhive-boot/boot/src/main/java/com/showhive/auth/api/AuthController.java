@@ -32,7 +32,7 @@ public class AuthController {
     private final CookieManager cookieManager;
 
     @PostMapping("/google")
-    public ResponseEntity<LoginResponse> googleLogin(@RequestBody @Valid AuthRequest request) {
+    public ResponseEntity<Void> googleLogin(@RequestBody @Valid AuthRequest request) {
         LoginResponse newTokens = socialLoginUseCase.googleLogin(request.toAuthDto());
         ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
                 newTokens.refreshToken(),
@@ -45,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/kakao")
-    public ResponseEntity<LoginResponse> kakaoLogin(@RequestBody @Valid AuthRequest request) {
+    public ResponseEntity<Void> kakaoLogin(@RequestBody @Valid AuthRequest request) {
         LoginResponse newTokens = socialLoginUseCase.kakaoLogin(request.toAuthDto());
         ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
                 newTokens.refreshToken(),
@@ -58,7 +58,7 @@ public class AuthController {
     }
 
     @PostMapping("/naver")
-    public ResponseEntity<LoginResponse> naverLogin(@RequestBody @Valid AuthRequest request) {
+    public ResponseEntity<Void> naverLogin(@RequestBody @Valid AuthRequest request) {
         LoginResponse newTokens = socialLoginUseCase.naverLogin(request.toAuthDto());
         ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
                 newTokens.refreshToken(),
@@ -82,7 +82,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<LoginResponse> refresh(@CookieValue(REFRESH_TOKEN_COOKIE_KEY) String refreshToken) {
+    public ResponseEntity<Void> refresh(@CookieValue(REFRESH_TOKEN_COOKIE_KEY) String refreshToken) {
         LoginResponse newTokens = refreshUsecase.refresh(refreshToken);
         ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
                 newTokens.refreshToken(),
