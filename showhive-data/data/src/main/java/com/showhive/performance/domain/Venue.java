@@ -7,40 +7,37 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "performances")
+@Table(name = "venues")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Performance extends BaseEntity {
+public class Venue extends BaseEntity {
 
-    @Column(name = "performance_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "venue_id")
     private Long id;
 
-    // TODO Venue 매핑하기
+    @NotBlank
+    private String name;
 
-    private String period;
+    private String address;
 
-    @Column(name = "running_time")
-    private Long runningTime;
+    private Double latitude;
 
-    private Short age;
+    private Double longitude;
 
-    private String advantage;
+    private String contactNumber;
 
-    private String performanceInfo;
-
-    private LocalDateTime bookStartedAt;
-
-    private LocalDateTime bookEndedAt;
+    @NotBlank
+    private String link;
 }
