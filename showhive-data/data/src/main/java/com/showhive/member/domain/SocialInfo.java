@@ -34,7 +34,7 @@ public class SocialInfo extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     // TODO : code로 바꿔야됨
@@ -54,25 +54,4 @@ public class SocialInfo extends BaseEntity {
                 .username(username)
                 .build();
     }
-
-    //소셜 프로필 갱신 (이메일/닉네임이 비어있거나 다르면 갱신)
-//    public void updateProfile(String email, String nickname) {
-//        if (email != null && (this.email == null || !this.email.equalsIgnoreCase(email))) {
-//            this.email = email;
-//        }
-//        if (nickname != null && (this.nickname == null || !this.nickname.equals(nickname))) {
-//            this.nickname = nickname;
-//        }
-//    }
-//
-//    //소유자 연결
-//    public void attachTo(Member owner) {
-//        this.member = owner;
-//    }
-//
-//    // 소유자 해제
-//    public void detach() {
-//        this.member = null;
-//    }
-
 }
