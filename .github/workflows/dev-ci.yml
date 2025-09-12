@@ -29,11 +29,6 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
-    env:
-      SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/showhive_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-      SPRING_DATASOURCE_USERNAME: ${{ secrets.MYSQL_USERNAME }}
-      SPRING_DATASOURCE_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-
 
     steps:
       - name: 레포 내 코드 불러오기
