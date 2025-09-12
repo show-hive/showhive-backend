@@ -19,8 +19,12 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    // TODO: 사용 안 할 시 삭제 예정
     public Optional<Member> findById(long memberId) {
         return jpaMemberRepository.findById(memberId);
+    }
+
+    @Override
+    public Optional<Member> findByRefreshToken(String refreshToken) {
+        return jpaMemberRepository.findByRefreshToken(refreshToken);
     }
 }

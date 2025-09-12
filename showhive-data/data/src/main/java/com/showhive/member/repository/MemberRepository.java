@@ -6,7 +6,9 @@ import java.util.Optional;
 
 public interface MemberRepository {
 
+    void save(Member member);
+
     Optional<Member> findById(long memberId);
 
-    void save(Member member);
+    Optional<Member> findByRefreshToken(String refreshToken);
 }
