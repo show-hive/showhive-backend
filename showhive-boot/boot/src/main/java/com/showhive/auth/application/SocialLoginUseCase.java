@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class SocialLoginUsecase {
+public class SocialLoginUseCase {
 
     private final GoogleClient googleClient;
     private final MemberRepository memberRepository;

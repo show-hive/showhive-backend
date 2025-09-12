@@ -2,7 +2,7 @@ package com.showhive.auth.api;
 
 import com.showhive.auth.api.dto.AuthRequest;
 import com.showhive.auth.api.dto.LoginResponse;
-import com.showhive.auth.application.LogoutUsecase;
+import com.showhive.auth.application.LogoutUseCase;
 import com.showhive.auth.application.RefreshUseCase;
 import com.showhive.auth.application.TokenManager;
 import com.showhive.member.domain.Member;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.showhive.auth.application.SocialLoginUsecase;
+import com.showhive.auth.application.SocialLoginUseCase;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -26,8 +26,8 @@ public class AuthController {
 
     private static final String REFRESH_TOKEN_COOKIE_KEY = "refreshToken";
 
-    private final SocialLoginUsecase socialLoginUseCase;
-    private final LogoutUsecase logoutUsecase;
+    private final SocialLoginUseCase socialLoginUseCase;
+    private final LogoutUseCase logoutUsecase;
     private final RefreshUseCase refreshUsecase;
     private final CookieManager cookieManager;
 
