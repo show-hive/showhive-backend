@@ -20,10 +20,7 @@ public class LogoutUseCase {
     public void logout(Member member, String refreshToken) {
         long memberId = tokenManager.parseToken(refreshToken);
 
-        Member loginMember = memberRepository.findById(member.getId())
-                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
-
-        if (!loginMember.isSameMember(memberId)) {
+        if (!member.isSameMember(memberId)) {
             throw new MemberException(MemberErrorCode.UNAUTHORIZED_MEMBER);
         }
 
