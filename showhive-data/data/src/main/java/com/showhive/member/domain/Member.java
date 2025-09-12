@@ -40,11 +40,11 @@ public class Member extends BaseEntity {
     // private File file;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "code_id")
+    @JoinColumn(name = "role_code_id")
     private Code roleCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "code_id")
+    @JoinColumn(name = "grade_code_id")
     private Code gradeCode;
 
     // TODO : Redis에 나중에 저장?

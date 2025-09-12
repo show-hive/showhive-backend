@@ -32,9 +32,34 @@ public class AuthController {
     private final CookieManager cookieManager;
 
     @PostMapping("/google")
-    public ResponseEntity<LoginResponse> login(@RequestBody @Valid AuthRequest request) {
-
+    public ResponseEntity<LoginResponse> googleLogin(@RequestBody @Valid AuthRequest request) {
         LoginResponse newTokens = socialLoginUseCase.googleLogin(request.toAuthDto());
+        ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
+                newTokens.refreshToken(),
+                TokenManager.REFRESH_TOKEN_EXP);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header(HttpHeaders.AUTHORIZATION, newTokens.accessToken())
+                .header(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString())
+                .build();
+    }
+
+    @PostMapping("/kakao")
+    public ResponseEntity<LoginResponse> kakaoLogin(@RequestBody @Valid AuthRequest request) {
+        LoginResponse newTokens = socialLoginUseCase.kakaoLogin(request.toAuthDto());
+        ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
+                newTokens.refreshToken(),
+                TokenManager.REFRESH_TOKEN_EXP);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header(HttpHeaders.AUTHORIZATION, newTokens.accessToken())
+                .header(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString())
+                .build();
+    }
+
+    @PostMapping("/naver")
+    public ResponseEntity<LoginResponse> naverLogin(@RequestBody @Valid AuthRequest request) {
+        LoginResponse newTokens = socialLoginUseCase.naverLogin(request.toAuthDto());
         ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
                 newTokens.refreshToken(),
                 TokenManager.REFRESH_TOKEN_EXP);
@@ -58,7 +83,6 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public ResponseEntity<LoginResponse> refresh(@CookieValue(REFRESH_TOKEN_COOKIE_KEY) String refreshToken) {
-
         LoginResponse newTokens = refreshUsecase.refresh(refreshToken);
         ResponseCookie refreshTokenCookie = cookieManager.createCookie(REFRESH_TOKEN_COOKIE_KEY,
                 newTokens.refreshToken(),

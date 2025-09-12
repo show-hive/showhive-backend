@@ -1,10 +1,10 @@
-package com.showhive.auth.api.dto;
+package com.showhive.auth.api.dto.naver;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public record GoogleTokenResponse(
+public record NaverTokenResponse(
         String accessToken
 ) {
 }
