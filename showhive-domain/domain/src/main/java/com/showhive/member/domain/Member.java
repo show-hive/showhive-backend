@@ -1,16 +1,16 @@
 package com.showhive.member.domain;
 
 import com.showhive.BaseEntity;
-import com.showhive.code.domain.Code;
 import com.showhive.file.domain.File;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -35,17 +35,18 @@ public class Member extends BaseEntity {
 
     private String email;
 
-    // TODO : String으로 받아올지 or File 조인걸지
-    // @OneToOne(fetch = FetchType.LAZY)
-    // private File file;
+    private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_code_id")
-    private Code roleCode;
+    @OneToOne(fetch = FetchType.LAZY)
+    private File file;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "grade_code_id")
-    private Code gradeCode;
+    @Column(name = "member_role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "member_grade")
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
 
     // TODO : Redis에 나중에 저장?
     private String refreshToken;
@@ -54,8 +55,12 @@ public class Member extends BaseEntity {
         return Member.builder()
                 .email(email)
                 .username(username)
+                .grade(Grade.WELCOME)
+                .role(Role.USER)
                 .build();
     }
+
+    // createMember, createAdmin 만들어야됨
 
     public void saveRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;

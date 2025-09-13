@@ -2,9 +2,10 @@ package com.showhive.auth.api;
 
 import com.showhive.auth.api.dto.AuthRequest;
 import com.showhive.auth.api.dto.LoginResponse;
-import com.showhive.auth.application.LogoutUseCase;
-import com.showhive.auth.application.RefreshUseCase;
-import com.showhive.auth.application.TokenManager;
+import com.showhive.auth.application.query.LogoutUseCase;
+import com.showhive.auth.application.query.RefreshUseCase;
+import com.showhive.auth.utils.CookieManager;
+import com.showhive.auth.utils.TokenManager;
 import com.showhive.member.domain.Member;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.showhive.auth.application.SocialLoginUseCase;
+import com.showhive.auth.application.query.SocialLoginUseCase;
 
 @RestController
 @RequestMapping("/api/auth")
