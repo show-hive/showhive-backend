@@ -3,8 +3,8 @@ rootProject.name = 'show-hive'
 // boot
 include 'showhive-boot:boot'
 
-// data
-include 'showhive-data:data'
+// domain
+include 'showhive-domain:domain'
 
 // infra
 include 'showhive-infra:infra-import'
