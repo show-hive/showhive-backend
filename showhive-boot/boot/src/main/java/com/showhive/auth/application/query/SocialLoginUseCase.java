@@ -1,12 +1,12 @@
-package com.showhive.auth.application;
+package com.showhive.auth.application.query;
 
-import com.showhive.auth.api.dto.google.GoogleTokenResponse;
-import com.showhive.auth.api.dto.google.GoogleUserInfo;
-import com.showhive.auth.api.dto.kakao.KakaoTokenResponse;
-import com.showhive.auth.api.dto.kakao.KakaoUserInfo;
+import com.showhive.auth.api.dto.GoogleUserInfo;
+import com.showhive.auth.api.dto.KakaoUserInfo;
 import com.showhive.auth.api.dto.LoginResponse;
-import com.showhive.auth.api.dto.naver.NaverTokenResponse;
-import com.showhive.auth.api.dto.naver.NaverUserInfo;
+import com.showhive.auth.api.dto.NaverUserInfo;
+import com.showhive.auth.api.dto.TokenResponse;
+
+import com.showhive.auth.utils.TokenManager;
 import com.showhive.auth.application.dto.AuthDto;
 import com.showhive.auth.client.GoogleClient;
 import com.showhive.auth.client.KakaoClient;
@@ -35,8 +35,8 @@ public class SocialLoginUseCase {
 
     @Transactional
     public LoginResponse googleLogin(AuthDto authDto) {
-        GoogleTokenResponse googleTokenResponse = googleClient.requestToken(authDto);
-        GoogleUserInfo googleUserInfo = googleClient.requestUserInfo(googleTokenResponse);
+        TokenResponse tokenResponse = googleClient.requestToken(authDto);
+        GoogleUserInfo googleUserInfo = googleClient.requestUserInfo(tokenResponse);
         Optional<SocialInfo> socialAccount = socialInfoRepository.findByProviderTypeAndProviderId(ProviderType.GOOGLE,
                 googleUserInfo.sub());
 
@@ -50,8 +50,8 @@ public class SocialLoginUseCase {
 
     @Transactional
     public LoginResponse kakaoLogin(AuthDto authDto) {
-        KakaoTokenResponse kakaoTokenResponse = kakaoClient.requestToken(authDto);
-        KakaoUserInfo kakaoUserInfo = kakaoClient.requestUserInfo(kakaoTokenResponse);
+        TokenResponse tokenResponse = kakaoClient.requestToken(authDto);
+        KakaoUserInfo kakaoUserInfo = kakaoClient.requestUserInfo(tokenResponse);
         Optional<SocialInfo> socialAccount = socialInfoRepository.findByProviderTypeAndProviderId(ProviderType.KAKAO,
                 kakaoUserInfo.id());
 
@@ -65,16 +65,19 @@ public class SocialLoginUseCase {
 
     @Transactional
     public LoginResponse naverLogin(AuthDto authDto) {
-        NaverTokenResponse naverTokenResponse = naverClient.requestToken(authDto);
-        NaverUserInfo naverUserInfo = naverClient.requestUserInfo(naverTokenResponse);
-        Optional<SocialInfo> socialAccount = socialInfoRepository.findByProviderTypeAndProviderId(ProviderType.NAVER,
-                naverUserInfo.id());
+        TokenResponse tokenResponse = naverClient.requestToken(authDto);
+        NaverUserInfo.Response profile = naverClient.requestUserInfo(tokenResponse);
+        Optional<SocialInfo> socialAccount =
+                socialInfoRepository.findByProviderTypeAndProviderId(ProviderType.NAVER, profile.id());
 
         if (socialAccount.isPresent()) {
             return issueTokens(socialAccount.get().getMember());
         }
-        Member member = createNaverMember(naverUserInfo);
-        createSocialNaverInfo(member, naverUserInfo);
+//        Member member = createNaverMember(naverUserInfo);
+//        createSocialNaverInfo(member, naverUserInfo);
+
+        Member member = createNaverMember(profile);
+        createSocialNaverInfo(member, profile);
         return issueTokens(member);
     }
 
@@ -90,7 +93,7 @@ public class SocialLoginUseCase {
         return member;
     }
 
-    private Member createNaverMember(NaverUserInfo naverUserInfo) {
+    private Member createNaverMember(NaverUserInfo.Response naverUserInfo) {
         Member member = Member.create(naverUserInfo.email(), naverUserInfo.name());
         memberRepository.save(member);
         return member;
@@ -108,7 +111,7 @@ public class SocialLoginUseCase {
         socialInfoRepository.save(socialInfo);
     }
 
-    private void createSocialNaverInfo(Member member, NaverUserInfo naverUserInfo) {
+    private void createSocialNaverInfo(Member member, NaverUserInfo.Response naverUserInfo) {
         SocialInfo socialInfo = SocialInfo.create(member, ProviderType.NAVER, naverUserInfo.id(),
                 naverUserInfo.name());
         socialInfoRepository.save(socialInfo);

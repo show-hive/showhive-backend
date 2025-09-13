@@ -1,6 +1,6 @@
 package com.showhive.member.application.query;
 
-import com.showhive.auth.application.TokenManager;
+import com.showhive.auth.utils.TokenManager;
 import com.showhive.member.domain.Member;
 import com.showhive.member.exception.MemberErrorCode;
 import com.showhive.member.exception.MemberException;

@@ -1,4 +1,4 @@
-package com.showhive.auth.api;
+package com.showhive.auth.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.server.Cookie.SameSite;

@@ -1,4 +1,4 @@
-package com.showhive.auth.api.dto.google;
+package com.showhive.auth.api.dto;
 
 public record GoogleUserInfo(
         String sub,

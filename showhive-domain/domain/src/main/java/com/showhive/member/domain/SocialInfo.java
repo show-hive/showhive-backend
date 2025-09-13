@@ -9,11 +9,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +35,6 @@ public class SocialInfo extends BaseEntity {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    // TODO : code로 바꿔야됨
     @Enumerated(EnumType.STRING)
     private ProviderType providerType;
 

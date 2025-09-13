@@ -1,6 +1,4 @@
-package com.showhive.auth.application;
-
-import static javax.crypto.Cipher.SECRET_KEY;
+package com.showhive.auth.utils;
 
 import com.showhive.ShowHiveException;
 import com.showhive.exception.ErrorCode;
@@ -10,7 +8,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.WeakKeyException;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
@@ -27,6 +24,7 @@ public class TokenManager {
 
     public static final long ACCESS_TOKEN_EXP = 60L * 60L * 1000L; // 1시간
     public static final long REFRESH_TOKEN_EXP = 60L * 60L * 1000L * 24L * 30L; // 1달
+    private static final String PREFIX = "Bearer ";
 
     public String createAccessToken(Member member) {
         return createToken(member, ACCESS_TOKEN_EXP, "ACCESS_TOKEN");
@@ -41,7 +39,7 @@ public class TokenManager {
 
         return Jwts.builder()
                 .setSubject(member.getId().toString())
-                //.claim("role", member.getRole()) // TODO : member role 추가해야됨
+                .claim("role", member.getRole())
                 .claim("token_type", tokenType)
                 .setExpiration(expirationDate)
                 .signWith(createSigningKey())
@@ -55,8 +53,10 @@ public class TokenManager {
 
     public long parseToken(String token) {
         try {
-//            String substring = token.substring(7);
-            Claims claims = parseClaims(token); // Bearer 접두사 빼기
+            if (token != null && token.startsWith(PREFIX)) {
+                token = token.substring(PREFIX.length());
+            }
+            Claims claims = parseClaims(token);
             return Long.parseLong(claims.getSubject());
         } catch (ExpiredJwtException exception) {
             throw new ShowHiveException(ErrorCode.EXPIRED_TOKEN.getMessage(), ErrorCode.EXPIRED_TOKEN.getStatusCode());
