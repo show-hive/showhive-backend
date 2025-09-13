@@ -1,8 +1,8 @@
 package com.showhive.auth.client;
 
 import com.showhive.ShowHiveException;
-import com.showhive.auth.api.dto.google.GoogleTokenResponse;
-import com.showhive.auth.api.dto.google.GoogleUserInfo;
+import com.showhive.auth.api.dto.TokenResponse;
+import com.showhive.auth.api.dto.GoogleUserInfo;
 import com.showhive.auth.application.dto.AuthDto;
 import com.showhive.exception.ErrorCode;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,20 +23,20 @@ public class GoogleClient {
         this.googleProperties = googleProperties;
     }
 
-    public GoogleTokenResponse requestToken(AuthDto authDto) {
+    public TokenResponse requestToken(AuthDto authDto) {
         try {
             return restClient.post()
                     .uri("https://oauth2.googleapis.com/token")
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                     .body(googleProperties.createTokenRequestBody(authDto))
                     .retrieve()
-                    .body(GoogleTokenResponse.class);
+                    .body(TokenResponse.class);
         } catch (RestClientException exception) {
             throw new ShowHiveException(ErrorCode.INTERNAL_SERVER_ERROR.getMessage(), ErrorCode.INTERNAL_SERVER_ERROR.getStatusCode());
         }
     }
 
-    public GoogleUserInfo requestUserInfo(GoogleTokenResponse response) {
+    public GoogleUserInfo requestUserInfo(TokenResponse response) {
         return restClient.get()
                 .uri("https://www.googleapis.com/oauth2/v3/userinfo")
                 .headers(headers -> headers.setBearerAuth(response.accessToken()))
