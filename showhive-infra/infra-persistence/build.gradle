@@ -6,7 +6,7 @@ bootJar { enabled = false }
 jar { enabled = true }
 
 dependencies {
-    implementation project(':showhive-data:data')
+    implementation project(':showhive-domain:domain')
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
