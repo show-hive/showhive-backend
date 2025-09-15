@@ -21,7 +21,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ""
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-          MYSQL_DATABASE: showhive_db
+          MYSQL_DATABASE: test_db
         ports:
           - 3306:3306
         options: >-
