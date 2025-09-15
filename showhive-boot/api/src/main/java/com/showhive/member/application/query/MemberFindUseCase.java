@@ -1,4 +1,4 @@
-package com.showhive.member.application;
+package com.showhive.member.application.query;
 
 import com.showhive.auth.utils.TokenManager;
 import com.showhive.member.domain.Member;

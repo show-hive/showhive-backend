@@ -1,3 +1,7 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
 // 실행가능한 jar로 생성하는 옵션, main이 없는 라이브러리에서는 false로 비활성화함
 bootJar { enabled = true }
 // 외부에서 의존하기 위한 jar로 생성하는 옵션, main이 없는 라이브러리에서는 true로 비활성화함
@@ -10,6 +14,7 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     // Jwt
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
