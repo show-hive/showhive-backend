@@ -5,7 +5,10 @@ import com.showhive.member.domain.Member;
 import java.util.Optional;
 
 public interface MemberRepository {
-    void signUp(Member member);
+
+    void save(Member member);
 
     Optional<Member> findById(long memberId);
+
+    Optional<Member> findByRefreshToken(String refreshToken);
 }
