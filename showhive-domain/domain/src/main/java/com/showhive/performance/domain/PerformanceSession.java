@@ -1,9 +1,7 @@
 package com.showhive.performance.domain;
 
 import com.showhive.BaseEntity;
-import com.showhive.code.domain.Code;
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -11,37 +9,34 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "performance_category_maps")
+@Table(name = "performance_sessions")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class PerformanceCategoryMap extends BaseEntity {
+public class PerformanceSession extends BaseEntity {
 
-    @EmbeddedId
-    private PerformanceCategoryId id;
+    @Column(name = "session_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("performanceId")
-    @JoinColumn(name = "performance_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "performance_id", nullable = false)
     private Performance performance;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("codeId")
-    @JoinColumn(name = "code_id")
-    private Code categoryCode;
+    private LocalTime startAt;
 
-    @Column(name = "priority")
-    private Integer priority;
+    private LocalTime endAt;
+
+    private Short sessionName;
 }
