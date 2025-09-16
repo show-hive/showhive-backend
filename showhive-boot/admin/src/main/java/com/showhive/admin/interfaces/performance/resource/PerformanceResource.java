@@ -16,7 +16,7 @@ public class PerformanceResource {
     private final CreatePerformanceUseCase createPerformanceUseCase;
 
     @PostMapping
-    public void aa(@RequestBody CreatePerformanceRequest createRequest) {
+    public void createPerformance(@RequestBody CreatePerformanceRequest createRequest) {
         CreatePerformanceDto commandDto = CreatePerformanceDto.of(createRequest);
 
         createPerformanceUseCase.handle(commandDto);

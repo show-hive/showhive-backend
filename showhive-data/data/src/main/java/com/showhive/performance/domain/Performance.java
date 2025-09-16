@@ -1,6 +1,9 @@
 package com.showhive.performance.domain;
 
 import com.showhive.BaseEntity;
+import com.showhive.ShowHiveException;
+import com.showhive.performance.exception.PerformanceErrorCode;
+import com.showhive.performance.exception.PerformanceException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,11 +34,8 @@ public class Performance extends BaseEntity {
 
     private String title;
 
-    @OneToOne
-    @JoinColumn(name = "venue_id")
-    private Venue venue;
+    private Long venueId;
 
-    private String period;
     @Column(name = "running_time")
     private Long runningTime;
 
@@ -49,4 +49,24 @@ public class Performance extends BaseEntity {
     private LocalDateTime bookStartedAt;
 
     private LocalDateTime bookEndedAt;
+
+
+    public static Performance create(String title, Long venueId, Long runningTime, Short ageRating,
+                                     String advantage, String performanceInfo, LocalDateTime bookStartedAt,
+                                     LocalDateTime bookEndedAt) {
+        if (bookStartedAt.isAfter(bookEndedAt)) {
+            throw new PerformanceException(PerformanceErrorCode.BOOKED_TIME_NOT_VALID);
+        }
+
+        return Performance.builder()
+                .title(title)
+                .venueId(venueId)
+                .runningTime(runningTime)
+                .ageRating(ageRating)
+                .advantage(advantage)
+                .performanceInfo(performanceInfo)
+                .bookStartedAt(bookStartedAt)
+                .bookEndedAt(bookEndedAt)
+                .build();
+    }
 }

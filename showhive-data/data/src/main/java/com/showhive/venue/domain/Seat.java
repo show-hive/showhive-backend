@@ -1,8 +1,6 @@
-package com.showhive.performance.domain;
+package com.showhive.venue.domain;
 
 import com.showhive.BaseEntity;
-import com.showhive.code.domain.Code;
-import com.showhive.venue.domain.Seat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,40 +10,40 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
-@Table(name = "performance_seats")
+@Table(name = "seats")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class PerformanceSeat extends BaseEntity {
+public class Seat extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "performance_seat_id")
+    @Column(name = "seat_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "session_id")
-    private PerformanceSession performanceSession;
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seat_id")
-    private Seat seat;
+    private String seatColumn;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "code_id")
-    private Code seatStatusCode;
+    private Short seatRow;
 
-    private int price;
+    private Short seatFloor;
 
-    private LocalDateTime holdExpiresAt;
+    @NotBlank
+    private String seatType;
+
+    @ManyToOne
+    @JoinColumn(name = "seat_grade_id")
+    private SeatGrade seatGrade;
 }

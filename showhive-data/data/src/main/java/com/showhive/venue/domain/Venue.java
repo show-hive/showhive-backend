@@ -1,4 +1,4 @@
-package com.showhive.performance.domain;
+package com.showhive.venue.domain;
 
 import com.showhive.BaseEntity;
 import jakarta.persistence.Column;
