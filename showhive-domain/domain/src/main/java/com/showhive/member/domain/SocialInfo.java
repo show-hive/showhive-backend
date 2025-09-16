@@ -28,7 +28,7 @@ public class SocialInfo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "social_info_id")
+    @Column(name = "social_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
