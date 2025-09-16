@@ -31,7 +31,7 @@ oauth:
     client-secret: ${NAVER_CLIENT_SECRET}
     redirect-uri: http://localhost:5173/oauth2/redirect/naver
 
-pringdoc:
+springdoc:
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
 

@@ -16,7 +16,7 @@ public class MemberFindUseCase {
 
     private final MemberRepository memberRepository;
     private final TokenManager tokenManager;
-    
+
     public Member findLoginMember(String accessToken) {
         long memberId = tokenManager.parseToken(accessToken);
         return memberRepository.findById(memberId)
