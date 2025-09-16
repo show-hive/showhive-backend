@@ -1,7 +1,7 @@
 package com.showhive.performance.domain;
 
 import com.showhive.BaseEntity;
-import com.showhive.code.domain.Code;
+import com.showhive.code.domain.Category;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -33,9 +33,9 @@ public class PerformanceCategoryMap extends BaseEntity {
     private Performance performance;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("codeId")
-    @JoinColumn(name = "code_id")
-    private Code categoryCode;
+    @MapsId("categoryId")
+    @JoinColumn(name = "category_id")
+    private Category categoryCategory;
 
     @Column(name = "priority")
     private Integer priority;

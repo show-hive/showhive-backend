@@ -2,7 +2,6 @@ package com.showhive.performance.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
@@ -15,25 +14,25 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PerformanceCategoryId implements Serializable {
+public class PerformanceSeatId implements Serializable {
+
+    @Column(name = "seat_id")
+    private Long seatId;
 
     @Column(name = "performance_id")
     private Long performanceId;
 
-    @Column(name = "category_id")
-    private Long categoryId;
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof PerformanceCategoryId)) return false;
-        PerformanceCategoryId that = (PerformanceCategoryId) obj;
-        return Objects.equals(performanceId, that.performanceId) &&
-                Objects.equals(categoryId, that.categoryId);
+        if (!(obj instanceof PerformanceSeatId)) return false;
+        PerformanceSeatId that = (PerformanceSeatId) obj;
+        return Objects.equals(seatId, that.seatId) &&
+                Objects.equals(performanceId, that.performanceId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(performanceId, categoryId);
+        return Objects.hash(seatId, performanceId);
     }
 }

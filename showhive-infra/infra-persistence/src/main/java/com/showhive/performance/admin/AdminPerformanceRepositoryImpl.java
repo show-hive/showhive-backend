@@ -12,7 +12,7 @@ public class AdminPerformanceRepositoryImpl implements AdminPerformanceRepositor
 
     @Override
     public boolean existsByTitleAndVenue(String title, Long venueId) {
-        return performanceRepository.existsByTitleAndVenue(title, venueId);
+        return performanceRepository.existsByTitleAndVenueId(title, venueId);
     }
 
     @Override

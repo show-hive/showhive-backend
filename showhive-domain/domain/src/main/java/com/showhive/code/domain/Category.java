@@ -19,23 +19,23 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "codes")
+@Table(name = "categories")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Code extends BaseEntity {
+public class Category extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_id")
+    @Column(name = "category_id")
     private Long id;
 
     private String groupCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    private Code parent;
+    private Category parent;
 
     @Column(name = "code")
     private String value;
@@ -50,5 +50,5 @@ public class Code extends BaseEntity {
 
     @Builder.Default
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
-    private List<Code> children = new ArrayList<>();
+    private List<Category> children = new ArrayList<>();
 }
