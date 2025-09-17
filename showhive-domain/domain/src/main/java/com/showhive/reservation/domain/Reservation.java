@@ -1,7 +1,6 @@
 package com.showhive.reservation.domain;
 
 import com.showhive.BaseEntity;
-import com.showhive.code.domain.Code;
 import com.showhive.member.domain.Member;
 import com.showhive.performance.domain.PerformanceSession;
 import jakarta.persistence.Column;
@@ -36,9 +35,8 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "code_id")
-    private Code reservationStatusCode;
+    // TODO Enum으로 변경
+    private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "session_id")

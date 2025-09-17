@@ -1,9 +1,6 @@
 package com.showhive.auth.client;
 
-import com.showhive.auth.api.dto.AuthRequest;
 import com.showhive.auth.application.dto.AuthDto;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.LinkedMultiValueMap;
@@ -31,5 +28,3 @@ public class GoogleProperties {
         return map;
     }
 }
-
-

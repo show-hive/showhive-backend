@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -34,8 +35,11 @@ public class ReservationItem extends BaseEntity {
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seat_id")
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "seat_id", referencedColumnName = "seat_id"),
+        @JoinColumn(name = "performance_id", referencedColumnName = "performance_id")
+    })
     private PerformanceSeat performanceSeat;
 
     // TODO: PerformanceSession 연결

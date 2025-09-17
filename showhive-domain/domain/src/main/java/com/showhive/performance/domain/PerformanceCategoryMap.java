@@ -1,20 +1,15 @@
 package com.showhive.performance.domain;
 
 import com.showhive.BaseEntity;
-import com.showhive.code.domain.Code;
+import com.showhive.code.domain.Category;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,9 +33,9 @@ public class PerformanceCategoryMap extends BaseEntity {
     private Performance performance;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("codeId")
-    @JoinColumn(name = "code_id")
-    private Code categoryCode;
+    @MapsId("categoryId")
+    @JoinColumn(name = "category_id")
+    private Category categoryCategory;
 
     @Column(name = "priority")
     private Integer priority;

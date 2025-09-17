@@ -1,4 +1,4 @@
-package com.showhive.code.domain;
+package com.showhive.venue.domain;
 
 import com.showhive.BaseEntity;
 import jakarta.persistence.Column;
@@ -9,46 +9,41 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "codes")
+@Table(name = "seats")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Code extends BaseEntity {
+public class Seat extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_id")
+    @Column(name = "seat_id")
     private Long id;
 
-    private String groupCode;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Code parent;
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
 
-    @Column(name = "code")
-    private String value;
+    private String seatColumn;
 
-    private String description;
+    private Short seatRow;
 
-    private Short level;
+    private Short seatFloor;
 
-    private Short sortOrder;
+    @NotBlank
+    private String seatType;
 
-    private Boolean isActive;
-
-    @Builder.Default
-    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
-    private List<Code> children = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "seat_grade_id")
+    private SeatGrade seatGrade;
 }
