@@ -73,4 +73,8 @@ public class Member extends BaseEntity {
     public boolean isSameMember(long memberId) {
         return this.id == memberId;
     }
+
+    public boolean canAccess(Role otherRole) {
+        return this.role.canAccess(otherRole);
+    }
 }
