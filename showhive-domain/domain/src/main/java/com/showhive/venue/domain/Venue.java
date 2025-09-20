@@ -27,7 +27,6 @@ public class Venue extends BaseEntity {
     @Column(name = "venue_id")
     private Long id;
 
-    @NotBlank
     private String name;
 
     private String address;
@@ -38,6 +37,5 @@ public class Venue extends BaseEntity {
 
     private String contactNumber;
 
-    @NotBlank
     private String link;
 }

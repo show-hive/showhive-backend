@@ -1,4 +1,4 @@
-package com.showhive.admin.application.command.usecase;
+package com.showhive.admin.application.command.usecase.performance;
 
 import com.showhive.admin.application.command.dto.CreatePerformanceDto;
 
