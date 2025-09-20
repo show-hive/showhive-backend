@@ -1,6 +1,8 @@
 package com.showhive.venue.domain;
 
 import com.showhive.BaseEntity;
+import com.showhive.venue.exception.SeatGradeErrorCode;
+import com.showhive.venue.exception.SeatGradeException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,4 +30,14 @@ public class SeatGrade extends BaseEntity {
 
     @Column(name = "seat_grade")
     private String grade;
+
+    public static SeatGrade create(String grade) {
+        if(grade == null || grade.isEmpty()) {
+            throw new SeatGradeException(SeatGradeErrorCode.GRADE_NOT_VALID);
+        }
+
+        return SeatGrade.builder()
+                .grade(grade)
+                .build();
+    }
 }

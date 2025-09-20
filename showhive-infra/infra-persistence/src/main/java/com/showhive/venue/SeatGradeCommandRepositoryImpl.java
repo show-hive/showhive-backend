@@ -1,0 +1,18 @@
+package com.showhive.venue;
+
+import com.showhive.venue.command.SeatGradeCommandJpaRepository;
+import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.repository.command.SeatGradeCommandRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RequiredArgsConstructor
+public class SeatGradeCommandRepositoryImpl implements SeatGradeCommandRepository {
+    private final SeatGradeCommandJpaRepository commandJpaRepository;
+
+    @Override
+    public void create(SeatGrade seatGrade) {
+        commandJpaRepository.save(seatGrade);
+    }
+}
