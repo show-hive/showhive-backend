@@ -1,0 +1,193 @@
+version: "3.9"
+
+networks:
+  coupon-net:
+  ticket-net:
+
+services:
+  # =============================
+  # 사용자 쿠폰 발급용 Redis (Cluster)
+  # =============================
+
+  redis-coupon-node1:
+    image: redis:7
+    container_name: redis-coupon-node1
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+    ports:
+      - "7001:6379"
+    networks:
+      - coupon-net
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis-coupon-node2:
+    image: redis:7
+    container_name: redis-coupon-node2
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+    ports:
+      - "7002:6379"
+    networks:
+      - coupon-net
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis-coupon-node3:
+    image: redis:7
+    container_name: redis-coupon-node3
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+    ports:
+      - "7003:6379"
+    networks:
+      - coupon-net
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis-coupon-node4:
+    image: redis:7
+    container_name: redis-coupon-node4
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+    ports:
+      - "7004:6379"
+    networks:
+      - coupon-net
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis-coupon-node5:
+    image: redis:7
+    container_name: redis-coupon-node5
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+    ports:
+      - "7005:6379"
+    networks:
+      - coupon-net
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis-coupon-node6:
+    image: redis:7
+    container_name: redis-coupon-node6
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+    ports:
+      - "7006:6379"
+    networks:
+      - coupon-net
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Cluster 초기화 (노드 연결)
+  redis-coupon-setup:
+    image: redis:7
+    container_name: redis-coupon-setup
+    depends_on:
+      redis-coupon-node1:
+        condition: service_healthy
+      redis-coupon-node2:
+        condition: service_healthy
+      redis-coupon-node3:
+        condition: service_healthy
+      redis-coupon-node4:
+        condition: service_healthy
+      redis-coupon-node5:
+        condition: service_healthy
+      redis-coupon-node6:
+        condition: service_healthy
+    networks:
+      - coupon-net
+    command: >
+      sh -c "echo yes | redis-cli --cluster create
+      redis-coupon-node1:6379
+      redis-coupon-node2:6379
+      redis-coupon-node3:6379
+      redis-coupon-node4:6379
+      redis-coupon-node5:6379
+      redis-coupon-node6:6379
+      --cluster-replicas 1"
+
+  # =============================
+  # 티켓팅용 Redis (Sentinel)
+  # =============================
+
+  redis-ticket-master:
+    image: redis:7
+    container_name: redis-ticket-master
+    command: redis-server --requirepass ticketpass
+    ports:
+      - "6380:6379"
+    networks:
+      - ticket-net
+
+  redis-ticket-replica:
+    image: redis:7
+    container_name: redis-ticket-replica
+    command: redis-server --replicaof redis-ticket-master 6379 --requirepass ticketpass --masterauth ticketpass
+    networks:
+      - ticket-net
+
+  redis-ticket-sentinel1:
+    image: redis:7
+    container_name: redis-ticket-sentinel1
+    command: redis-sentinel /etc/sentinel.conf
+    volumes:
+      - ./sentinel-ticket.conf:/etc/sentinel.conf
+    ports:
+      - "26390:26379"
+    depends_on:
+      - redis-ticket-master
+      - redis-ticket-replica
+    networks:
+      - ticket-net
+
+  redis-ticket-sentinel2:
+    image: redis:7
+    container_name: redis-ticket-sentinel2
+    command: redis-sentinel /etc/sentinel.conf
+    volumes:
+      - ./sentinel-ticket.conf:/etc/sentinel.conf
+    depends_on:
+      - redis-ticket-master
+      - redis-ticket-replica
+    networks:
+      - ticket-net
+
+  redis-ticket-sentinel3:
+    image: redis:7
+    container_name: redis-ticket-sentinel3
+    command: redis-sentinel /etc/sentinel.conf
+    volumes:
+      - ./sentinel-ticket.conf:/etc/sentinel.conf
+    depends_on:
+      - redis-ticket-master
+      - redis-ticket-replica
+    networks:
+      - ticket-net
