@@ -1,6 +1,6 @@
 spring:
   application:
-    name: boot-member
+    name: admin
   datasource:
     url: jdbc:mysql://localhost:3306/showhive_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,21 +16,6 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
 
-oauth:
-  kakao:
-    client-id: ${KAKAO_CLIENT_ID}
-    redirect-uri: http://localhost:5173/oauth2/redirect/kakao
-
-  google:
-    client-id: ${GOOGLE_CLIENT_ID}
-    client-secret: ${GOOGLE_CLIENT_SECRET}
-    redirect-uri: http://localhost:5173/oauth2/redirect/google
-
-  naver:
-    client-id: ${NAVER_CLIENT_ID}
-    client-secret: ${NAVER_CLIENT_SECRET}
-    redirect-uri: http://localhost:5173/oauth2/redirect/naver
-
 springdoc:
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
@@ -45,9 +30,6 @@ springdoc:
     persist-authorization: true # 토큰 로컬 스토리지에 저장 (공용 pc는 위험)
     filter: true # Tag로 검색
     url: /
-
-cors:
-  origin: http://localhost:5173
 
 jwt:
   secret: ${JWT_SECRET_KEY}

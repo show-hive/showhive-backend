@@ -37,13 +37,9 @@ public class ReservationItem extends BaseEntity {
 
     @ManyToOne
     @JoinColumns({
-        @JoinColumn(name = "seat_id", referencedColumnName = "seat_id"),
-        @JoinColumn(name = "performance_id", referencedColumnName = "performance_id")
+            @JoinColumn(name = "seat_id", referencedColumnName = "seat_id"),
+            @JoinColumn(name = "performance_id", referencedColumnName = "performance_id")
     })
     private PerformanceSeat performanceSeat;
 
-    // TODO: PerformanceSession 연결
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "session_id")
-//    private PerformanceSession performanceSession;
 }
