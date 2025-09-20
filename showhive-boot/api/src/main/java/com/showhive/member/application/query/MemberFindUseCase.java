@@ -1,6 +1,5 @@
 package com.showhive.member.application.query;
 
-import com.showhive.auth.utils.TokenManager;
 import com.showhive.member.domain.Member;
 import com.showhive.member.exception.MemberErrorCode;
 import com.showhive.member.exception.MemberException;
@@ -15,10 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberFindUseCase {
 
     private final MemberRepository memberRepository;
-    private final TokenManager tokenManager;
 
-    public Member findLoginMember(String accessToken) {
-        long memberId = tokenManager.parseToken(accessToken);
+    public Member findLoginMember(long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
     }

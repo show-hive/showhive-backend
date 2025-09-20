@@ -1,5 +1,6 @@
 package com.showhive.config;
 
+import com.showhive.auth.TokenParser;
 import com.showhive.auth.interceptor.AdminInterceptor;
 import com.showhive.auth.resolver.LoginMemberArgumentResolver;
 import com.showhive.auth.usecase.MemberFindUseCase;
@@ -16,11 +17,13 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
 
     private final MemberFindUseCase memberFindUseCase;
+    private final TokenParser tokenParser;
+
     private final AdminInterceptor adminInterceptor;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(new LoginMemberArgumentResolver(memberFindUseCase));
+        argumentResolvers.add(new LoginMemberArgumentResolver(memberFindUseCase, tokenParser));
     }
 
     @Override
