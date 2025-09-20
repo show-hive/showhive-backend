@@ -1,6 +1,8 @@
 package com.showhive.coupon.domain;
 
 import com.showhive.BaseEntity;
+import com.showhive.coupon.exception.CouponErrorCode;
+import com.showhive.coupon.exception.CouponException;
 import com.showhive.member.domain.Grade;
 import com.showhive.member.domain.Member;
 import com.showhive.member.domain.Role;
@@ -66,5 +68,35 @@ public class Coupon extends BaseEntity {
                 .couponCode(couponCode)
                 .status(Status.AVAILABLE)
                 .build();
+    }
+
+    public void use(Long orderId) {
+        if (status == Status.USED) {
+            throw new CouponException(CouponErrorCode.COUPON_ALREADY_USED);
+        }
+        if (isExpired()) {
+            throw new CouponException(CouponErrorCode.COUPON_EXPIRED);
+        }
+        this.status = Status.USED;
+        this.orderId = orderId;
+        this.usedAt = LocalDateTime.now();
+    }
+
+    public void cancel() {
+        if (status != Status.USED) {
+            throw new CouponException(CouponErrorCode.COUPON_NOT_USED);
+        }
+        this.status = Status.CANCELLED;
+        this.orderId = null;
+        this.usedAt = null;
+    }
+
+    public boolean isExpired() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.isBefore(couponInfo.getStartTime()) || now.isAfter(couponInfo.getEndTime());
+    }
+
+    public boolean isUsed() {
+        return status == Status.USED;
     }
 }

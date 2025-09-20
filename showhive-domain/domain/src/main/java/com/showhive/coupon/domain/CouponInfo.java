@@ -51,4 +51,10 @@ public class CouponInfo extends BaseEntity {
     private CouponType couponType;  // 쿠폰 유형
 
     private Integer isDuplicateUse;    // 중복 사용 여부
+
+    // TODO : 필요할 것 같아 일단 추가해봄
+    private LocalDateTime startTime;
+
+    @Setter
+    private LocalDateTime endTime;
 }
