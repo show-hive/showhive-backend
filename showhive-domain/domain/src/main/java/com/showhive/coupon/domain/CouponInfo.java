@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,7 +36,7 @@ public class CouponInfo extends BaseEntity {
 
     private String description; // 쿠폰 설명
 
-    private Integer issued_count; // 발급 가능 개수
+    private Integer issuedCount; // 발급 가능 개수
 
     private Integer discountValue; // 할인 금액
 
