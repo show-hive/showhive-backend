@@ -1,6 +1,6 @@
 package com.showhive.config;
 
-import com.showhive.auth.resolver.LoginMemberArgumentResolver;
+import com.showhive.auth.resolver.AuthMemberArgumentResolver;
 import com.showhive.auth.utils.TokenManager;
 import com.showhive.member.application.query.MemberFindUseCase;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(new LoginMemberArgumentResolver(memberFindUseCase, tokenManager));
+        argumentResolvers.add(new AuthMemberArgumentResolver(memberFindUseCase, tokenManager));
     }
 }

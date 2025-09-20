@@ -2,7 +2,7 @@ package com.showhive.config;
 
 import com.showhive.auth.TokenParser;
 import com.showhive.auth.interceptor.AdminInterceptor;
-import com.showhive.auth.resolver.LoginMemberArgumentResolver;
+import com.showhive.auth.resolver.AuthMemberArgumentResolver;
 import com.showhive.auth.usecase.MemberFindUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(new LoginMemberArgumentResolver(memberFindUseCase, tokenParser));
+        argumentResolvers.add(new AuthMemberArgumentResolver(memberFindUseCase, tokenParser));
     }
 
     @Override
