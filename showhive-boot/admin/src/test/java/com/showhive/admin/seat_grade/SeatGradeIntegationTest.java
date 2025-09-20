@@ -1,7 +1,7 @@
 package com.showhive.admin.seat_grade;
 
-import com.showhive.admin.application.command.usecase.venue.CreateSeatGradeUseCase;
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.admin.application.command.dto.CreateSeatGradeDto;
+import com.showhive.admin.application.command.usecase.CreateSeatGradeUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,9 +14,10 @@ public class SeatGradeIntegationTest {
 
     @Test
     void seat_grade_save_test() {
-        String name = "R";
-
-        SeatGrade seatGrade = SeatGrade.create(name);
-        createSeatGradeUseCase.handle(seatGrade);
+        CreateSeatGradeDto createSeatGradeDto =
+                CreateSeatGradeDto.builder()
+                .grade("S")
+                .build();
+        createSeatGradeUseCase.handle(createSeatGradeDto);
     }
 }

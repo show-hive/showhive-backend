@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ListSeatGradeUseCaseImpl implements ListSeatGradeUseCase {
-    private final SeatGradeQueryRepository queryRepository;
+//    private final SeatGradeQueryRepository queryRepository;
 
     @Override
     public void handle(CreateSeatGradeDto commandDto) {
-        queryRepository.getList(seatGrade);
+//        queryRepository.getList(null);
     }
 }
