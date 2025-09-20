@@ -1,4 +1,4 @@
-package com.showhive.member.application.query;
+package com.showhive.auth.usecase;
 
 import com.showhive.member.domain.Member;
 import com.showhive.member.exception.MemberErrorCode;
