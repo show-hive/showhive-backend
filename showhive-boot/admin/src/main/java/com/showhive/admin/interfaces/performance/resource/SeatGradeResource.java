@@ -6,6 +6,7 @@ import com.showhive.admin.application.command.usecase.seatgrade.ReadSeatGradeUse
 import com.showhive.admin.application.command.usecase.seatgrade.UpdateSeatGradeUseCase;
 import com.showhive.admin.interfaces.performance.dto.SeatGradeListResponse;
 import com.showhive.admin.interfaces.performance.dto.SeatGradeRequest;
+import com.showhive.admin.interfaces.performance.dto.SeatGradeResponse;
 import com.showhive.auth.RequireRole;
 import com.showhive.member.domain.Role;
 import jakarta.validation.Valid;
@@ -40,6 +41,12 @@ public class SeatGradeResource {
     @GetMapping
     public ResponseEntity<SeatGradeListResponse> readAllSeatGrades() {
         SeatGradeListResponse response = readSeatGradeUseCase.readAllSeatGrades();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{seatGradeId}")
+    public ResponseEntity<SeatGradeResponse> readSeatGrade(@PathVariable long seatGradeId) {
+        SeatGradeResponse response = readSeatGradeUseCase.readSeatGrade(seatGradeId);
         return ResponseEntity.ok(response);
     }
 
