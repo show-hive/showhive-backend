@@ -7,6 +7,7 @@ import com.showhive.venue.repository.query.SeatGradeQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,4 +26,8 @@ public class SeatGradeQueryRepositoryImpl implements SeatGradeQueryRepository {
         return seatGradeQueryJpaRepository.findById(seatGradeId);
     }
 
+    @Override
+    public List<SeatGrade> findAll() {
+        return seatGradeQueryJpaRepository.findAll();
+    }
 }
