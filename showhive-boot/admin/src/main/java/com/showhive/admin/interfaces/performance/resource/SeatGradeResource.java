@@ -1,27 +1,44 @@
 package com.showhive.admin.interfaces.performance.resource;
 
-import com.showhive.admin.application.command.dto.CreateSeatGradeDto;
-import com.showhive.admin.application.command.usecase.CreateSeatGradeUseCase;
-import com.showhive.admin.interfaces.performance.dto.CreateSeatGradeRequest;
+import com.showhive.admin.application.command.dto.SeatGradeDto;
+import com.showhive.admin.application.command.usecase.seatgrade.CreateSeatGradeUseCase;
+import com.showhive.admin.application.command.usecase.seatgrade.UpdateSeatGradeUseCase;
+import com.showhive.admin.interfaces.performance.dto.SeatGradeRequest;
+import com.showhive.auth.RequireRole;
+import com.showhive.member.domain.Role;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Validated
-@RequestMapping("/admin/v1/seat-grade")
-@Controller
+@RestController
 @RequiredArgsConstructor
+@RequireRole(role = Role.MANAGER)
+@RequestMapping("/admin/v1/seat-grade")
 public class SeatGradeResource {
+    
     private final CreateSeatGradeUseCase createSeatGradeUseCase;
+    private final UpdateSeatGradeUseCase updateSeatGradeUseCase;
 
     @PostMapping
-    public void createPerformance(@Valid @RequestBody CreateSeatGradeRequest createRequest) {
-        CreateSeatGradeDto commandDto = CreateSeatGradeDto.of(createRequest);
-
+    public ResponseEntity<Void> createPerformance(@Valid @RequestBody SeatGradeRequest createRequest) {
+        SeatGradeDto commandDto = SeatGradeDto.of(createRequest);
         createSeatGradeUseCase.handle(commandDto);
+        return ResponseEntity.ok()
+                .build();
+    }
+
+    @PutMapping("/{seatGradeId}")
+    public ResponseEntity<Void> updatePerformance(@PathVariable long seatGradeId,
+                                                  @Valid @RequestBody SeatGradeRequest updateRequest) {
+        SeatGradeDto commandDto = SeatGradeDto.of(updateRequest);
+        updateSeatGradeUseCase.update(seatGradeId, commandDto);
+        return ResponseEntity.ok()
+                .build();
     }
 }

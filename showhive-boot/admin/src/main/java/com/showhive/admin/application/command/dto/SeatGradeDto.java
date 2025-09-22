@@ -4,12 +4,11 @@ import com.showhive.admin.interfaces.performance.dto.SeatGradeRequest;
 import lombok.Builder;
 
 @Builder
-public record ListSeatGradeDto(
-        Long seatGradeId,
+public record SeatGradeDto(
         String grade
 ) {
-    public static ListSeatGradeDto of(SeatGradeRequest request) {
-        return ListSeatGradeDto.builder()
+    public static SeatGradeDto of(SeatGradeRequest request) {
+        return SeatGradeDto.builder()
                 .grade(request.name())
                 .build();
     }

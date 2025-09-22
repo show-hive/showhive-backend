@@ -32,12 +32,15 @@ public class SeatGrade extends BaseEntity {
     private String grade;
 
     public static SeatGrade create(String grade) {
-        if(grade == null || grade.isEmpty()) {
-            throw new SeatGradeException(SeatGradeErrorCode.GRADE_NOT_VALID);
+        if (grade.isBlank()) {
+            throw new SeatGradeException(SeatGradeErrorCode.SEAT_GRADE_NOT_VALID);
         }
-
         return SeatGrade.builder()
                 .grade(grade)
                 .build();
+    }
+
+    public void changeGrade(String grade) {
+        this.grade = grade;
     }
 }
