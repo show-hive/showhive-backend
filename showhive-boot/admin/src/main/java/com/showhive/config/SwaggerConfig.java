@@ -5,7 +5,6 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
-import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,35 +24,8 @@ public class SwaggerConfig {
                                 .bearerFormat("JWT")
                 ))
                 .info(new Info()
-                        .title("Showhive API")
-                        .description("API for managing showhive")
+                        .title("Showhive Admin API")
+                        .description("API for managing showhive admin")
                         .version("1.0"));
-    }
-
-    // 회원 API 그룹
-    @Bean
-    public GroupedOpenApi memberApi() {
-        return GroupedOpenApi.builder()
-                .group("member")
-                .pathsToMatch("/member/**")
-                .build();
-    }
-
-    // 공연 API 그룹
-    @Bean
-    public GroupedOpenApi performanceApi() {
-        return GroupedOpenApi.builder()
-                .group("performance")
-                .pathsToMatch("/performance/**")
-                .build();
-    }
-
-    // 예매 API 그룹
-    @Bean
-    public GroupedOpenApi reservationApi() {
-        return GroupedOpenApi.builder()
-                .group("reservation")
-                .pathsToMatch("/reservation/**")
-                .build();
     }
 }
