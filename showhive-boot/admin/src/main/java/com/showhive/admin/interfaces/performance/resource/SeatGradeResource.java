@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -42,8 +43,9 @@ public class SeatGradeResource {
     }
 
     @GetMapping
-    public ResponseEntity<SeatGradeListResponse> readAllSeatGrades() {
-        SeatGradeListResponse response = readSeatGradeUseCase.readAllSeatGrades();
+    public ResponseEntity<SeatGradeListResponse> readAllSeatGrades(@RequestParam(name = "size", defaultValue = "20") int pageSize,
+                                                                   @RequestParam(name = "lastGradeId", defaultValue = "0") long lastGradeId) {
+        SeatGradeListResponse response = readSeatGradeUseCase.readAllSeatGrades(pageSize, lastGradeId);
         return ResponseEntity.ok(response);
     }
 

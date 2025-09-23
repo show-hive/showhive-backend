@@ -3,6 +3,7 @@ package com.showhive.admin.application.command.usecase.seatgrade.impl;
 import com.showhive.admin.application.command.usecase.seatgrade.ReadSeatGradeUseCase;
 import com.showhive.admin.interfaces.performance.dto.SeatGradeListResponse;
 import com.showhive.admin.interfaces.performance.dto.SeatGradeResponse;
+import com.showhive.common.CursorPage;
 import com.showhive.venue.domain.SeatGrade;
 import com.showhive.venue.exception.SeatGradeErrorCode;
 import com.showhive.venue.exception.SeatGradeException;
@@ -21,12 +22,18 @@ public class ReadSeatGradeUseCaseImpl implements ReadSeatGradeUseCase {
     private final SeatGradeQueryRepository seatGradeQueryRepository;
 
     @Override
-    @Transactional
-    public SeatGradeListResponse readAllSeatGrades() {
-        List<SeatGrade> seatGrades = seatGradeQueryRepository.findAll();
+    public SeatGradeListResponse readAllSeatGrades(int pageSize, long lastGradeId) {
+        if (lastGradeId == 0) {
+            lastGradeId = Long.MAX_VALUE;
+        }
+        CursorPage<SeatGrade> seatGradeSlice = seatGradeQueryRepository.findAllByLessThanId(lastGradeId, pageSize);
+        List<SeatGrade> seatGrades = seatGradeSlice.contents();
+        boolean loadable = seatGradeSlice.hasNext();
+
         return new SeatGradeListResponse(seatGrades.stream()
                 .map(seatGrade -> new SeatGradeResponse(seatGrade.getId(), seatGrade.getGrade()))
-                .toList());
+                .toList(),
+                loadable);
     }
 
     @Override

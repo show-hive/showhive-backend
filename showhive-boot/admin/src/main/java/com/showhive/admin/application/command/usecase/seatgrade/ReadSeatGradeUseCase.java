@@ -5,7 +5,7 @@ import com.showhive.admin.interfaces.performance.dto.SeatGradeResponse;
 
 public interface ReadSeatGradeUseCase {
 
-    SeatGradeListResponse readAllSeatGrades();
+    SeatGradeListResponse readAllSeatGrades(int pageSize, long lastGradeId);
 
     SeatGradeResponse readSeatGrade(long seatGradeId);
 }
