@@ -5,7 +5,6 @@ import com.showhive.admin.application.command.usecase.seatgrade.CreateSeatGradeU
 import com.showhive.admin.application.command.usecase.seatgrade.DeleteSeatGradeUseCase;
 import com.showhive.admin.application.command.usecase.seatgrade.ReadSeatGradeUseCase;
 import com.showhive.admin.application.command.usecase.seatgrade.UpdateSeatGradeUseCase;
-import com.showhive.admin.docs.SeatGradeResourceSwagger;
 import com.showhive.admin.interfaces.performance.dto.SeatGradeListResponse;
 import com.showhive.admin.interfaces.performance.dto.SeatGradeRequest;
 import com.showhive.admin.interfaces.performance.dto.SeatGradeResponse;
@@ -29,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequireRole(role = Role.MANAGER)
 @RequestMapping("/admin/v1/seat-grade")
-public class SeatGradeResource implements SeatGradeResourceSwagger {
+public class SeatGradeResource implements SeatGradeResourceFacade {
 
     private final CreateSeatGradeUseCase createSeatGradeUseCase;
     private final ReadSeatGradeUseCase readSeatGradeUseCase;

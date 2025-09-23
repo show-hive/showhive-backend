@@ -1,4 +1,4 @@
-package com.showhive.admin.docs;
+package com.showhive.admin.interfaces.performance.resource;
 
 import com.showhive.admin.interfaces.performance.dto.SeatGradeListResponse;
 import com.showhive.admin.interfaces.performance.dto.SeatGradeRequest;
@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 
 @Tag(name = "Seat Grade API")
 @SecurityRequirement(name = "Authorization")
-public interface SeatGradeResourceSwagger {
+public interface SeatGradeResourceFacade {
 
     @Operation(
             summary = "좌석 등급 생성",
