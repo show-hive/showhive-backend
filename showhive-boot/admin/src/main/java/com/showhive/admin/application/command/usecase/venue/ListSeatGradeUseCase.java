@@ -1,7 +1,0 @@
-package com.showhive.admin.application.command.usecase.venue;
-
-import com.showhive.admin.application.command.dto.SeatGradeDto;
-
-public interface ListSeatGradeUseCase {
-    void handle(SeatGradeDto commandDto);
-}

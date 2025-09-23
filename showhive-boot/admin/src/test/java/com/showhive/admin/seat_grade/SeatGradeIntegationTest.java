@@ -1,7 +1,7 @@
 package com.showhive.admin.seat_grade;
 
-import com.showhive.admin.application.command.dto.SeatGradeDto;
-import com.showhive.admin.application.command.usecase.seatgrade.CreateSeatGradeUseCase;
+import com.showhive.admin.application.command.dto.venue.SeatGradeDto;
+import com.showhive.admin.application.command.usecase.venue.seatgrade.CreateSeatGradeUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

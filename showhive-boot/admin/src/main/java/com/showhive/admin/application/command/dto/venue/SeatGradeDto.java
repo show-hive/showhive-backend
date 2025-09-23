@@ -1,6 +1,6 @@
-package com.showhive.admin.application.command.dto;
+package com.showhive.admin.application.command.dto.venue;
 
-import com.showhive.admin.interfaces.performance.dto.SeatGradeRequest;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeRequest;
 import lombok.Builder;
 
 @Builder

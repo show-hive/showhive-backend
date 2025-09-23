@@ -1,8 +1,8 @@
-package com.showhive.admin.interfaces.performance.resource;
+package com.showhive.admin.interfaces.venue.resource;
 
-import com.showhive.admin.interfaces.performance.dto.SeatGradeListResponse;
-import com.showhive.admin.interfaces.performance.dto.SeatGradeRequest;
-import com.showhive.admin.interfaces.performance.dto.SeatGradeResponse;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeListResponse;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeRequest;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

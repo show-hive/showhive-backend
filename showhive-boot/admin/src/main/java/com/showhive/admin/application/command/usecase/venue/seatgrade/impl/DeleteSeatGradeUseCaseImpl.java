@@ -1,6 +1,6 @@
-package com.showhive.admin.application.command.usecase.seatgrade.impl;
+package com.showhive.admin.application.command.usecase.venue.seatgrade.impl;
 
-import com.showhive.admin.application.command.usecase.seatgrade.DeleteSeatGradeUseCase;
+import com.showhive.admin.application.command.usecase.venue.seatgrade.DeleteSeatGradeUseCase;
 import com.showhive.venue.exception.SeatGradeErrorCode;
 import com.showhive.venue.exception.SeatGradeException;
 import com.showhive.venue.repository.command.SeatGradeCommandRepository;

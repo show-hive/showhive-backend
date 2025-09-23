@@ -1,8 +1,8 @@
-package com.showhive.admin.application.command.usecase.seatgrade.impl;
+package com.showhive.admin.application.command.usecase.venue.seatgrade.impl;
 
-import com.showhive.admin.application.command.usecase.seatgrade.ReadSeatGradeUseCase;
-import com.showhive.admin.interfaces.performance.dto.SeatGradeListResponse;
-import com.showhive.admin.interfaces.performance.dto.SeatGradeResponse;
+import com.showhive.admin.application.command.usecase.venue.seatgrade.ReadSeatGradeUseCase;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeListResponse;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeResponse;
 import com.showhive.common.CursorPage;
 import com.showhive.venue.domain.SeatGrade;
 import com.showhive.venue.exception.SeatGradeErrorCode;

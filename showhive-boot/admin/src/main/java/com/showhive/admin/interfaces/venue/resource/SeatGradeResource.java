@@ -1,13 +1,13 @@
-package com.showhive.admin.interfaces.performance.resource;
+package com.showhive.admin.interfaces.venue.resource;
 
-import com.showhive.admin.application.command.dto.SeatGradeDto;
-import com.showhive.admin.application.command.usecase.seatgrade.CreateSeatGradeUseCase;
-import com.showhive.admin.application.command.usecase.seatgrade.DeleteSeatGradeUseCase;
-import com.showhive.admin.application.command.usecase.seatgrade.ReadSeatGradeUseCase;
-import com.showhive.admin.application.command.usecase.seatgrade.UpdateSeatGradeUseCase;
-import com.showhive.admin.interfaces.performance.dto.SeatGradeListResponse;
-import com.showhive.admin.interfaces.performance.dto.SeatGradeRequest;
-import com.showhive.admin.interfaces.performance.dto.SeatGradeResponse;
+import com.showhive.admin.application.command.dto.venue.SeatGradeDto;
+import com.showhive.admin.application.command.usecase.venue.seatgrade.CreateSeatGradeUseCase;
+import com.showhive.admin.application.command.usecase.venue.seatgrade.DeleteSeatGradeUseCase;
+import com.showhive.admin.application.command.usecase.venue.seatgrade.ReadSeatGradeUseCase;
+import com.showhive.admin.application.command.usecase.venue.seatgrade.UpdateSeatGradeUseCase;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeListResponse;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeRequest;
+import com.showhive.admin.interfaces.venue.dto.SeatGradeResponse;
 import com.showhive.auth.RequireRole;
 import com.showhive.member.domain.Role;
 import jakarta.validation.Valid;

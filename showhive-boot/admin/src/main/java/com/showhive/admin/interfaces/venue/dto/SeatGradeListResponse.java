@@ -1,4 +1,4 @@
-package com.showhive.admin.interfaces.performance.dto;
+package com.showhive.admin.interfaces.venue.dto;
 
 import java.util.List;
 
