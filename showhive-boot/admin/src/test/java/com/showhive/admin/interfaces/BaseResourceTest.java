@@ -3,7 +3,7 @@ package com.showhive.admin.interfaces;
 import com.showhive.admin.DataBaseCleaner;
 import com.showhive.admin.fixture.MemberGenerator;
 import com.showhive.admin.fixture.SeatGradeGenerator;
-import com.showhive.auth.TokenParser;
+import com.showhive.auth.TokenManager;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -22,7 +22,7 @@ import org.springframework.test.context.ActiveProfiles;
 public abstract class BaseResourceTest {
 
     @Autowired
-    protected TokenParser tokenParser;
+    protected TokenManager tokenManager;
 
     @Autowired
     protected MemberGenerator memberGenerator;

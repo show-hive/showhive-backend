@@ -18,7 +18,7 @@ import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
-public class TokenParser {
+public class TokenManager {
 
     @Value("${jwt.secret}")
     private String secretKey;

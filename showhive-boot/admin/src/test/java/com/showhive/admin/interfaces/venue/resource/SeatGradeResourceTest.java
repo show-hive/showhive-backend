@@ -23,7 +23,7 @@ class SeatGradeResourceTest extends BaseResourceTest {
     @BeforeEach
     void auth() {
         Member member = memberGenerator.generateAdmin("admin");
-        accessToken = tokenParser.createAccessToken(member);
+        accessToken = tokenManager.createAccessToken(member);
     }
 
     @DisplayName("좌석 등급을 생성할 수 있다.")
