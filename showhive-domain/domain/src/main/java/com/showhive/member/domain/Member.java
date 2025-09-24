@@ -60,6 +60,15 @@ public class Member extends BaseEntity {
                 .build();
     }
 
+    public static Member createAdmin(String email, String username) {
+        return Member.builder()
+                .email(email)
+                .username(username)
+                .grade(Grade.WELCOME)
+                .role(Role.ADMIN)
+                .build();
+    }
+
     // createMember, createAdmin 만들어야됨
 
     public void saveRefreshToken(String refreshToken) {
