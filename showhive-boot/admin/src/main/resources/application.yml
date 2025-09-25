@@ -29,7 +29,7 @@ springdoc:
     operations-sorter: alpha # 정렬 - 알파벳순
     persist-authorization: true # 토큰 로컬 스토리지에 저장 (공용 pc는 위험)
     filter: true # Tag로 검색
-    url: /
+    url: /api-docs
 
 jwt:
   secret: ${JWT_SECRET_KEY}
