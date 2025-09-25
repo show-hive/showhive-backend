@@ -12,7 +12,18 @@ public interface SeatGradeQueryJpaRepository extends JpaRepository<SeatGrade, Lo
     @Query("""
                 SELECT sg FROM SeatGrade sg
                 WHERE sg.id < :lastGradeId
+                          AND (:keyword IS NULL OR sg.grade LIKE %:keyword%)
                 ORDER BY sg.id DESC
             """)
-    Slice<SeatGrade> findAllByLessThanId(@Param("lastGradeId") long lastGradeId, Pageable pageable);
+    Slice<SeatGrade> findSliceByKeywordAndIdLessThan(@Param("lastGradeId") long lastGradeId, Pageable pageable,
+                                                     @Param("keyword") String keyword);
+
+    @Query("""
+                SELECT sg FROM SeatGrade sg
+                WHERE sg.id > :lastGradeId
+                          AND (:keyword IS NULL OR sg.grade LIKE %:keyword%)
+                ORDER BY sg.id ASC
+            """)
+    Slice<SeatGrade> findSliceByKeywordAndIdGreaterThan(@Param("lastGradeId") long lastGradeId, Pageable pageable,
+                                                        @Param("keyword") String keyword);
 }

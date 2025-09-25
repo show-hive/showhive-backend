@@ -4,6 +4,7 @@ import com.showhive.admin.application.command.usecase.venue.seatgrade.ReadSeatGr
 import com.showhive.admin.interfaces.venue.dto.SeatGradeListResponse;
 import com.showhive.admin.interfaces.venue.dto.SeatGradeResponse;
 import com.showhive.common.CursorPage;
+import com.showhive.venue.domain.Direction;
 import com.showhive.venue.domain.SeatGrade;
 import com.showhive.venue.exception.SeatGradeErrorCode;
 import com.showhive.venue.exception.SeatGradeException;
@@ -22,11 +23,16 @@ public class ReadSeatGradeUseCaseImpl implements ReadSeatGradeUseCase {
     private final SeatGradeQueryRepository seatGradeQueryRepository;
 
     @Override
-    public SeatGradeListResponse readAllSeatGrades(int pageSize, long lastGradeId) {
-        if (lastGradeId == 0) {
+    public SeatGradeListResponse readAllSeatGrades(int pageSize, long lastGradeId,
+                                                   String keyword, String direction) {
+        Direction validDirection = Direction.from(direction);
+
+        if (lastGradeId == 0 && validDirection == Direction.DESC) {
             lastGradeId = Long.MAX_VALUE;
         }
-        CursorPage<SeatGrade> seatGradeSlice = seatGradeQueryRepository.findAllByLessThanId(lastGradeId, pageSize);
+
+        CursorPage<SeatGrade> seatGradeSlice = seatGradeQueryRepository.findSeatGradesBy(lastGradeId, pageSize,
+                keyword, validDirection);
         List<SeatGrade> seatGrades = seatGradeSlice.contents();
         boolean loadable = seatGradeSlice.hasNext();
 

@@ -47,8 +47,11 @@ public class SeatGradeResource implements SeatGradeResourceFacade {
     @Override
     @GetMapping
     public ResponseEntity<SeatGradeListResponse> readAllSeatGrades(@RequestParam(name = "size", defaultValue = "20") int pageSize,
-                                                                   @RequestParam(name = "lastGradeId", defaultValue = "0") long lastGradeId) {
-        SeatGradeListResponse response = readSeatGradeUseCase.readAllSeatGrades(pageSize, lastGradeId);
+                                                                   @RequestParam(name = "lastGradeId", defaultValue = "0") long lastGradeId,
+                                                                   @RequestParam(name = "keyword", required = false) String keyword,
+                                                                   @RequestParam(name = "direction", defaultValue = "desc") String direction) {
+        SeatGradeListResponse response = readSeatGradeUseCase.readAllSeatGrades(
+                pageSize, lastGradeId, keyword, direction);
         return ResponseEntity.ok(response);
     }
 

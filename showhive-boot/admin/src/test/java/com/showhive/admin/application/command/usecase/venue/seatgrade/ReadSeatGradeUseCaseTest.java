@@ -27,8 +27,10 @@ class ReadSeatGradeUseCaseTest extends BaseUseCaseTest {
         createSeatGradeUseCase.handle(new SeatGradeDto("A"));
         int pageSize = 10;
         int lastGradeId = 0;
+        String keyword = null;
+        String direction = "desc";
         // when
-        SeatGradeListResponse seatGradeListResponse = readSeatGradeUseCase.readAllSeatGrades(pageSize, lastGradeId);
+        SeatGradeListResponse seatGradeListResponse = readSeatGradeUseCase.readAllSeatGrades(pageSize, lastGradeId, keyword, direction);
         // then
         assertThat(seatGradeListResponse.seatGrades()).hasSize(3);
     }
@@ -42,8 +44,10 @@ class ReadSeatGradeUseCaseTest extends BaseUseCaseTest {
         createSeatGradeUseCase.handle(new SeatGradeDto("A"));
         int pageSize = 10;
         int lastGradeId = 3;
+        String keyword = null;
+        String direction = "desc";
         // when
-        SeatGradeListResponse seatGradeListResponse = readSeatGradeUseCase.readAllSeatGrades(pageSize, lastGradeId);
+        SeatGradeListResponse seatGradeListResponse = readSeatGradeUseCase.readAllSeatGrades(pageSize, lastGradeId, keyword, direction);
         // then
         assertAll(
                 () -> assertThat(seatGradeListResponse.seatGrades()).hasSize(2),
@@ -51,6 +55,26 @@ class ReadSeatGradeUseCaseTest extends BaseUseCaseTest {
                 () -> assertThat(seatGradeListResponse.seatGrades().getFirst().id()).isEqualTo(2),
                 () -> assertThat(seatGradeListResponse.seatGrades().getLast().grade()).isEqualTo("R"),
                 () -> assertThat(seatGradeListResponse.seatGrades().getLast().id()).isEqualTo(1)
+        );
+    }
+
+    @DisplayName("검색 키워드 조건에 맞는 좌석 등급 목록을 조회할 수 있다.")
+    @Test
+    void read_seat_grades_by_keyword() {
+        // given
+        createSeatGradeUseCase.handle(new SeatGradeDto("R"));
+        createSeatGradeUseCase.handle(new SeatGradeDto("S"));
+        createSeatGradeUseCase.handle(new SeatGradeDto("A"));
+        int pageSize = 10;
+        int lastGradeId = 0;
+        String keyword = "a";
+        String direction = "desc";
+        // when
+        SeatGradeListResponse seatGradeListResponse = readSeatGradeUseCase.readAllSeatGrades(pageSize, lastGradeId, keyword, direction);
+        // then
+        assertAll(
+                () -> assertThat(seatGradeListResponse.seatGrades()).hasSize(1),
+                () -> assertThat(seatGradeListResponse.seatGrades().getFirst().grade()).isEqualTo("A")
         );
     }
 }

@@ -1,6 +1,7 @@
 package com.showhive.venue;
 
 import com.showhive.common.CursorPage;
+import com.showhive.venue.domain.Direction;
 import com.showhive.venue.domain.SeatGrade;
 import com.showhive.venue.query.SeatGradeQueryJpaRepository;
 import com.showhive.venue.repository.query.SeatGradeQueryRepository;
@@ -23,9 +24,17 @@ public class SeatGradeQueryRepositoryImpl implements SeatGradeQueryRepository {
     }
 
     @Override
-    public CursorPage<SeatGrade> findAllByLessThanId(long lastGradeId, int pageSize) {
-        Slice<SeatGrade> slice = seatGradeQueryJpaRepository.findAllByLessThanId(lastGradeId,
-                PageRequest.of(0, pageSize));
+    public CursorPage<SeatGrade> findSeatGradesBy(long lastGradeId, int pageSize, String keyword, Direction direction) {
+        if (direction == Direction.DESC) {
+            Slice<SeatGrade> slice = seatGradeQueryJpaRepository.findSliceByKeywordAndIdLessThan(lastGradeId,
+                    PageRequest.of(0, pageSize), keyword);
+            return new CursorPage<>(
+                    slice.getContent(),
+                    slice.hasNext()
+            );
+        }
+        Slice<SeatGrade> slice = seatGradeQueryJpaRepository.findSliceByKeywordAndIdGreaterThan(lastGradeId,
+                PageRequest.of(0, pageSize), keyword);
         return new CursorPage<>(
                 slice.getContent(),
                 slice.hasNext()

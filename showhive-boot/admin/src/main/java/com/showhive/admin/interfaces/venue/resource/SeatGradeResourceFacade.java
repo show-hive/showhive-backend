@@ -40,7 +40,9 @@ public interface SeatGradeResourceFacade {
     )
     ResponseEntity<SeatGradeListResponse> readAllSeatGrades(
             @Parameter(name = "size", description = "페이지 크기", example = "20") int pageSize,
-            @Parameter(name = "lastGradeId", description = "마지막 조회한 좌석 등급 ID", example = "0") long lastGradeId
+            @Parameter(name = "lastGradeId", description = "마지막 조회한 좌석 등급 ID", example = "0") long lastGradeId,
+            @Parameter(name = "keyword", description = "검색 키워드", example = "a") String keyword,
+            @Parameter(name = "direction", description = "정렬 방향", example = "desc") String direction
     );
 
     @Operation(
