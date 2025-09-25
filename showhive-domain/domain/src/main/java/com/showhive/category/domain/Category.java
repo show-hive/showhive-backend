@@ -1,4 +1,4 @@
-package com.showhive.code.domain;
+package com.showhive.category.domain;
 
 import com.showhive.BaseEntity;
 import jakarta.persistence.Column;
@@ -51,4 +51,20 @@ public class Category extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Category> children = new ArrayList<>();
+
+    public static Category create(String groupCode, Category parent, String value, String description, Short level, Short sortOrder, Boolean isActive) {
+        level = level == null ? 0 : level;
+        sortOrder = sortOrder == null ? 0 : sortOrder;
+
+        return Category.builder()
+                .groupCode(groupCode)
+                .parent(parent)
+                .value(value)
+                .description(description)
+                .level(level)
+                .sortOrder(sortOrder)
+                .isActive(isActive)
+                .build();
+
+    }
 }
