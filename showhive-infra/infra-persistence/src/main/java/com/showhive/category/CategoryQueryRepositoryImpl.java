@@ -23,6 +23,11 @@ public class CategoryQueryRepositoryImpl implements CategoryQueryRepository {
     }
 
     @Override
+    public Optional<Category> findCategoryByGroupCodeAndValue(String groupCode, String value) {
+        return queryRepository.findOneByGroupCodeAndValue(groupCode, value);
+    }
+
+    @Override
     public Optional<Category> findByIdWithChildren(Long id) {
         return queryRepository.findWithChildrenById(id);
     }
