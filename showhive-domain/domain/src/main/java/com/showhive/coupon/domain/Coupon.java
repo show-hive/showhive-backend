@@ -60,12 +60,16 @@ public class Coupon extends BaseEntity {
     private String couponCode;      // 쿠폰 코드
     private Long orderId;           // 주문 번호
 
-    public static Coupon create(Member member,CouponInfo couponInfo, Long userId, String name, String couponCode) {
+    public static String generateCouponCode() {
+        return java.util.UUID.randomUUID().toString().substring(0, 8);
+    }
+
+    public static Coupon create(Member member, CouponInfo couponInfo, String name) {
         return Coupon.builder()
                 .couponInfo(couponInfo)
                 .member(member)
                 .name(name)
-                .couponCode(couponCode)
+                .couponCode(generateCouponCode())
                 .status(Status.AVAILABLE)
                 .build();
     }

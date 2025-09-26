@@ -2,7 +2,8 @@ package com.showhive.coupon;
 
 import com.showhive.coupon.domain.Coupon;
 import com.showhive.coupon.domain.Status;
-import com.showhive.coupon.repository.CouponRepository;
+import com.showhive.coupon.query.CouponQueryJpaRepository;
+import com.showhive.coupon.repository.query.CouponQueryRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,32 +12,31 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class CouponRepositoryImpl implements CouponRepository {
-
-    private final JpaCouponRepository jpaCouponRepository;
+public class CouponQueryRepositoryImpl implements CouponQueryRepository {
+    private final CouponQueryJpaRepository couponQueryJpaRepository;
 
     @Override
-    public void save(Coupon coupon) {
-        jpaCouponRepository.save(coupon);
+    public Optional<Coupon> findById(Long id) {
+        return couponQueryJpaRepository.findById(id);
     }
 
     @Override
     public Optional<Coupon> findByIdAndMemberId(Long id, Long memberId) {
-        return jpaCouponRepository.findByIdAndMemberId(id, memberId);
+        return couponQueryJpaRepository.findByIdAndMemberId(id, memberId);
     }
 
     @Override
     public Long countByCouponInfoId(Long infoId) {
-        return jpaCouponRepository.countByCouponInfoId(infoId);
+        return couponQueryJpaRepository.countByCouponInfoId(infoId);
     }
 
     @Override
     public Page<Coupon> findByMemberIdAndStatusOrderByCreatedAtDesc(Long memberId, Status status, Pageable pageable) {
-        return jpaCouponRepository.findByMemberIdAndStatusOrderByCreatedAtDesc(memberId, status, pageable);
+        return couponQueryJpaRepository.findByMemberIdAndStatusOrderByCreatedAtDesc(memberId, status, pageable);
     }
 
     @Override
     public Optional<Coupon> findByIdWithLock(Long id) {
-        return jpaCouponRepository.findByIdWithLock(id);
+        return couponQueryJpaRepository.findByIdWithLock(id);
     }
 }

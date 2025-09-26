@@ -1,8 +1,7 @@
-package com.showhive.coupon;
+package com.showhive.coupon.query;
 
 import com.showhive.coupon.domain.Coupon;
 import com.showhive.coupon.domain.Status;
-import com.showhive.member.domain.SocialInfo;
 import jakarta.persistence.LockModeType;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -12,14 +11,13 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface JpaCouponRepository extends JpaRepository<Coupon, Long> {
+public interface CouponQueryJpaRepository extends JpaRepository<Coupon, Long> {
 
     // 아이디와 유저아이디를 가지고 발급된 쿠폰을 찾아오는 인터페이스
     Optional<Coupon> findByIdAndMemberId(Long id, Long memberId);
 
     // 특정 정책id로 발급된 쿠폰의 개수를 확인하기 위한 인터페이스
-    @Query("SELECT COUNT(c) FROM Coupon c WHERE c.couponInfo.id = :infoId")
-    Long countByCouponInfoId(@Param("infoId") Long infoId);
+    Long countByCouponInfoId(Long infoId);
 
     // 특정 유저가 최근에 발급받은 쿠폰 리스트를 가지고 오는 인터페이스
     Page<Coupon> findByMemberIdAndStatusOrderByCreatedAtDesc(Long memberId, Status status, Pageable pageable);

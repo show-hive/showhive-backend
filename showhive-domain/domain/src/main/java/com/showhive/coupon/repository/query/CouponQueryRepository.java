@@ -1,6 +1,7 @@
-package com.showhive.coupon.repository;
+package com.showhive.coupon.repository.query;
 
 import com.showhive.coupon.domain.Coupon;
+import com.showhive.coupon.domain.CouponInfo;
 import com.showhive.coupon.domain.Status;
 import jakarta.persistence.LockModeType;
 import java.util.Optional;
@@ -10,12 +11,14 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface CouponRepository {
+public interface CouponQueryRepository {
 
-    // 아이디와 유저아이디를 가지고 발급된 쿠폰을 찾아오는 인터페이
+    Optional<Coupon> findById(Long id);
+
+    // 아이디와 유저아이디를 가지고 발급된 쿠폰을 찾아옴
     Optional<Coupon> findByIdAndMemberId(Long id, Long memberId);
 
-    // 특정 정책id로 발급된 쿠폰의 개수를 확인하기 위한 인터페이스
+    // 특정 정책id로 발급된 쿠폰의 개수를 확인
     @Query("SELECT COUNT(c) FROM Coupon c WHERE c.couponInfo.id = :infoId")
     Long countByCouponInfoId(@Param("infoId") Long infoId);
 
@@ -27,6 +30,4 @@ public interface CouponRepository {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT c FROM Coupon c where c.id=:id")
     Optional<Coupon> findByIdWithLock(Long id);
-
-    void save(Coupon coupon);
 }

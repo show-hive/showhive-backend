@@ -1,7 +1,9 @@
-package com.showhive.admin.application.command.dto.coupon;
+package com.showhive.admin.interfaces.coupon.dto;
 
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
 public record CouponUseRequest(Long orderId) {
+
 }
