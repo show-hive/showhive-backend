@@ -2,6 +2,7 @@ package com.showhive.admin.interfaces;
 
 import com.showhive.admin.DataBaseCleaner;
 import com.showhive.admin.fixture.MemberGenerator;
+import com.showhive.admin.fixture.SeatGenerator;
 import com.showhive.admin.fixture.SeatGradeGenerator;
 import com.showhive.admin.fixture.VenueGenerator;
 import com.showhive.auth.TokenManager;
@@ -30,6 +31,9 @@ public abstract class BaseResourceTest {
 
     @Autowired
     protected SeatGradeGenerator seatGradeGenerator;
+
+    @Autowired
+    protected SeatGenerator seatGenerator;
 
     @Autowired
     protected VenueGenerator venueGenerator;

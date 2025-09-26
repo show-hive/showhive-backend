@@ -2,7 +2,9 @@ package com.showhive.admin.interfaces.venue.resource;
 
 import com.showhive.admin.interfaces.BaseResourceTest;
 import com.showhive.admin.interfaces.venue.dto.SeatRequest;
+import com.showhive.admin.interfaces.venue.dto.SeatResponse;
 import com.showhive.member.domain.Member;
+import com.showhive.venue.domain.Seat;
 import com.showhive.venue.domain.SeatGrade;
 import com.showhive.venue.domain.SeatType;
 import com.showhive.venue.domain.Venue;
@@ -12,6 +14,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class SeatResourceTest extends BaseResourceTest {
 
@@ -56,7 +61,28 @@ class SeatResourceTest extends BaseResourceTest {
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                 .when()
                 .body(createRequest)
-                .post("/admin/v1/venues/" + venue.getId() + "/seats")
+                .post("/admin/v1/venues/{venueId}/seats", venue.getId())
                 .then().statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @DisplayName("특정 좌석을 조회할 수 있다.")
+    @Test
+    void read_seat() {
+        Venue venue = venueGenerator.generateVenue();
+        SeatGrade seatGrade = seatGradeGenerator.generateSeatGrade("A");
+        Seat seat = seatGenerator.generateSeat(venue, seatGrade);
+
+        SeatResponse seatResponse = given()
+                .contentType(ContentType.JSON)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+                .when()
+                .get("/admin/v1/venues/{venueId}/seats/{seatId}", venue.getId(), seat.getId())
+                .then().statusCode(HttpStatus.OK.value())
+                .extract().as(SeatResponse.class);
+
+        assertAll(
+                () -> assertThat(seatResponse.seatId()).isEqualTo(seat.getId()),
+                () -> assertThat(seatResponse.venueResponse().venueId()).isEqualTo(venue.getId())
+        );
     }
 }
