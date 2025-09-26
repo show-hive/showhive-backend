@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin/v1/category")
 @RestController
 @RequiredArgsConstructor
-public class CategoryResource {
+public class CategoryResource implements CategoryFacade {
     private CreateCategoryUseCase createCategoryUseCase;
 
+    @Override
     @PostMapping
     public void create(@Valid @RequestBody CreateCategoryRequest categoryRequest) {
 

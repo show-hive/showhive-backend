@@ -18,7 +18,12 @@ public class CategoryQueryRepositoryImpl implements CategoryQueryRepository {
     }
 
     @Override
-    public boolean existsCategory(String value) {
-        return queryRepository.existsByValue(value);
+    public boolean existsCategory(String groupCode, String value) {
+        return queryRepository.existsByGroupCodeAndValue(groupCode, value);
+    }
+
+    @Override
+    public Optional<Category> findByIdWithChildren(Long id) {
+        return queryRepository.findWithChildrenById(id);
     }
 }

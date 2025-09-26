@@ -20,15 +20,26 @@ public class CreateCategoryUseCaseImpl implements CreateCategoryUseCase {
 
     @Override
     public void handle(CreateCategoryDto commandDto) {
-        Category parentCategory = null;
-        boolean existCategory = queryRepository.existsCategory(commandDto.value());
-        if(commandDto.parentId() != null) {
-            parentCategory = queryRepository.findById(commandDto.parentId())
-                                            .orElseThrow(()-> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
+        Category category = null;
+
+        // 카테고리 그룹코드, 값으로 중복 검사
+        boolean existCategory = queryRepository.existsCategory(commandDto.groupCode(), commandDto.value());
+
+        if (existCategory) {
+            throw new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND);
         }
 
-        Category category = Category.create(commandDto.groupCode(), parentCategory, commandDto.value(),
-                commandDto.description(), commandDto.level(), commandDto.sortOrder(), commandDto.isActive());
+        // 부모 카테고리 존재시 Root가 아닌 Node로 추가 됨
+        if (commandDto.parentId() != null) {
+            Category parentCategory = queryRepository.findById(commandDto.parentId())
+                                                     .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
+
+            category = Category.createNodeCategory(commandDto.groupCode(), parentCategory, commandDto.value(),
+                    commandDto.description(), commandDto.level(), commandDto.sortOrder(), commandDto.isActive());
+        } else {
+            category = Category.createRoot(commandDto.groupCode(), commandDto.value(),
+                    commandDto.description(), commandDto.sortOrder(), commandDto.isActive());
+        }
 
         commandRepository.createCategory(category);
     }
