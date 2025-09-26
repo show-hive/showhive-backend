@@ -79,4 +79,23 @@ public class Category extends BaseEntity {
                 .isActive(isActive)
                 .build();
     }
+
+    public void update(String groupCode, Category parent, String value, String description, Short level, Short sortOrder, Boolean isActive) {
+        this.groupCode = groupCode;
+        this.parent = parent;
+        this.value = value;
+        this.description = description;
+        this.level = level;
+        this.sortOrder = sortOrder;
+        this.isActive = isActive;
+    }
+
+    public void update(String groupCode, String value, String description, Short level, Short sortOrder, Boolean isActive) {
+        this.groupCode = groupCode;
+        this.value = value;
+        this.description = description;
+        this.level = level;
+        this.sortOrder = sortOrder;
+        this.isActive = isActive;
+    }
 }
