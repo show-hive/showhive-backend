@@ -22,7 +22,7 @@ public class TokenManager {
     @Value("${jwt.secret}")
     private String secretKey;
 
-    public static final long ACCESS_TOKEN_EXP = 60L * 60L * 1000L * 24L * 30L; // 1시간
+    public static final long ACCESS_TOKEN_EXP = 60L * 60L * 1000L; // 1시간
     public static final long REFRESH_TOKEN_EXP = 60L * 60L * 1000L * 24L * 30L; // 1달
     private static final String PREFIX = "Bearer ";
 
