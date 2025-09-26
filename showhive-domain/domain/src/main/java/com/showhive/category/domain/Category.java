@@ -79,4 +79,9 @@ public class Category extends BaseEntity {
                 .isActive(isActive)
                 .build();
     }
+
+    public void deactivate() {
+        this.isActive = false;
+    }
+
 }

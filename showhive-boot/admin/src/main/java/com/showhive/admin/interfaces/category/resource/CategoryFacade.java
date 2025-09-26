@@ -8,9 +8,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "카테고리 API")
 public interface CategoryFacade {
@@ -20,6 +17,12 @@ public interface CategoryFacade {
             @ApiResponse(responseCode = "400", description = "카테고리 추가에 필요한 값 검증 실패.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))}),
             @ApiResponse(responseCode = "404", description = "카테고리를 찾을 수 없습니다.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})
     })
-    @PostMapping
-    void create(@Valid @RequestBody CreateCategoryRequest categoryRequest);
+    void create(CreateCategoryRequest categoryRequest);
+
+    @Operation(summary = "카테고리 삭제", description = "카테고리를 삭제함. 비활성화 처리")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "카테고리 삭제 완료.", content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", description = "카테고리를 찾을 수 없습니다.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})
+    })
+    void delete(Long id);
 }
