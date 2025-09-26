@@ -1,6 +1,8 @@
 package com.showhive.category.domain;
 
 import com.showhive.BaseEntity;
+import com.showhive.category.exception.CategoryErrorCode;
+import com.showhive.category.exception.CategoryException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -52,9 +54,20 @@ public class Category extends BaseEntity {
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Category> children = new ArrayList<>();
 
-    public static Category create(String groupCode, Category parent, String value, String description, Short level, Short sortOrder, Boolean isActive) {
-        level = level == null ? 0 : level;
-        sortOrder = sortOrder == null ? 0 : sortOrder;
+    public static Category createRoot(String groupCode, String value, String description, Short sortOrder, Boolean isActive) {
+        return Category.builder()
+                .groupCode(groupCode)
+                .value(value)
+                .description(description)
+                .sortOrder(sortOrder)
+                .isActive(isActive)
+                .build();
+    }
+
+    public static Category createNodeCategory(String groupCode, Category parent, String value, String description, Short level, Short sortOrder, Boolean isActive) {
+        if(parent == null) {
+            throw new CategoryException(CategoryErrorCode.CATEGORY_PARENT_NOT_FOUND);
+        }
 
         return Category.builder()
                 .groupCode(groupCode)
@@ -65,6 +78,5 @@ public class Category extends BaseEntity {
                 .sortOrder(sortOrder)
                 .isActive(isActive)
                 .build();
-
     }
 }
