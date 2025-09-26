@@ -1,7 +1,7 @@
 package com.showhive.performance.domain;
 
 import com.showhive.BaseEntity;
-import com.showhive.code.domain.Category;
+import com.showhive.category.domain.Category;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

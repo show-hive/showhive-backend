@@ -52,19 +52,37 @@ public class Category extends BaseEntity {
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Category> children = new ArrayList<>();
 
-    public static Category create(String groupCode, Category parent, String value, String description, Short level, Short sortOrder, Boolean isActive) {
-        level = level == null ? 0 : level;
-        sortOrder = sortOrder == null ? 0 : sortOrder;
-
+    public static Category createRoot(String groupCode, String value, String description) {
         return Category.builder()
                 .groupCode(groupCode)
-                .parent(parent)
                 .value(value)
                 .description(description)
-                .level(level)
-                .sortOrder(sortOrder)
-                .isActive(isActive)
+                .level((short) 0)
+                .sortOrder((short) 0)
+                .isActive(true)
+                .build();
+    }
+
+    public Category addChild(String value, String description, Short sortOrder) {
+        Category child = Category.builder()
+                .groupCode(this.groupCode)
+                .parent(this)
+                .value(value)
+                .description(description)
+                .level((short) (this.level + 1))
+                .sortOrder(sortOrder == null ? 0 : sortOrder)
+                .isActive(true)
                 .build();
 
+        this.children.add(child);
+        return child;
+    }
+
+    public void activate() {
+        this.isActive = true;
+    }
+
+    public void deactivate() {
+        this.isActive = false;
     }
 }
