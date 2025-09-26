@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequireRole(role = Role.MANAGER)
 @RequestMapping("/admin/v1/venues/{venueId}/seats")
-public class SeatResource {
+public class SeatResource implements SeatResourceFacade {
 
     private final CreateSeatUseCase createSeatUseCase;
 
-    //    @Override
+    @Override
     @PostMapping
-    public ResponseEntity<SeatResponse> createSeatGrade(@Valid @RequestBody SeatRequest seatRequest,
-                                                        @PathVariable long venueId) {
+    public ResponseEntity<SeatResponse> createSeat(@Valid @RequestBody SeatRequest seatRequest,
+                                                   @PathVariable long venueId) {
         SeatDto seatDto = SeatDto.of(seatRequest);
         SeatResponse seatResponse = createSeatUseCase.create(seatDto, venueId);
         return ResponseEntity.status(HttpStatus.CREATED)
