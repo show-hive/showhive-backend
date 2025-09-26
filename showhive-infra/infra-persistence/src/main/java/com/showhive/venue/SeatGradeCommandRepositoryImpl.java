@@ -9,10 +9,21 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class SeatGradeCommandRepositoryImpl implements SeatGradeCommandRepository {
+
     private final SeatGradeCommandJpaRepository commandJpaRepository;
 
     @Override
     public void create(SeatGrade seatGrade) {
         commandJpaRepository.save(seatGrade);
+    }
+
+    @Override
+    public boolean existsById(long seatGradeId) {
+        return commandJpaRepository.existsById(seatGradeId);
+    }
+
+    @Override
+    public void deleteById(long seatGradeId) {
+        commandJpaRepository.deleteById(seatGradeId);
     }
 }

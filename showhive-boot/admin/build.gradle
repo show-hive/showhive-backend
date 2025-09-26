@@ -32,8 +32,9 @@ dependencies {
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured:5.3.1'
 }
 
-test {
-    jvmArgs += ["-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains("mockito") }}"]
-}
+//test {
+//    jvmArgs += ["-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains("mockito") }}"]
+//}

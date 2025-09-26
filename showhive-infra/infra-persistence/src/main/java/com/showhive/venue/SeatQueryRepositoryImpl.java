@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class SeatQueryRepositoryImpl implements VenueCommandRepository {
+
     private VenueCommandJpaRepository venueCommandJpaRepository;
 
     @Override
