@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.showhive.admin.application.command.dto.couponInfo.CouponInfoDto;
 import com.showhive.admin.application.command.usecase.couponInfo.CreateCouponInfoUseCase;
 import com.showhive.admin.application.command.usecase.couponInfo.GetCouponInfoUseCase;
-import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoReqeust;
+import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoRequest;
 import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoResponse;
 import com.showhive.auth.RequireRole;
 import com.showhive.member.domain.Role;
@@ -21,17 +21,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("couponControllerV2")
+@RestController("couponInfoControllerV2")
 @RequiredArgsConstructor
 @RequireRole(role = Role.MANAGER)
 @RequestMapping("/admin/v2/coupon-infos")
-public class CouponInfoResource {
+public class CouponInfoResource implements CouponInfoResourceFacade{
 
     private final CreateCouponInfoUseCase createCouponInfoUseCase;
     private final GetCouponInfoUseCase getCouponInfoUseCase;
 
     @PostMapping
-    public ResponseEntity<CouponInfoResponse> createCouponInfo(@RequestBody CouponInfoReqeust request)
+    public ResponseEntity<CouponInfoResponse> createCouponInfo(@RequestBody CouponInfoRequest request)
             throws JsonProcessingException {
         CouponInfoDto commandDto = CouponInfoDto.of(request);
         createCouponInfoUseCase.create(commandDto);
