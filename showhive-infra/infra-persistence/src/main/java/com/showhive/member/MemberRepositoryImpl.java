@@ -11,20 +11,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberRepositoryImpl implements MemberRepository {
 
-    private final JpaMemberRepository jpaMemberRepository;
+    private final MemberJpaRepository memberJpaRepository;
 
     @Override
     public void save(Member member) {
-        jpaMemberRepository.save(member);
+        memberJpaRepository.save(member);
     }
 
     @Override
     public Optional<Member> findById(long memberId) {
-        return jpaMemberRepository.findById(memberId);
+        return memberJpaRepository.findById(memberId);
     }
 
     @Override
     public Optional<Member> findByRefreshToken(String refreshToken) {
-        return jpaMemberRepository.findByRefreshToken(refreshToken);
+        return memberJpaRepository.findByRefreshToken(refreshToken);
     }
 }

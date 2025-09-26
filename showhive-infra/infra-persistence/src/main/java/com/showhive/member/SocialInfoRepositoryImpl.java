@@ -11,15 +11,15 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class SocialInfoRepositoryImpl implements SocialInfoRepository {
 
-    private final JpaSocialInfoRepository jpaSocialInfoRepository;
+    private final SocialInfoJpaRepository socialInfoJpaRepository;
 
     @Override
     public Optional<SocialInfo> findByProviderTypeAndProviderId(ProviderType providerType, String providerId) {
-        return jpaSocialInfoRepository.findByProviderTypeAndProviderId(providerType, providerId);
+        return socialInfoJpaRepository.findByProviderTypeAndProviderId(providerType, providerId);
     }
 
     @Override
     public void save(SocialInfo socialInfo) {
-        jpaSocialInfoRepository.save(socialInfo);
+        socialInfoJpaRepository.save(socialInfo);
     }
 }
