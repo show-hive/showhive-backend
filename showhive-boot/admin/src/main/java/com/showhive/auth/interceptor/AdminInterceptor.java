@@ -1,7 +1,7 @@
 package com.showhive.auth.interceptor;
 
 import com.showhive.auth.RequireRole;
-import com.showhive.auth.TokenParser;
+import com.showhive.auth.TokenManager;
 import com.showhive.auth.usecase.MemberFindUseCase;
 import com.showhive.member.domain.Member;
 import com.showhive.member.domain.Role;
@@ -20,7 +20,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class AdminInterceptor implements HandlerInterceptor {
 
     private final MemberFindUseCase memberFindUseCase;
-    private final TokenParser tokenParser;
+    private final TokenManager tokenManager;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -46,7 +46,7 @@ public class AdminInterceptor implements HandlerInterceptor {
 
     private Member extractMember(HttpServletRequest request) {
         String accessToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-        long memberId = tokenParser.parseToken(accessToken);
+        long memberId = tokenManager.parseToken(accessToken);
         Member member = memberFindUseCase.findLoginMember(memberId);
         request.setAttribute("loginMember", member);
         return member;
