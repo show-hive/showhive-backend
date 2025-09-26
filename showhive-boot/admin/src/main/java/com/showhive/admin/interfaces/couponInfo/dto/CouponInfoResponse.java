@@ -1,11 +1,10 @@
-package com.showhive.admin.application.command.dto.couponInfo;
+package com.showhive.admin.interfaces.couponInfo.dto;
 
 import com.showhive.coupon.domain.CouponInfo;
 import com.showhive.coupon.domain.CouponType;
 import com.showhive.coupon.domain.DiscountType;
-import lombok.Builder;
-
 import java.time.LocalDateTime;
+import lombok.Builder;
 
 @Builder
 public record CouponInfoResponse(

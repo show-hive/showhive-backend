@@ -46,6 +46,8 @@ public class CouponInfo extends BaseEntity {
 
     private Integer maxDiscountAmount; // 최대 할인 금액
 
+    private Integer totalQuantity; // 전체 수량
+
     @Enumerated(EnumType.STRING)
     private CouponType couponType;  // 쿠폰 유형
 
@@ -56,4 +58,22 @@ public class CouponInfo extends BaseEntity {
 
     @Setter
     private LocalDateTime endTime;
+
+
+    public static CouponInfo create(DiscountType discountType, String name, String description, Integer issuedCount, Integer discountValue, Integer discountRate, Integer minPaymentAmount, Integer maxDiscountAmount, CouponType couponType, Integer isDuplicateUse, LocalDateTime startTime, LocalDateTime endTime) {
+        return CouponInfo.builder()
+                .discountType(discountType)
+                .name(name)
+                .description(description)
+                .issuedCount(issuedCount)
+                .discountValue(discountValue)
+                .discountRate(discountRate)
+                .minPaymentAmount(minPaymentAmount)
+                .maxDiscountAmount(maxDiscountAmount)
+                .couponType(couponType)
+                .isDuplicateUse(isDuplicateUse)
+                .startTime(startTime)
+                .endTime(endTime)
+                .build();
+    }
 }

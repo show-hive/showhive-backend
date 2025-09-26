@@ -1,4 +1,4 @@
-package com.showhive.admin.application.command.dto.couponInfo;
+package com.showhive.admin.interfaces.couponInfo.dto;
 
 import com.showhive.coupon.domain.CouponInfo;
 import com.showhive.coupon.domain.CouponType;
@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 
 @Builder
-public record CouponInfoCreateReqeust(
+public record CouponInfoReqeust(
+
         @NotBlank(message = "쿠폰 정보 이름은 필수입니다.")
         String name,
 
