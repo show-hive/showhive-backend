@@ -1,7 +1,7 @@
 package com.showhive.auth.resolver;
 
 import com.showhive.auth.AuthMember;
-import com.showhive.auth.TokenParser;
+import com.showhive.auth.TokenManager;
 import com.showhive.auth.usecase.MemberFindUseCase;
 import com.showhive.member.domain.Member;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class AuthMemberArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final MemberFindUseCase memberFindUseCase;
-    private final TokenParser tokenParser;
+    private final TokenManager tokenManager;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -43,7 +43,7 @@ public class AuthMemberArgumentResolver implements HandlerMethodArgumentResolver
             return member;
         }
         String accessToken = webRequest.getHeader(HttpHeaders.AUTHORIZATION);
-        long memberId = tokenParser.parseToken(accessToken);
+        long memberId = tokenManager.parseToken(accessToken);
         return memberFindUseCase.findLoginMember(memberId);
     }
 }
