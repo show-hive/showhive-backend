@@ -2,10 +2,15 @@ package com.showhive.admin.interfaces.category.resource;
 
 import com.showhive.admin.application.command.dto.category.CreateCategoryDto;
 import com.showhive.admin.application.command.usecase.category.CreateCategoryUseCase;
+import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
+import com.showhive.admin.application.command.usecase.category.dto.CategoryResult;
 import com.showhive.admin.interfaces.category.dto.CreateCategoryRequest;
+import com.showhive.admin.interfaces.category.dto.DetailCategoryResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CategoryResource implements CategoryFacade {
     private CreateCategoryUseCase createCategoryUseCase;
+    private DetailCategoryUseCase detailCategoryUseCase;
 
     @Override
     @PostMapping
@@ -27,5 +33,12 @@ public class CategoryResource implements CategoryFacade {
                 categoryRequest.level(), categoryRequest.level(), categoryRequest.isActive());
 
         createCategoryUseCase.handle(createCategoryDto);
+    }
+
+    @Override
+    @GetMapping("/{id}")
+    public DetailCategoryResponse detail(@PathVariable Long id) {
+        CategoryResult result = detailCategoryUseCase.handle(id);
+        return DetailCategoryResponse.from(result);
     }
 }
