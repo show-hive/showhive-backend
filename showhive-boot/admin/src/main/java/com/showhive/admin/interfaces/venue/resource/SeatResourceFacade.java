@@ -30,4 +30,18 @@ public interface SeatResourceFacade {
             SeatRequest seatRequest,
             @Parameter(name = "venueId", description = "공연장 ID", example = "1") long venueId
     );
+
+    @Operation(
+            summary = "특정 좌석 조회",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "좌석 조회 성공",
+                            content = @Content(schema = @Schema(implementation = SeatResponse.class)))
+            }
+    )
+    ResponseEntity<SeatResponse> readSeat(
+            @Parameter(name = "venueId", description = "공연장 ID", example = "1") long venueId,
+            @Parameter(name = "seatId", description = "좌석 ID", example = "1") long seatId
+    );
 }

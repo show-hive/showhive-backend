@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum VenueErrorCode {
 
     //4XX
-    VENUE_NOT_FOUND(404, "존재하지 않는 좌석 등급입니다."),
+    VENUE_NOT_FOUND(404, "존재하지 않는 공연장입니다."),
     ;
 
     private final int statusCode;
