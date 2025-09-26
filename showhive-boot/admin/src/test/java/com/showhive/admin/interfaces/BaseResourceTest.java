@@ -3,6 +3,7 @@ package com.showhive.admin.interfaces;
 import com.showhive.admin.DataBaseCleaner;
 import com.showhive.admin.fixture.MemberGenerator;
 import com.showhive.admin.fixture.SeatGradeGenerator;
+import com.showhive.admin.fixture.VenueGenerator;
 import com.showhive.auth.TokenManager;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -29,6 +30,9 @@ public abstract class BaseResourceTest {
 
     @Autowired
     protected SeatGradeGenerator seatGradeGenerator;
+
+    @Autowired
+    protected VenueGenerator venueGenerator;
 
     @LocalServerPort
     private int port;
