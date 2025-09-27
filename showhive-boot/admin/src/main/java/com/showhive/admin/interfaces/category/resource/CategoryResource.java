@@ -35,12 +35,10 @@ public class CategoryResource implements CategoryFacade {
     }
 
     @Override
-    @PutMapping("/{id}")
-    public void update(Long id, UpdateCategoryRequest updateRequest) {
-        UpdateCategoryDto updateCategoryDto = new UpdateCategoryDto(updateRequest.groupCode(),
-                updateRequest.parentId(), updateRequest.value(), updateRequest.description(),
-                updateRequest.level(), updateRequest.level(), updateRequest.isActive());
+    @PutMapping("/{categoryId}")
+    public void update(Long categoryId, UpdateCategoryRequest updateRequest) {
+        UpdateCategoryDto updateCategoryDto = UpdateCategoryDto.of(updateRequest);
 
-        updateCategoryUseCase.handle(id, updateCategoryDto);
+        updateCategoryUseCase.handle(categoryId, updateCategoryDto);
     }
 }
