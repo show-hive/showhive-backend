@@ -19,6 +19,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Table(name = "seats")
 @Entity
 @Getter
@@ -61,5 +63,9 @@ public class Seat extends BaseEntity {
                 .seatType(seatType)
                 .seatGrade(seatGrade)
                 .build();
+    }
+
+    public boolean isInVenue(Venue venue) {
+        return Objects.equals(this.getVenue().getId(), venue.getId());
     }
 }
