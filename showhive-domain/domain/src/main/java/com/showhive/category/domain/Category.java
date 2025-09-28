@@ -1,6 +1,8 @@
 package com.showhive.category.domain;
 
 import com.showhive.BaseEntity;
+import com.showhive.category.exception.CategoryErrorCode;
+import com.showhive.category.exception.CategoryException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -63,26 +65,19 @@ public class Category extends BaseEntity {
                 .build();
     }
 
-    public Category addChild(String value, String description, Short sortOrder) {
-        Category child = Category.builder()
-                .groupCode(this.groupCode)
-                .parent(this)
+    public static Category createNodeCategory(String groupCode, Category parent, String value, String description, Short level, Short sortOrder, Boolean isActive) {
+        if(parent == null) {
+            throw new CategoryException(CategoryErrorCode.CATEGORY_PARENT_NOT_FOUND);
+        }
+
+        return Category.builder()
+                .groupCode(groupCode)
+                .parent(parent)
                 .value(value)
                 .description(description)
-                .level((short) (this.level + 1))
-                .sortOrder(sortOrder == null ? 0 : sortOrder)
-                .isActive(true)
+                .level(level)
+                .sortOrder(sortOrder)
+                .isActive(isActive)
                 .build();
-
-        this.children.add(child);
-        return child;
-    }
-
-    public void activate() {
-        this.isActive = true;
-    }
-
-    public void deactivate() {
-        this.isActive = false;
     }
 }
