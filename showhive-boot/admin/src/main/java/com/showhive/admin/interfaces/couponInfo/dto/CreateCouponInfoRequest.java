@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 
 @Builder
-public record CouponInfoRequest(
+public record CreateCouponInfoRequest(
 
         @NotBlank(message = "쿠폰 정보 이름은 필수입니다.")
         String name,

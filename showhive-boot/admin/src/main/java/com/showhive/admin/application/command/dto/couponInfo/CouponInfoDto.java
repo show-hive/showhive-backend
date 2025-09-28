@@ -1,6 +1,6 @@
 package com.showhive.admin.application.command.dto.couponInfo;
 
-import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoRequest;
+import com.showhive.admin.interfaces.couponInfo.dto.CreateCouponInfoRequest;
 import com.showhive.coupon.domain.CouponType;
 import com.showhive.coupon.domain.DiscountType;
 import java.time.LocalDateTime;
@@ -34,7 +34,7 @@ public record CouponInfoDto(
         LocalDateTime endTime
 
 ) {
-    public static CouponInfoDto of(CouponInfoRequest request) {
+    public static CouponInfoDto of(CreateCouponInfoRequest request) {
         return CouponInfoDto.builder()
                 .name(request.name())
                 .description(request.description())

@@ -19,9 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class GetCouponUseCaseImpl implements GetCouponUseCase {
 
-    private final CouponCommandRepository couponCommandRepository;
     private final CouponQueryRepository couponQueryRepository;
-    private final RedisIssueCouponUseCase redisIssueCouponUseCase;
     private final RedisUpdateCouponUseCase redisUpdateCouponUseCase;
     private final RedisGetCouponUseCase redisGetCouponUseCase;
 

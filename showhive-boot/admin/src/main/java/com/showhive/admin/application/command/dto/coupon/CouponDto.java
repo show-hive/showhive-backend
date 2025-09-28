@@ -1,6 +1,6 @@
 package com.showhive.admin.application.command.dto.coupon;
 
-import com.showhive.admin.interfaces.coupon.dto.CouponIssueRequest;
+import com.showhive.admin.interfaces.coupon.dto.CreateCouponRequest;
 import com.showhive.coupon.domain.Status;
 import java.time.LocalDateTime;
 import lombok.Builder;
@@ -19,7 +19,7 @@ public record CouponDto(
         LocalDateTime usedAt
 
 ) {
-    public static CouponDto of(CouponIssueRequest request) {
+    public static CouponDto of(CreateCouponRequest request) {
         return CouponDto.builder()
                 .name(request.name())
                 .usableCount(request.usableCount())

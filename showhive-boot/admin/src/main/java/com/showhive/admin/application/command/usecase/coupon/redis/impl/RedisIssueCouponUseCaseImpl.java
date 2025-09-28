@@ -2,7 +2,7 @@ package com.showhive.admin.application.command.usecase.coupon.redis.impl;
 
 import com.showhive.admin.application.command.usecase.coupon.redis.RedisIssueCouponUseCase;
 import com.showhive.admin.application.command.usecase.couponInfo.GetCouponInfoUseCase;
-import com.showhive.admin.interfaces.coupon.dto.CouponIssueRequest;
+import com.showhive.admin.interfaces.coupon.dto.CreateCouponRequest;
 import com.showhive.coupon.domain.Coupon;
 import com.showhive.coupon.domain.CouponInfo;
 import com.showhive.coupon.domain.Status;
@@ -35,7 +35,7 @@ public class RedisIssueCouponUseCaseImpl implements RedisIssueCouponUseCase {
     private static final long LOCK_LEASE_TIME = 5;
 
     @Transactional
-    public Coupon issueCoupon(CouponIssueRequest request) {
+    public Coupon issueCoupon(CreateCouponRequest request) {
         String quantityKey = COUPON_QUANTITY_KEY + request.couponInfoId();
         String lockKey = COUPON_LOCK_KEY + request.couponInfoId();
         RLock lock = redissonClient.getLock(lockKey);

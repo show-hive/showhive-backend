@@ -1,10 +1,9 @@
 package com.showhive.admin.interfaces.couponInfo.resource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoRequest;
+import com.showhive.admin.interfaces.couponInfo.dto.CreateCouponInfoRequest;
 import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,14 +19,14 @@ public interface CouponInfoResourceFacade {
 
     @Operation(
             summary = "쿠폰 정보 생성",
-            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = CouponInfoRequest.class))),
+            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = CreateCouponInfoRequest.class))),
             responses = {
                     @ApiResponse(
                             responseCode = "201",
                             description = "쿠폰 정보 생성 성공")
             }
     )
-    ResponseEntity<CouponInfoResponse> createCouponInfo(CouponInfoRequest request) throws JsonProcessingException;
+    ResponseEntity<CouponInfoResponse> createCouponInfo(CreateCouponInfoRequest request) throws JsonProcessingException;
 
     @Operation(
             summary = "쿠폰 정보 조회",

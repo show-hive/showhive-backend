@@ -1,14 +1,11 @@
 package com.showhive.admin.application.command.usecase.coupon.impl;
 
 import com.showhive.admin.application.command.usecase.coupon.UseCouponUseCase;
-import com.showhive.admin.application.command.usecase.coupon.redis.RedisIssueCouponUseCase;
 import com.showhive.admin.application.command.usecase.coupon.redis.RedisUpdateCouponUseCase;
-import com.showhive.admin.interfaces.coupon.dto.CouponIssueRequest;
 import com.showhive.admin.interfaces.coupon.dto.CouponResponse;
 import com.showhive.coupon.domain.Coupon;
 import com.showhive.coupon.exception.CouponErrorCode;
 import com.showhive.coupon.exception.CouponException;
-import com.showhive.coupon.repository.command.CouponCommandRepository;
 import com.showhive.coupon.repository.query.CouponQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

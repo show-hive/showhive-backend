@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.showhive.admin.application.command.dto.couponInfo.CouponInfoDto;
 import com.showhive.admin.application.command.usecase.couponInfo.CreateCouponInfoUseCase;
 import com.showhive.admin.application.command.usecase.couponInfo.GetCouponInfoUseCase;
-import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoRequest;
+import com.showhive.admin.interfaces.couponInfo.dto.CreateCouponInfoRequest;
 import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoResponse;
 import com.showhive.auth.RequireRole;
 import com.showhive.member.domain.Role;
@@ -31,16 +31,16 @@ public class CouponInfoResource implements CouponInfoResourceFacade{
     private final GetCouponInfoUseCase getCouponInfoUseCase;
 
     @PostMapping
-    public ResponseEntity<CouponInfoResponse> createCouponInfo(@RequestBody CouponInfoRequest request)
+    public ResponseEntity<CouponInfoResponse> createCouponInfo(@RequestBody CreateCouponInfoRequest request)
             throws JsonProcessingException {
         CouponInfoDto commandDto = CouponInfoDto.of(request);
         createCouponInfoUseCase.create(commandDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CouponInfoResponse> getCouponInfo(@PathVariable Long id) {
-        CouponInfoResponse response = CouponInfoResponse.from(getCouponInfoUseCase.get(id));
+    @GetMapping("/{couponInfoId}")
+    public ResponseEntity<CouponInfoResponse> getCouponInfo(@PathVariable Long couponInfoId) {
+        CouponInfoResponse response = CouponInfoResponse.from(getCouponInfoUseCase.get(couponInfoId));
         return ResponseEntity.ok(response);
     }
 

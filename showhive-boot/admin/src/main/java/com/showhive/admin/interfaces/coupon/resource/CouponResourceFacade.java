@@ -1,11 +1,8 @@
 package com.showhive.admin.interfaces.coupon.resource;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.showhive.admin.interfaces.coupon.dto.CouponIssueRequest;
+import com.showhive.admin.interfaces.coupon.dto.CreateCouponRequest;
 import com.showhive.admin.interfaces.coupon.dto.CouponResponse;
-import com.showhive.admin.interfaces.coupon.dto.CouponUseRequest;
-import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoRequest;
-import com.showhive.admin.interfaces.couponInfo.dto.CouponInfoResponse;
+import com.showhive.admin.interfaces.coupon.dto.UseCouponRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,7 +10,6 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 @Tag(name = "Coupon API")
@@ -22,14 +18,14 @@ public interface CouponResourceFacade {
 
     @Operation(
             summary = "쿠폰 정보 생성",
-            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = CouponIssueRequest.class))),
+            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = CreateCouponRequest.class))),
             responses = {
                     @ApiResponse(
                             responseCode = "201",
                             description = "쿠폰 생성 성공")
             }
     )
-    ResponseEntity<CouponResponse> issueCoupon(CouponIssueRequest request);
+    ResponseEntity<CouponResponse> issueCoupon(CreateCouponRequest request);
 
     @Operation(
             summary = "쿠폰 정보 조회",
@@ -40,7 +36,7 @@ public interface CouponResourceFacade {
                             description = "쿠폰 조회 성공")
             }
     )
-    ResponseEntity<CouponResponse> useCoupon(Long couponId, CouponUseRequest request);
+    ResponseEntity<CouponResponse> useCoupon(Long couponId, UseCouponRequest request);
 
 
     @Operation(
