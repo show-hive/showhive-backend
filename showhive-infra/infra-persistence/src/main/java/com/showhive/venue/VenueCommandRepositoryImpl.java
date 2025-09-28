@@ -5,12 +5,12 @@ import com.showhive.venue.domain.Venue;
 import com.showhive.venue.repository.command.VenueCommandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
 public class VenueCommandRepositoryImpl implements VenueCommandRepository {
-    private VenueCommandJpaRepository venueCommandJpaRepository;
+
+    private final VenueCommandJpaRepository venueCommandJpaRepository;
 
     @Override
     public Venue create(Venue venue) {
