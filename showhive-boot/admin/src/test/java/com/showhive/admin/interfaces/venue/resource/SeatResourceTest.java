@@ -31,7 +31,7 @@ class SeatResourceTest extends BaseResourceTest {
     @DisplayName("좌석을 생성할 수 있다.")
     @Test
     void create_seat() {
-        Venue venue = venueGenerator.generateVenue();
+        Venue venue = venueGenerator.generateVenue("임지현 아트 센터");
         SeatGrade seatGrade = seatGradeGenerator.generateSeatGrade("A");
 
         SeatRequest createRequest = new SeatRequest(seatGrade.getId(), null,
@@ -42,14 +42,14 @@ class SeatResourceTest extends BaseResourceTest {
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                 .when()
                 .body(createRequest)
-                .post("/admin/v1/venues/" + venue.getId() + "/seats")
+                .post("/admin/v1/venues/{venueId}/seats", venue.getId())
                 .then().statusCode(HttpStatus.CREATED.value());
     }
 
     @DisplayName("유효한 좌석 타입이 아니면 예외가 발생한다.")
     @Test
     void throw_exception_when_seat_type_is_invalid() {
-        Venue venue = venueGenerator.generateVenue();
+        Venue venue = venueGenerator.generateVenue("임지현 아트 센터");
         SeatGrade seatGrade = seatGradeGenerator.generateSeatGrade("A");
 
         String invalidSeatType = "stand";
@@ -68,7 +68,7 @@ class SeatResourceTest extends BaseResourceTest {
     @DisplayName("특정 좌석을 조회할 수 있다.")
     @Test
     void read_seat() {
-        Venue venue = venueGenerator.generateVenue();
+        Venue venue = venueGenerator.generateVenue("임지현 아트 센터");
         SeatGrade seatGrade = seatGradeGenerator.generateSeatGrade("A");
         Seat seat = seatGenerator.generateSeat(venue, seatGrade);
 

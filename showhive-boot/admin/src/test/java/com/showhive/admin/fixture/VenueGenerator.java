@@ -11,9 +11,8 @@ public class VenueGenerator {
     @Autowired
     private VenueCommandRepository venueCommandRepository;
 
-    //TODO: venue 인자 추가 필요
-    public Venue generateVenue() {
-        Venue venue = Venue.create();
+    public Venue generateVenue(String name) {
+        Venue venue = Venue.create(name, null, null, null, null, "link.com");
         return venueCommandRepository.create(venue);
     }
 }

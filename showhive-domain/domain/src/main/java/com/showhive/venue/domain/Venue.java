@@ -38,8 +38,15 @@ public class Venue extends BaseEntity {
 
     private String link;
 
-    public static Venue create() {
+    public static Venue create(String name, String address, Double latitude,
+                               Double longitude, String contactNumber, String link) {
         return Venue.builder()
+                .name(name)
+                .address(address)
+                .latitude(latitude)
+                .longitude(longitude)
+                .contactNumber(contactNumber)
+                .link(link)
                 .build();
     }
 }
