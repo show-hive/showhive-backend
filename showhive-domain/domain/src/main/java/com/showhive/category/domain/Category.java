@@ -54,14 +54,13 @@ public class Category extends BaseEntity {
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Category> children = new ArrayList<>();
 
-    public static Category createRoot(String groupCode, String value, String description) {
+    public static Category createRoot(String groupCode, String value, String description, Short sortOrder, Boolean isActive) {
         return Category.builder()
                 .groupCode(groupCode)
                 .value(value)
                 .description(description)
-                .level((short) 0)
-                .sortOrder((short) 0)
-                .isActive(true)
+                .sortOrder(sortOrder)
+                .isActive(isActive)
                 .build();
     }
 
