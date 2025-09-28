@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class DetailCategoryUseCaseImpl implements DetailCategoryUseCase {
-    private CategoryQueryRepository queryRepository;
+    private final CategoryQueryRepository queryRepository;
 
     @Override
     public CategoryResult handle(Long id) {

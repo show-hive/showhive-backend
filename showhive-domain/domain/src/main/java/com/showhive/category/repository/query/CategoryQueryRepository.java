@@ -9,4 +9,7 @@ public interface CategoryQueryRepository {
     boolean existsCategory(String groupCode, String value);
 
     Optional<Category> findByIdWithChildren(Long id);
+
+    Optional<Category> findByValueWithChildren(String value);
+
 }

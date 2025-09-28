@@ -35,7 +35,7 @@ public class CreateCategoryUseCaseImpl implements CreateCategoryUseCase {
                                                      .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
 
             category = Category.createNodeCategory(commandDto.groupCode(), parentCategory, commandDto.value(),
-                    commandDto.description(), commandDto.level(), commandDto.sortOrder(), commandDto.isActive());
+                    commandDto.description(), commandDto.sortOrder(), commandDto.isActive());
         } else {
             category = Category.createRoot(commandDto.groupCode(), commandDto.value(),
                     commandDto.description(), commandDto.sortOrder(), commandDto.isActive());
