@@ -36,9 +36,9 @@ public class CategoryResource implements CategoryFacade {
     }
 
     @Override
-    @GetMapping("/{id}")
-    public DetailCategoryResponse detail(@PathVariable Long id) {
-        CategoryResult result = detailCategoryUseCase.handle(id);
+    @GetMapping("/{categoryId}")
+    public DetailCategoryResponse detail(@PathVariable Long categoryId) {
+        CategoryResult result = detailCategoryUseCase.handle(categoryId);
         return DetailCategoryResponse.from(result);
     }
 }
