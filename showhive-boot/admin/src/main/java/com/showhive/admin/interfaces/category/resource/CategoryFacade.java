@@ -28,8 +28,8 @@ public interface CategoryFacade {
 
     @Operation(summary = "카테고리 단건 조회", description = "카테고리 ID로 카테고리 단건을 조회함. 조회시 하위의 카테고리를 포함함.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "카테고리 추가 완료.", content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode = "400", description = "카테고리 추가에 필요한 값 검증 실패.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))}),
+            @ApiResponse(responseCode = "200", description = "카테고리 조회 완료.", useReturnTypeSchema = true),
+            @ApiResponse(responseCode = "400", description = "카테고리 조회에 필요한 카테고리 값 검증 실패.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))}),
             @ApiResponse(responseCode = "404", description = "카테고리를 찾을 수 없습니다.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})
     })
     @GetMapping("/{id}")
