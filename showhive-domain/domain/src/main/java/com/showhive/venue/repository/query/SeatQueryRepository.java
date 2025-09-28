@@ -2,6 +2,9 @@ package com.showhive.venue.repository.query;
 
 import com.showhive.venue.domain.Seat;
 
+import java.util.Optional;
+
 public interface SeatQueryRepository {
-    Seat create(Seat seat);
+
+    Optional<Seat> findById(long seatId);
 }

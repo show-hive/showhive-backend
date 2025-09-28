@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,4 +37,9 @@ public class Venue extends BaseEntity {
     private String contactNumber;
 
     private String link;
+
+    public static Venue create() {
+        return Venue.builder()
+                .build();
+    }
 }
