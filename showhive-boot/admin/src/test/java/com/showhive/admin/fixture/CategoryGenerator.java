@@ -40,14 +40,14 @@ public class CategoryGenerator {
                 "ticket", "티켓"
         );
 
-        AtomicInteger index = new AtomicInteger(0);
+        AtomicInteger sortOrder = new AtomicInteger(0);
 
         menu.forEach((categoryName, categoryValue) -> {
             Category category = Category.createRoot(
                     GROUP_CODE,
                     categoryName,
                     categoryValue,
-                    (short) index.getAndIncrement(),
+                    (short) sortOrder.getAndIncrement(),
                     IS_ACTIVE
             );
             commandRepository.createCategory(category);
