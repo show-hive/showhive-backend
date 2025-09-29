@@ -28,7 +28,7 @@ public class CategoryGenerator {
 
         int size = parent.getChildren() != null ? parent.getChildren().size() : 0;
         short sortOrder = (short) (size + 1);
-        Category category = Category.createNodeCategory(GROUP_CODE, parent, value, description,  sortOrder, isActive);
+        Category category = Category.createNodeCategory(GROUP_CODE, parent, value, description,  sortOrder, IS_ACTIVE);
 
         return commandRepository.createCategory(category);
     }
