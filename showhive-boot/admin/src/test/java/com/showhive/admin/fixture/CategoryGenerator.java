@@ -12,13 +12,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryGenerator {
-
     @Autowired
     private CategoryCommandRepository commandRepository;
     @Autowired
     private CategoryQueryRepository queryRepository;
-    private final String GROUP_CODE = "MENU";
-    private final boolean isActive = true;
+    private static final String GROUP_CODE = "MENU";
+    private static final boolean IS_ACTIVE = true;
 
     public Category generateNodeCategory(String parentCode, String value, String description) {
         Category parent = null;
@@ -49,7 +48,7 @@ public class CategoryGenerator {
                     categoryName,
                     categoryValue,
                     (short) (index.getAndIncrement() - 1),
-                    isActive
+                    IS_ACTIVE
             );
             commandRepository.createCategory(category);
         });
