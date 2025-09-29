@@ -27,11 +27,7 @@ public class CategoryResource implements CategoryFacade {
     @Override
     @PostMapping
     public void create(@Valid @RequestBody CreateCategoryRequest categoryRequest) {
-
-        CreateCategoryDto  createCategoryDto = new CreateCategoryDto(categoryRequest.groupCode(),
-                categoryRequest.parentId(), categoryRequest.value(), categoryRequest.description(),
-                categoryRequest.level(), categoryRequest.level(), categoryRequest.isActive());
-
+        CreateCategoryDto  createCategoryDto = CreateCategoryDto.of(categoryRequest);
         createCategoryUseCase.handle(createCategoryDto);
     }
 
