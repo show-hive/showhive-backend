@@ -13,7 +13,6 @@ public record CreateCategoryDto(
 ) {
     
     public static CreateCategoryDto of(CreateCategoryRequest request) {
-
         return new CreateCategoryDto(request.groupCode(),
                 request.parentId(), request.value(), request.description(),
                 request.level(), request.level(), request.isActive());

@@ -1,6 +1,7 @@
 package com.showhive.admin.interfaces.category.resource;
 
 import com.showhive.admin.interfaces.category.dto.CreateCategoryRequest;
+import com.showhive.admin.interfaces.category.dto.DetailCategoryResponse;
 import com.showhive.exception.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -9,6 +10,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -22,4 +25,13 @@ public interface CategoryFacade {
     })
     @PostMapping
     void create(@Valid @RequestBody CreateCategoryRequest categoryRequest);
+
+    @Operation(summary = "카테고리 단건 조회", description = "카테고리 ID로 카테고리 단건을 조회함. 조회시 하위의 카테고리를 포함함.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "카테고리 조회 완료.", useReturnTypeSchema = true),
+            @ApiResponse(responseCode = "400", description = "카테고리 조회에 필요한 카테고리 값 검증 실패.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))}),
+            @ApiResponse(responseCode = "404", description = "카테고리를 찾을 수 없습니다.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))})
+    })
+    @GetMapping("/{id}")
+    DetailCategoryResponse detail(@PathVariable Long id);
 }
