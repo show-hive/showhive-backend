@@ -6,6 +6,7 @@ import com.showhive.category.exception.CategoryException;
 import com.showhive.category.repository.command.CategoryCommandRepository;
 import com.showhive.category.repository.query.CategoryQueryRepository;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,10 +41,16 @@ public class CategoryGenerator {
                 "ticket", "티켓"
         );
 
+        AtomicInteger index = new AtomicInteger(0);
+
         menu.forEach((categoryName, categoryValue) -> {
-            short index = (short) 0;
-            Category category = Category.createRoot(GROUP_CODE, categoryName, categoryValue, index, isActive);
-            index++;
+            Category category = Category.createRoot(
+                    GROUP_CODE,
+                    categoryName,
+                    categoryValue,
+                    (short) (index.getAndIncrement() - 1),
+                    isActive
+            );
             commandRepository.createCategory(category);
         });
     }
