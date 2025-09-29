@@ -1,7 +1,7 @@
 package com.showhive.admin.interfaces.venue.resource;
 
 import com.showhive.admin.interfaces.BaseResourceTest;
-import com.showhive.admin.interfaces.venue.dto.VenueRequest;
+import com.showhive.admin.interfaces.venue.dto.CreateVenueRequest;
 import com.showhive.admin.interfaces.venue.dto.VenueResponse;
 import com.showhive.member.domain.Member;
 import com.showhive.venue.domain.Venue;
@@ -30,7 +30,7 @@ class VenueResourceTest extends BaseResourceTest {
     void create_seat() {
         String name = "세종문화회관 대극장";
         String link = "https://www.sejongpac.or.kr";
-        VenueRequest createRequest = new VenueRequest(name, null, null, null, null, link);
+        CreateVenueRequest createRequest = new CreateVenueRequest(name, null, null, null, null, link);
 
         given()
                 .contentType(ContentType.JSON)
@@ -48,7 +48,7 @@ class VenueResourceTest extends BaseResourceTest {
         venueGenerator.generateVenue(name);
 
         String link = "https://www.sejongpac.or.kr";
-        VenueRequest createRequest = new VenueRequest(name, null, null, null, null, link);
+        CreateVenueRequest createRequest = new CreateVenueRequest(name, null, null, null, null, link);
 
         given()
                 .contentType(ContentType.JSON)

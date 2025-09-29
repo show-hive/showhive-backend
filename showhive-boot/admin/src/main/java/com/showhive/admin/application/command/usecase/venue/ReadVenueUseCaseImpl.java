@@ -16,7 +16,7 @@ public class ReadVenueUseCaseImpl implements ReadVenueUseCase {
     private final VenueQueryRepository venueQueryRepository;
 
     @Override
-    public VenueResponse read(long venueId) {
+    public VenueResponse handle(long venueId) {
         Venue venue = venueQueryRepository.findById(venueId)
                 .orElseThrow(() -> new VenueException(VenueErrorCode.VENUE_NOT_FOUND));
         return new VenueResponse(venue);

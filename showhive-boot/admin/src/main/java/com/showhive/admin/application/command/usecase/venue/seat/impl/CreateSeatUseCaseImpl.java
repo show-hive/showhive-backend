@@ -26,7 +26,7 @@ public class CreateSeatUseCaseImpl implements CreateSeatUseCase {
     private final VenueQueryRepository venueQueryRepository;
 
     @Override
-    public SeatResponse create(SeatDto seatDto, long venueId) {
+    public SeatResponse handle(SeatDto seatDto, long venueId) {
         SeatGrade seatGrade = getSeatGrade(seatDto);
         Venue venue = getVenue(venueId);
         SeatType seatType = SeatType.findSeatType(seatDto.seatType());

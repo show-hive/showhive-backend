@@ -3,7 +3,7 @@ package com.showhive.admin.interfaces.venue.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
-public record VenueRequest(
+public record CreateVenueRequest(
 
         @NotBlank
         @Schema(description = "공연장 이름", example = "예술의전당 오페라극장", requiredMode = Schema.RequiredMode.REQUIRED)

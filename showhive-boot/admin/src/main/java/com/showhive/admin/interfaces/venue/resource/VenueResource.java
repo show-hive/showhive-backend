@@ -1,9 +1,9 @@
 package com.showhive.admin.interfaces.venue.resource;
 
-import com.showhive.admin.application.command.dto.venue.VenueDto;
+import com.showhive.admin.application.command.dto.venue.CreateVenueDto;
 import com.showhive.admin.application.command.usecase.venue.CreateVenueUseCase;
 import com.showhive.admin.application.command.usecase.venue.ReadVenueUseCase;
-import com.showhive.admin.interfaces.venue.dto.VenueRequest;
+import com.showhive.admin.interfaces.venue.dto.CreateVenueRequest;
 import com.showhive.admin.interfaces.venue.dto.VenueResponse;
 import com.showhive.auth.RequireRole;
 import com.showhive.member.domain.Role;
@@ -29,9 +29,9 @@ public class VenueResource implements VenueResourceFacade {
 
     @Override
     @PostMapping
-    public ResponseEntity<VenueResponse> createVenue(@Valid @RequestBody VenueRequest venueRequest) {
-        VenueDto venueDto = VenueDto.of(venueRequest);
-        VenueResponse venueResponse = createVenueUseCase.create(venueDto);
+    public ResponseEntity<VenueResponse> createVenue(@Valid @RequestBody CreateVenueRequest createVenueRequest) {
+        CreateVenueDto createVenueDto = CreateVenueDto.of(createVenueRequest);
+        VenueResponse venueResponse = createVenueUseCase.handle(createVenueDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(venueResponse);
     }
@@ -39,7 +39,7 @@ public class VenueResource implements VenueResourceFacade {
     @Override
     @GetMapping("/{venueId}")
     public ResponseEntity<VenueResponse> readVenue(@PathVariable long venueId) {
-        VenueResponse response = readVenueUseCase.read(venueId);
+        VenueResponse response = readVenueUseCase.handle(venueId);
         return ResponseEntity.ok(response);
     }
 }

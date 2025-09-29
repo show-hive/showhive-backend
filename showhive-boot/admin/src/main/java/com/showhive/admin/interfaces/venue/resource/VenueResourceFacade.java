@@ -1,6 +1,6 @@
 package com.showhive.admin.interfaces.venue.resource;
 
-import com.showhive.admin.interfaces.venue.dto.VenueRequest;
+import com.showhive.admin.interfaces.venue.dto.CreateVenueRequest;
 import com.showhive.admin.interfaces.venue.dto.VenueResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,7 +18,7 @@ public interface VenueResourceFacade {
 
     @Operation(
             summary = "공연장 생성",
-            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = VenueRequest.class))),
+            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = CreateVenueRequest.class))),
             responses = {
                     @ApiResponse(
                             responseCode = "201",
@@ -26,7 +26,7 @@ public interface VenueResourceFacade {
                             content = @Content(schema = @Schema(implementation = VenueResponse.class)))
             }
     )
-    ResponseEntity<VenueResponse> createVenue(VenueRequest venueRequest);
+    ResponseEntity<VenueResponse> createVenue(CreateVenueRequest createVenueRequest);
 
     @Operation(
             summary = "특정 공연장 조회",

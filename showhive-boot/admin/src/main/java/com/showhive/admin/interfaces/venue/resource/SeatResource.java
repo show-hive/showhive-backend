@@ -32,7 +32,7 @@ public class SeatResource implements SeatResourceFacade {
     public ResponseEntity<SeatResponse> createSeat(@Valid @RequestBody SeatRequest seatRequest,
                                                    @PathVariable long venueId) {
         SeatDto seatDto = SeatDto.of(seatRequest);
-        SeatResponse seatResponse = createSeatUseCase.create(seatDto, venueId);
+        SeatResponse seatResponse = createSeatUseCase.handle(seatDto, venueId);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(seatResponse);
     }
@@ -40,7 +40,7 @@ public class SeatResource implements SeatResourceFacade {
     @Override
     @GetMapping("/{seatId}")
     public ResponseEntity<SeatResponse> readSeat(@PathVariable long venueId, @PathVariable long seatId) {
-        SeatResponse response = readSeatUseCase.readSeat(venueId, seatId);
+        SeatResponse response = readSeatUseCase.handle(venueId, seatId);
         return ResponseEntity.ok(response);
     }
 }

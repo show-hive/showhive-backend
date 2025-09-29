@@ -21,7 +21,7 @@ public class ReadSeatUseCaseImpl implements ReadSeatUseCase {
     private final VenueQueryRepository venueQueryRepository;
 
     @Override
-    public SeatResponse readSeat(long venueId, long seatId) {
+    public SeatResponse handle(long venueId, long seatId) {
         //question: 공연장이랑 좌석 조회를 한번에 하는게 나을지?
         Venue venue = getVenue(venueId);
         Seat seat = seatQueryRepository.findById(seatId)

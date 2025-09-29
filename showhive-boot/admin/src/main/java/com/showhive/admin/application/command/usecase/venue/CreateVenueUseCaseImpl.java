@@ -1,7 +1,7 @@
 package com.showhive.admin.application.command.usecase.venue;
 
 
-import com.showhive.admin.application.command.dto.venue.VenueDto;
+import com.showhive.admin.application.command.dto.venue.CreateVenueDto;
 import com.showhive.admin.interfaces.venue.dto.VenueResponse;
 import com.showhive.venue.domain.Venue;
 import com.showhive.venue.exception.VenueErrorCode;
@@ -19,15 +19,15 @@ public class CreateVenueUseCaseImpl implements CreateVenueUseCase {
     private final VenueQueryRepository venueQueryRepository;
 
     @Override
-    public VenueResponse create(VenueDto venueDto) {
-        if (venueQueryRepository.existsByName(venueDto.name())) {
+    public VenueResponse handle(CreateVenueDto createVenueDto) {
+        if (venueQueryRepository.existsByName(createVenueDto.name())) {
             throw new VenueException(VenueErrorCode.VENUE_ALREADY_EXISTS);
         }
 
         Venue venue = venueCommandRepository.create(
-                Venue.create(venueDto.name(), venueDto.address(),
-                        venueDto.latitude(), venueDto.longitude(),
-                        venueDto.contactNumber(), venueDto.link())
+                Venue.create(createVenueDto.name(), createVenueDto.address(),
+                        createVenueDto.latitude(), createVenueDto.longitude(),
+                        createVenueDto.contactNumber(), createVenueDto.link())
         );
         return new VenueResponse(venue);
     }
