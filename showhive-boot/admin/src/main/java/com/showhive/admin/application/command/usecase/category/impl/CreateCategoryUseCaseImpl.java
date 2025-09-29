@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class CreateCategoryUseCaseImpl implements CreateCategoryUseCase {
-    private CategoryCommandRepository commandRepository;
-    private CategoryQueryRepository queryRepository;
+    private final CategoryCommandRepository commandRepository;
+    private final CategoryQueryRepository queryRepository;
 
     @Override
     public void handle(CreateCategoryDto commandDto) {

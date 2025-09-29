@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class CategoryResource implements CategoryFacade {
-    private CreateCategoryUseCase createCategoryUseCase;
-    private DetailCategoryUseCase detailCategoryUseCase;
+    private final CreateCategoryUseCase createCategoryUseCase;
+    private final DetailCategoryUseCase detailCategoryUseCase;
 
     @Override
     @PostMapping
