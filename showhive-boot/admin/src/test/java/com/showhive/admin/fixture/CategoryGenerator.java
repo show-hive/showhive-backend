@@ -47,7 +47,7 @@ public class CategoryGenerator {
                     GROUP_CODE,
                     categoryName,
                     categoryValue,
-                    (short) (index.getAndIncrement() - 1),
+                    (short) index.getAndIncrement(),
                     IS_ACTIVE
             );
             commandRepository.createCategory(category);
