@@ -1,9 +1,9 @@
 package com.showhive.admin.application.command.usecase.coupon.impl;
 
+import com.showhive.admin.application.command.dto.coupon.CouponDto;
 import com.showhive.admin.application.command.usecase.coupon.IssueCouponUseCase;
 import com.showhive.admin.application.command.usecase.coupon.redis.RedisIssueCouponUseCase;
 import com.showhive.admin.application.command.usecase.coupon.redis.RedisUpdateCouponUseCase;
-import com.showhive.admin.interfaces.coupon.dto.CreateCouponRequest;
 import com.showhive.admin.interfaces.coupon.dto.CouponResponse;
 import com.showhive.coupon.domain.Coupon;
 import com.showhive.coupon.exception.CouponErrorCode;
@@ -27,8 +27,8 @@ public class IssueCouponUseCaseImpl implements IssueCouponUseCase {
     // 쿠폰 발급
     @Transactional
     @Override
-    public CouponResponse issueCoupon(CreateCouponRequest request) {
-        Coupon coupon = redisIssueCouponUseCase.issueCoupon(request);
+    public CouponResponse issueCoupon(CouponDto couponDto) {
+        Coupon coupon = redisIssueCouponUseCase.issueCoupon(couponDto);
         redisUpdateCouponUseCase.updateCouponStatus(couponQueryRepository.findById(coupon.getId())
                 .orElseThrow(() -> new CouponException(CouponErrorCode.COUPON_NOT_FOUND)));
 

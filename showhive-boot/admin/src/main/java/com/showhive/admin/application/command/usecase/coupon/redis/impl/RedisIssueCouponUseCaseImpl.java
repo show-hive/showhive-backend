@@ -1,5 +1,6 @@
 package com.showhive.admin.application.command.usecase.coupon.redis.impl;
 
+import com.showhive.admin.application.command.dto.coupon.CouponDto;
 import com.showhive.admin.application.command.usecase.coupon.redis.RedisIssueCouponUseCase;
 import com.showhive.admin.application.command.usecase.couponInfo.GetCouponInfoUseCase;
 import com.showhive.admin.interfaces.coupon.dto.CreateCouponRequest;
@@ -35,9 +36,9 @@ public class RedisIssueCouponUseCaseImpl implements RedisIssueCouponUseCase {
     private static final long LOCK_LEASE_TIME = 5;
 
     @Transactional
-    public Coupon issueCoupon(CreateCouponRequest request) {
-        String quantityKey = COUPON_QUANTITY_KEY + request.couponInfoId();
-        String lockKey = COUPON_LOCK_KEY + request.couponInfoId();
+    public Coupon issueCoupon(CouponDto couponDto) {
+        String quantityKey = COUPON_QUANTITY_KEY + couponDto.couponInfoId();
+        String lockKey = COUPON_LOCK_KEY + couponDto.couponInfoId();
         RLock lock = redissonClient.getLock(lockKey);
 
         try {
@@ -46,7 +47,7 @@ public class RedisIssueCouponUseCaseImpl implements RedisIssueCouponUseCase {
                 throw new CouponException(CouponErrorCode.TOO_MANY_COUPON_REQUEST);
             }
 
-            CouponInfo couponInfo = getCouponInfoUseCase.get(request.couponInfoId());
+            CouponInfo couponInfo = getCouponInfoUseCase.get(couponDto.couponInfoId());
 
             LocalDateTime now = LocalDateTime.now();
             if (now.isBefore(couponInfo.getStartTime()) || now.isAfter(couponInfo.getEndTime())) {
