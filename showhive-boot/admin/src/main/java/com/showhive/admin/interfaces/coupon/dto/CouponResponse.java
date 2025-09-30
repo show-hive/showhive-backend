@@ -17,7 +17,7 @@ public record CouponResponse(
         DiscountType discountType,
         Integer discountValue,
         Integer usableCount,
-        CouponStatus couponStatus,
+        CouponStatus status,
         Long orderId,
         LocalDateTime issuedAt,
         LocalDateTime usedAt
