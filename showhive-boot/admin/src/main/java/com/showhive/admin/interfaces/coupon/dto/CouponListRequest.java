@@ -1,7 +1,7 @@
 package com.showhive.admin.interfaces.coupon.dto;
 
-import com.showhive.coupon.domain.CouponStatus;
+import com.showhive.coupon.domain.Status;
 import lombok.Builder;
 
 @Builder
-public record CouponListRequest(CouponStatus couponStatus, Integer page, Integer size) { }
+public record CouponListRequest(Status status, Integer page, Integer size) { }

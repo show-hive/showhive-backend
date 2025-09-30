@@ -3,7 +3,10 @@ package com.showhive.coupon.domain;
 import com.showhive.BaseEntity;
 import com.showhive.coupon.exception.CouponErrorCode;
 import com.showhive.coupon.exception.CouponException;
+import com.showhive.member.domain.Grade;
 import com.showhive.member.domain.Member;
+import com.showhive.member.domain.Role;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -50,7 +54,7 @@ public class Coupon extends BaseEntity {
     private Integer usableCount; // 쿠폰 사용 가능 횟수
 
     @Enumerated(EnumType.STRING)
-    private CouponStatus couponStatus;          // 쿠폰 상태
+    private Status status;          // 쿠폰 상태
 
     // TODO : 필요할 수도 있어서 erd에는 없지만 일단 넣음
     private String couponCode;      // 쿠폰 코드
@@ -66,27 +70,27 @@ public class Coupon extends BaseEntity {
                 .member(member)
                 .name(name)
                 .couponCode(generateCouponCode())
-                .couponStatus(CouponStatus.AVAILABLE)
+                .status(Status.AVAILABLE)
                 .build();
     }
 
     public void use(Long orderId) {
-        if (couponStatus == CouponStatus.USED) {
+        if (status == Status.USED) {
             throw new CouponException(CouponErrorCode.COUPON_ALREADY_USED);
         }
         if (isExpired()) {
             throw new CouponException(CouponErrorCode.COUPON_EXPIRED);
         }
-        this.couponStatus = CouponStatus.USED;
+        this.status = Status.USED;
         this.orderId = orderId;
         this.usedAt = LocalDateTime.now();
     }
 
     public void cancel() {
-        if (couponStatus != CouponStatus.USED) {
+        if (status != Status.USED) {
             throw new CouponException(CouponErrorCode.COUPON_NOT_USED);
         }
-        this.couponStatus = CouponStatus.CANCELLED;
+        this.status = Status.CANCELLED;
         this.orderId = null;
         this.usedAt = null;
     }
@@ -97,6 +101,6 @@ public class Coupon extends BaseEntity {
     }
 
     public boolean isUsed() {
-        return couponStatus == CouponStatus.USED;
+        return status == Status.USED;
     }
 }

@@ -1,6 +1,6 @@
 package com.showhive.coupon.domain;
 
-public enum CouponStatus {
+public enum Status {
     AVAILABLE,   // 사용가능한 상태
     USED,        // 사용된 상태
     EXPIRE,      // 만료된 상태
