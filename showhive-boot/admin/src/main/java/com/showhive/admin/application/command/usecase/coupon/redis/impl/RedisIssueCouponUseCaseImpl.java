@@ -3,7 +3,6 @@ package com.showhive.admin.application.command.usecase.coupon.redis.impl;
 import com.showhive.admin.application.command.dto.coupon.CouponDto;
 import com.showhive.admin.application.command.usecase.coupon.redis.RedisIssueCouponUseCase;
 import com.showhive.admin.application.command.usecase.couponInfo.GetCouponInfoUseCase;
-import com.showhive.admin.interfaces.coupon.dto.CreateCouponRequest;
 import com.showhive.coupon.domain.Coupon;
 import com.showhive.coupon.domain.CouponInfo;
 import com.showhive.coupon.domain.Status;
