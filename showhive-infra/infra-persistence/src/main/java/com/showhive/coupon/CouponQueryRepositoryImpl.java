@@ -1,7 +1,7 @@
 package com.showhive.coupon;
 
 import com.showhive.coupon.domain.Coupon;
-import com.showhive.coupon.domain.Status;
+import com.showhive.coupon.domain.CouponStatus;
 import com.showhive.coupon.query.CouponQueryJpaRepository;
 import com.showhive.coupon.repository.query.CouponQueryRepository;
 import java.util.Optional;
@@ -31,8 +31,8 @@ public class CouponQueryRepositoryImpl implements CouponQueryRepository {
     }
 
     @Override
-    public Page<Coupon> findByMemberIdAndStatusOrderByCreatedAtDesc(Long memberId, Status status, Pageable pageable) {
-        return couponQueryJpaRepository.findByMemberIdAndStatusOrderByCreatedAtDesc(memberId, status, pageable);
+    public Page<Coupon> findByMemberIdAndStatusOrderByCreatedAtDesc(Long memberId, CouponStatus couponStatus, Pageable pageable) {
+        return couponQueryJpaRepository.findByMemberIdAndStatusOrderByCreatedAtDesc(memberId, couponStatus, pageable);
     }
 
     @Override

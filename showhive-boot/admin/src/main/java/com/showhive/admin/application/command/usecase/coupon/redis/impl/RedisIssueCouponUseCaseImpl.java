@@ -5,7 +5,7 @@ import com.showhive.admin.application.command.usecase.couponInfo.GetCouponInfoUs
 import com.showhive.admin.interfaces.coupon.dto.CreateCouponRequest;
 import com.showhive.coupon.domain.Coupon;
 import com.showhive.coupon.domain.CouponInfo;
-import com.showhive.coupon.domain.Status;
+import com.showhive.coupon.domain.CouponStatus;
 import com.showhive.coupon.exception.CouponErrorCode;
 import com.showhive.coupon.exception.CouponException;
 import com.showhive.coupon.repository.command.CouponCommandRepository;
@@ -65,7 +65,7 @@ public class RedisIssueCouponUseCaseImpl implements RedisIssueCouponUseCase {
             // 쿠폰 발급
             return couponCommandRepository.issue(Coupon.builder()
                     .couponInfo(couponInfo)
-                    .status(Status.AVAILABLE)
+                    .couponStatus(CouponStatus.AVAILABLE)
                     .couponCode(generateCouponCode())
                     .build());
 

@@ -1,6 +1,6 @@
 package com.showhive.admin.interfaces.coupon.dto;
 
-import com.showhive.coupon.domain.Status;
+import com.showhive.coupon.domain.CouponStatus;
 import java.time.LocalDateTime;
 import lombok.Builder;
 
@@ -17,6 +17,6 @@ public record CreateCouponRequest(
 
         Integer usableCount,    // 사용가능횟수
 
-        Status status
+        CouponStatus couponStatus
 ) {
 }
