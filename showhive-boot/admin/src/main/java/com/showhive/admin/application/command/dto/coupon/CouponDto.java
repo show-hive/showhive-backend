@@ -12,7 +12,7 @@ public record CouponDto(
 
         Integer usableCount,
 
-        CouponStatus couponStatus,
+        CouponStatus status,
 
         LocalDateTime issuedAt,
 
