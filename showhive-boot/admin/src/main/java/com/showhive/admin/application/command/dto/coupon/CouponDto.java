@@ -8,6 +8,8 @@ import lombok.Builder;
 @Builder
 public record CouponDto(
 
+        Long couponInfoId,
+
         String name,
 
         Integer usableCount,
