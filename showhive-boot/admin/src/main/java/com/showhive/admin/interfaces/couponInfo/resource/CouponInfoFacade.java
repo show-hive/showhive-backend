@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 
 @Tag(name = "CouponInfo API")
 @SecurityRequirement(name = "Authorization")
-public interface CouponInfoResourceFacade {
+public interface CouponInfoFacade {
 
     @Operation(
             summary = "쿠폰 정보 생성",
