@@ -25,11 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequireRole(role = Role.MANAGER)
 @RequestMapping("/admin/v2/coupon-infos")
-public class CouponInfoResource implements CouponInfoResourceFacade{
+public class CouponInfoResource implements CouponInfoFacade {
 
     private final CreateCouponInfoUseCase createCouponInfoUseCase;
     private final GetCouponInfoUseCase getCouponInfoUseCase;
 
+    @Override
     @PostMapping
     public ResponseEntity<CouponInfoResponse> createCouponInfo(@RequestBody CreateCouponInfoRequest request)
             throws JsonProcessingException {
@@ -38,12 +39,14 @@ public class CouponInfoResource implements CouponInfoResourceFacade{
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @Override
     @GetMapping("/{couponInfoId}")
     public ResponseEntity<CouponInfoResponse> getCouponInfo(@PathVariable Long couponInfoId) {
         CouponInfoResponse response = CouponInfoResponse.from(getCouponInfoUseCase.get(couponInfoId));
         return ResponseEntity.ok(response);
     }
 
+    @Override
     @GetMapping
     public ResponseEntity<List<CouponInfoResponse>> getAllCouponInfo() {
         return ResponseEntity.ok(getCouponInfoUseCase.getAll().stream()
