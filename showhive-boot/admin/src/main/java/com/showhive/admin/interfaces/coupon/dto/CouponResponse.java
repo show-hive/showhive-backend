@@ -3,7 +3,7 @@ package com.showhive.admin.interfaces.coupon.dto;
 import com.showhive.coupon.domain.Coupon;
 import com.showhive.coupon.domain.CouponInfo;
 import com.showhive.coupon.domain.DiscountType;
-import com.showhive.coupon.domain.CouponStatus;
+import com.showhive.coupon.domain.Status;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ public record CouponResponse(
         DiscountType discountType,
         Integer discountValue,
         Integer usableCount,
-        CouponStatus couponStatus,
+        Status status,
         Long orderId,
         LocalDateTime issuedAt,
         LocalDateTime usedAt
@@ -32,7 +32,7 @@ public record CouponResponse(
                 .discountType(info.getDiscountType())   // 쿠폰 정보로부터 받아옴
                 .discountValue(info.getDiscountValue()) // 쿠폰 정보로부터 받아옴
                 .usableCount(coupon.getUsableCount())
-                .status(coupon.getCouponStatus())
+                .status(coupon.getStatus())
                 .orderId(coupon.getOrderId())
                 .issuedAt(coupon.getIssuedAt())
                 .usedAt(coupon.getUsedAt())
