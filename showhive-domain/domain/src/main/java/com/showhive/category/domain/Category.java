@@ -60,11 +60,12 @@ public class Category extends BaseEntity {
                 .value(value)
                 .description(description)
                 .sortOrder(sortOrder)
+                .level((short) 0)
                 .isActive(isActive)
                 .build();
     }
 
-    public static Category createNodeCategory(String groupCode, Category parent, String value, String description, Short level, Short sortOrder, Boolean isActive) {
+    public static Category createNodeCategory(String groupCode, Category parent, String value, String description, Short sortOrder, Boolean isActive) {
         if(parent == null) {
             throw new CategoryException(CategoryErrorCode.CATEGORY_PARENT_NOT_FOUND);
         }
@@ -74,7 +75,7 @@ public class Category extends BaseEntity {
                 .parent(parent)
                 .value(value)
                 .description(description)
-                .level(level)
+                .level((short) (parent.getLevel() + 1))
                 .sortOrder(sortOrder)
                 .isActive(isActive)
                 .build();

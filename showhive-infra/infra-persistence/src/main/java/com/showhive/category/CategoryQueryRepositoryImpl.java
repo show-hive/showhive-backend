@@ -26,4 +26,9 @@ public class CategoryQueryRepositoryImpl implements CategoryQueryRepository {
     public Optional<Category> findByIdWithChildren(Long id) {
         return queryRepository.findWithChildrenById(id);
     }
+
+    @Override
+    public Optional<Category> findByValueWithChildren(String value) {
+        return queryRepository.findWithChildrenByValue(value);
+    }
 }
