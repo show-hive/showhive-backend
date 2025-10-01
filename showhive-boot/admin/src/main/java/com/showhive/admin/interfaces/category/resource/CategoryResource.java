@@ -5,13 +5,11 @@ import com.showhive.admin.application.command.usecase.category.CreateCategoryUse
 import com.showhive.admin.application.command.usecase.category.DeleteCategoryUseCase;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
 import com.showhive.admin.application.command.usecase.category.dto.CategoryResult;
-
 import com.showhive.admin.interfaces.category.dto.CreateCategoryRequest;
 import com.showhive.admin.interfaces.category.dto.DetailCategoryResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +30,7 @@ public class CategoryResource implements CategoryFacade {
     @Override
     @PostMapping
     public void create(@Valid @RequestBody CreateCategoryRequest categoryRequest) {
-        CreateCategoryDto  createCategoryDto = CreateCategoryDto.of(categoryRequest);
+        CreateCategoryDto createCategoryDto = CreateCategoryDto.of(categoryRequest);
         createCategoryUseCase.handle(createCategoryDto);
     }
 
@@ -40,6 +38,7 @@ public class CategoryResource implements CategoryFacade {
     @DeleteMapping("/{categoryId}")
     public void delete(@PathVariable Long categoryId) {
         deleteCategoryUseCase.handle(categoryId);
+    }
 
     @GetMapping("/{categoryId}")
     public DetailCategoryResponse detail(@PathVariable Long categoryId) {
