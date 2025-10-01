@@ -1,7 +1,7 @@
 package com.showhive.admin.application.command.usecase.category;
 
-import com.showhive.admin.application.command.dto.category.CategoryResult;
+import com.showhive.admin.application.command.dto.category.DetailCategoryResult;
 
 public interface DetailCategoryUseCase {
-    CategoryResult handle(Long id);
+    DetailCategoryResult handle(Long id);
 }

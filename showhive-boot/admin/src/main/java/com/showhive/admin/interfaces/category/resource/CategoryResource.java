@@ -1,7 +1,7 @@
 package com.showhive.admin.interfaces.category.resource;
 
-import com.showhive.admin.application.command.dto.category.CategoryResult;
 import com.showhive.admin.application.command.dto.category.CreateCategoryDto;
+import com.showhive.admin.application.command.dto.category.DetailCategoryResult;
 import com.showhive.admin.application.command.usecase.category.CreateCategoryUseCase;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
 import com.showhive.admin.interfaces.category.dto.CreateCategoryRequest;
@@ -34,7 +34,7 @@ public class CategoryResource implements CategoryFacade {
     @Override
     @GetMapping("/{categoryId}")
     public DetailCategoryResponse detail(@PathVariable Long categoryId) {
-        CategoryResult result = detailCategoryUseCase.handle(categoryId);
+        DetailCategoryResult result = detailCategoryUseCase.handle(categoryId);
         return DetailCategoryResponse.from(result);
     }
 }

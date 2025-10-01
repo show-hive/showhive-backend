@@ -1,6 +1,6 @@
 package com.showhive.admin.application.command.usecase.category.impl;
 
-import com.showhive.admin.application.command.dto.category.CategoryResult;
+import com.showhive.admin.application.command.dto.category.DetailCategoryResult;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
 import com.showhive.category.domain.Category;
 import com.showhive.category.exception.CategoryErrorCode;
@@ -17,9 +17,9 @@ public class DetailCategoryUseCaseImpl implements DetailCategoryUseCase {
     private final CategoryQueryRepository queryRepository;
 
     @Override
-    public CategoryResult handle(Long id) {
+    public DetailCategoryResult handle(Long id) {
         Category category = queryRepository.findByIdWithChildren(id)
                 .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
-        return CategoryResult.from(category);
+        return DetailCategoryResult.from(category);
     }
 }

@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.showhive.admin.application.command.dto.category.CategoryResult;
+import com.showhive.admin.application.command.dto.category.DetailCategoryResult;
 import com.showhive.admin.application.command.usecase.BaseUseCaseTest;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
 import com.showhive.admin.fixture.CategoryGenerator;
@@ -39,7 +39,7 @@ class DetailCategoryUseCaseTest extends BaseUseCaseTest {
         Category sports = categoryGenerator.generateNodeCategory("ticket", "sports", "스포츠");
 
         // when
-        CategoryResult result = detailCategoryUseCase.handle(sports.getId());
+        DetailCategoryResult result = detailCategoryUseCase.handle(sports.getId());
 
         // then
         assertAll(

@@ -1,6 +1,6 @@
 package com.showhive.admin.interfaces.category.dto;
 
-import com.showhive.admin.application.command.dto.category.CategoryResult;
+import com.showhive.admin.application.command.dto.category.DetailCategoryResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public record DetailCategoryResponse(
         @Schema(description = "하위 카테고리")
         List<DetailCategoryResponse> children
 ) {
-    public static DetailCategoryResponse from(CategoryResult category) {
+    public static DetailCategoryResponse from(DetailCategoryResult category) {
         return new DetailCategoryResponse(
                 category.id(),
                 category.value(),

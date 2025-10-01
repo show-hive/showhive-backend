@@ -6,21 +6,21 @@ import java.util.List;
 /**
  * 카테고리 부모와 자식의 트리 관계를 반환
  */
-public record CategoryResult(
+public record DetailCategoryResult(
         Long id,
         String value,
         String description,
         Short sortOrder,
-        List<CategoryResult> children
+        List<DetailCategoryResult> children
 ) {
-    public static CategoryResult from(Category category) {
-        return new CategoryResult(
+    public static DetailCategoryResult from(Category category) {
+        return new DetailCategoryResult(
                 category.getId(),
                 category.getValue(),
                 category.getDescription(),
                 category.getSortOrder(),
                 category.getChildren().stream()
-                        .map(CategoryResult::from)
+                        .map(DetailCategoryResult::from)
                         .toList()
         );
     }
