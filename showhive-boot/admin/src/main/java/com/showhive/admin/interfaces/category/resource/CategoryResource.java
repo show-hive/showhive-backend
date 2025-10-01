@@ -15,18 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Validated
-@RequestMapping("/admin/v1/category")
+@RequestMapping("/admin/v1/categories")
 @RestController
 @RequiredArgsConstructor
 public class CategoryResource implements CategoryFacade {
-    private CreateCategoryUseCase createCategoryUseCase;
-    private DeleteCategoryUseCase deleteCategoryUseCase;
+    private final CreateCategoryUseCase createCategoryUseCase;
+    private final DeleteCategoryUseCase deleteCategoryUseCase;
 
     @Override
     @PostMapping
     public void create(@Valid @RequestBody CreateCategoryRequest categoryRequest) {
 
-        CreateCategoryDto  createCategoryDto = new CreateCategoryDto(categoryRequest.groupCode(),
+        CreateCategoryDto createCategoryDto = new CreateCategoryDto(categoryRequest.groupCode(),
                 categoryRequest.parentId(), categoryRequest.value(), categoryRequest.description(),
                 categoryRequest.level(), categoryRequest.level(), categoryRequest.isActive());
 
@@ -34,8 +34,8 @@ public class CategoryResource implements CategoryFacade {
     }
 
     @Override
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        deleteCategoryUseCase.handle(id);
+    @DeleteMapping("/{categoryId}")
+    public void delete(@PathVariable Long categoryId) {
+        deleteCategoryUseCase.handle(categoryId);
     }
 }
