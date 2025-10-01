@@ -1,4 +1,4 @@
-package com.showhive.admin.application.command.usecase.category.dto;
+package com.showhive.admin.application.command.dto.category;
 
 import com.showhive.category.domain.Category;
 import java.util.List;

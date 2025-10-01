@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.showhive.admin.application.command.dto.category.CategoryResult;
 import com.showhive.admin.application.command.usecase.BaseUseCaseTest;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
-import com.showhive.admin.application.command.usecase.category.dto.CategoryResult;
 import com.showhive.admin.fixture.CategoryGenerator;
 import com.showhive.category.domain.Category;
 import com.showhive.category.exception.CategoryException;

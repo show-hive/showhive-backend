@@ -1,11 +1,10 @@
 package com.showhive.admin.application.command.usecase.category.impl;
 
+import com.showhive.admin.application.command.dto.category.CategoryResult;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
-import com.showhive.admin.application.command.usecase.category.dto.CategoryResult;
 import com.showhive.category.domain.Category;
 import com.showhive.category.exception.CategoryErrorCode;
 import com.showhive.category.exception.CategoryException;
-import com.showhive.category.repository.command.CategoryCommandRepository;
 import com.showhive.category.repository.query.CategoryQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,11 @@
 package com.showhive.admin.interfaces.category.dto;
 
-import com.showhive.admin.application.command.usecase.category.dto.CategoryResult;
+import com.showhive.admin.application.command.dto.category.CategoryResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 @Schema(description = "상세 카테고리 반환")
-public record DetailCategoryResponse (
+public record DetailCategoryResponse(
         @Schema(description = "카테고리 ID")
         Long id,
         @Schema(description = "카테고리 코드값")
