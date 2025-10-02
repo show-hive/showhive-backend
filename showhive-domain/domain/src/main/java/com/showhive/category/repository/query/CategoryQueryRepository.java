@@ -11,4 +11,7 @@ public interface CategoryQueryRepository {
     Optional<Category> findCategoryByGroupCodeAndValue(String groupCode, String value);
 
     Optional<Category> findByIdWithChildren(Long id);
+
+    Optional<Category> findByValueWithChildren(String value);
+
 }

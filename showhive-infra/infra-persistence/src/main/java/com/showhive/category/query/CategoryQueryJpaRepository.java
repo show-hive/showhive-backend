@@ -12,5 +12,8 @@ public interface CategoryQueryJpaRepository extends JpaRepository<Category, Long
 
     boolean existsByGroupCodeAndValue(String groupCode, String value);
 
+    @EntityGraph(attributePaths = {"children"})
+    Optional<Category> findWithChildrenByValue(String value);
+
     Optional<Category> findOneByGroupCodeAndValue(String groupCode, String value);
 }
