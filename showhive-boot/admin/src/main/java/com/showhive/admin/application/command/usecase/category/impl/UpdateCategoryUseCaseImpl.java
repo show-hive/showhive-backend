@@ -21,16 +21,18 @@ public class UpdateCategoryUseCaseImpl implements UpdateCategoryUseCase {
 
     @Override
     public void handle(Long id, UpdateCategoryDto commandDto) {
-        Category category = queryRepository.findById(id).orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
+        Category category = queryRepository.findById(id)
+                .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
 
         // 카테고리 그룹코드, 값으로 중복 검사
-        Optional<Category> existCategoryOptional = queryRepository.findCategoryByGroupCodeAndValue(commandDto.groupCode(), commandDto.value());
+        Optional<Category> existCategoryOptional = queryRepository.findCategoryByGroupCodeAndValue(
+                commandDto.groupCode(), commandDto.value());
 
         if (existCategoryOptional.isPresent()) {
             // 변경 값이 본인과 다르지 않다면 오류 발생시킴
             boolean isSelf = existCategoryOptional.get().getId().equals(id);
 
-            if(!isSelf) {
+            if (!isSelf) {
                 throw new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND);
             }
         }
@@ -38,12 +40,12 @@ public class UpdateCategoryUseCaseImpl implements UpdateCategoryUseCase {
         // 부모 카테고리 존재시 Root가 아닌 Node로 추가 됨
         if (commandDto.parentId() != null) {
             Category parentCategory = queryRepository.findById(commandDto.parentId())
-                                                     .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
+                    .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
 
-            category.update(commandDto.groupCode(), parentCategory, commandDto.value(),
+            category.updateNode(commandDto.groupCode(), parentCategory, commandDto.value(),
                     commandDto.description(), commandDto.level(), commandDto.sortOrder(), commandDto.isActive());
         } else {
-            category.update(commandDto.groupCode(), commandDto.value(),
+            category.updateRoot(commandDto.groupCode(), commandDto.value(),
                     commandDto.description(), commandDto.level(), commandDto.sortOrder(), commandDto.isActive());
         }
 

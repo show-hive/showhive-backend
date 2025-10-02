@@ -54,19 +54,20 @@ public class Category extends BaseEntity {
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Category> children = new ArrayList<>();
 
-    public static Category createRoot(String groupCode, String value, String description, Short sortOrder, Boolean isActive) {
+    public static Category createRoot(String groupCode, String value, String description, Short sortOrder,
+                                      Boolean isActive) {
         return Category.builder()
                 .groupCode(groupCode)
                 .value(value)
                 .description(description)
                 .sortOrder(sortOrder)
-                .level((short) 0)
                 .isActive(isActive)
                 .build();
     }
 
-    public static Category createNodeCategory(String groupCode, Category parent, String value, String description, Short sortOrder, Boolean isActive) {
-        if(parent == null) {
+    public static Category createNodeCategory(String groupCode, Category parent, String value, String description,
+                                              Short level, Short sortOrder, Boolean isActive) {
+        if (parent == null) {
             throw new CategoryException(CategoryErrorCode.CATEGORY_PARENT_NOT_FOUND);
         }
 
@@ -75,13 +76,14 @@ public class Category extends BaseEntity {
                 .parent(parent)
                 .value(value)
                 .description(description)
-                .level((short) (parent.getLevel() + 1))
+                .level(level)
                 .sortOrder(sortOrder)
                 .isActive(isActive)
                 .build();
     }
 
-    public void update(String groupCode, Category parent, String value, String description, Short level, Short sortOrder, Boolean isActive) {
+    public void updateNode(String groupCode, Category parent, String value, String description, Short level,
+                           Short sortOrder, Boolean isActive) {
         this.groupCode = groupCode;
         this.parent = parent;
         this.value = value;
@@ -91,7 +93,8 @@ public class Category extends BaseEntity {
         this.isActive = isActive;
     }
 
-    public void update(String groupCode, String value, String description, Short level, Short sortOrder, Boolean isActive) {
+    public void updateRoot(String groupCode, String value, String description, Short level, Short sortOrder,
+                           Boolean isActive) {
         this.groupCode = groupCode;
         this.value = value;
         this.description = description;
