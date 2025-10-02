@@ -49,6 +49,6 @@ public class UpdateCategoryUseCaseImpl implements UpdateCategoryUseCase {
                     commandDto.description(), commandDto.level(), commandDto.sortOrder(), commandDto.isActive());
         }
 
-        commandRepository.createCategory(category);
+        commandRepository.saveCategory(category);
     }
 }
