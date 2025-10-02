@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 @Tag(name = "Venue API")
 @SecurityRequirement(name = "Authorization")
-public interface VenueResourceFacade {
+public interface VenueFacade {
 
     @Operation(
             summary = "공연장 생성",

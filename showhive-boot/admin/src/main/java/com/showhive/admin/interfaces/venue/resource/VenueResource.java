@@ -1,6 +1,7 @@
 package com.showhive.admin.interfaces.venue.resource;
 
 import com.showhive.admin.application.command.dto.venue.CreateVenueDto;
+import com.showhive.admin.application.command.dto.venue.VenueResult;
 import com.showhive.admin.application.command.usecase.venue.CreateVenueUseCase;
 import com.showhive.admin.application.command.usecase.venue.ReadVenueUseCase;
 import com.showhive.admin.interfaces.venue.dto.CreateVenueRequest;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequireRole(role = Role.MANAGER)
 @RequestMapping("/admin/v1/venues")
-public class VenueResource implements VenueResourceFacade {
+public class VenueResource implements VenueFacade {
 
     private final CreateVenueUseCase createVenueUseCase;
     private final ReadVenueUseCase readVenueUseCase;
@@ -31,15 +32,17 @@ public class VenueResource implements VenueResourceFacade {
     @PostMapping
     public ResponseEntity<VenueResponse> createVenue(@Valid @RequestBody CreateVenueRequest createVenueRequest) {
         CreateVenueDto createVenueDto = CreateVenueDto.of(createVenueRequest);
-        VenueResponse venueResponse = createVenueUseCase.handle(createVenueDto);
+        VenueResult venueResult = createVenueUseCase.handle(createVenueDto);
+        VenueResponse response = VenueResponse.from(venueResult);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(venueResponse);
+                .body(response);
     }
 
     @Override
     @GetMapping("/{venueId}")
     public ResponseEntity<VenueResponse> readVenue(@PathVariable long venueId) {
-        VenueResponse response = readVenueUseCase.handle(venueId);
+        VenueResult venueResult = readVenueUseCase.handle(venueId);
+        VenueResponse response = VenueResponse.from(venueResult);
         return ResponseEntity.ok(response);
     }
 }

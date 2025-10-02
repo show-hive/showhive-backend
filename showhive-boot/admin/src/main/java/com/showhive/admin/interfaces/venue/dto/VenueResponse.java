@@ -1,6 +1,6 @@
 package com.showhive.admin.interfaces.venue.dto;
 
-import com.showhive.venue.domain.Venue;
+import com.showhive.admin.application.command.dto.venue.VenueResult;
 
 public record VenueResponse(
         long venueId,
@@ -11,9 +11,13 @@ public record VenueResponse(
         String contactNumber,
         String link
 ) {
-    public VenueResponse(Venue venue) {
-        this(venue.getId(), venue.getName(), venue.getAddress(),
-                venue.getLatitude(), venue.getLongitude(),
-                venue.getContactNumber(), venue.getLink());
+    public static VenueResponse from(VenueResult venueResult) {
+        return new VenueResponse(venueResult.venueId(),
+                venueResult.name(),
+                venueResult.address(),
+                venueResult.latitude(),
+                venueResult.longitude(),
+                venueResult.contactNumber(),
+                venueResult.link());
     }
 }

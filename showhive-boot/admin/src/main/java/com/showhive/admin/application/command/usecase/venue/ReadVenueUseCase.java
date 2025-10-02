@@ -1,8 +1,8 @@
 package com.showhive.admin.application.command.usecase.venue;
 
-import com.showhive.admin.interfaces.venue.dto.VenueResponse;
+import com.showhive.admin.application.command.dto.venue.VenueResult;
 
 public interface ReadVenueUseCase {
 
-    VenueResponse handle(long venueId);
+    VenueResult handle(long venueId);
 }
