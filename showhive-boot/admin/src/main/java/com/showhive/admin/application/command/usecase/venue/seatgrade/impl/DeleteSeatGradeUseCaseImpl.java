@@ -17,7 +17,7 @@ public class DeleteSeatGradeUseCaseImpl implements DeleteSeatGradeUseCase {
 
     @Override
     @Transactional
-    public void deleteSeatGrade(long seatGradeId) {
+    public void handle(long seatGradeId) {
         if (!seatGradeCommandRepository.existsById(seatGradeId)) {
             throw new SeatGradeException(SeatGradeErrorCode.SEAT_GRADE_NOT_FOUND);
         }

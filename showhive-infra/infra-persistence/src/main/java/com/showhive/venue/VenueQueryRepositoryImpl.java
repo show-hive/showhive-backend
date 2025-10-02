@@ -18,4 +18,9 @@ public class VenueQueryRepositoryImpl implements VenueQueryRepository {
     public Optional<Venue> findById(long venueId) {
         return venueQueryJpaRepository.findById(venueId);
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        return venueQueryJpaRepository.existsByName(name);
+    }
 }

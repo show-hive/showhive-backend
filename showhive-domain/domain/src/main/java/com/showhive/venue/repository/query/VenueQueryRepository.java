@@ -8,4 +8,5 @@ public interface VenueQueryRepository {
 
     Optional<Venue> findById(long venueId);
 
+    boolean existsByName(String name);
 }

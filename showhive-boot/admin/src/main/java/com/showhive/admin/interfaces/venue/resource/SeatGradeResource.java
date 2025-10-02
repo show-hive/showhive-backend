@@ -67,7 +67,7 @@ public class SeatGradeResource implements SeatGradeResourceFacade {
     public ResponseEntity<Void> updatePerformance(@PathVariable long seatGradeId,
                                                   @Valid @RequestBody SeatGradeRequest updateRequest) {
         SeatGradeDto commandDto = SeatGradeDto.of(updateRequest);
-        updateSeatGradeUseCase.update(seatGradeId, commandDto);
+        updateSeatGradeUseCase.handle(seatGradeId, commandDto);
         return ResponseEntity.ok()
                 .build();
     }
@@ -75,7 +75,7 @@ public class SeatGradeResource implements SeatGradeResourceFacade {
     @Override
     @DeleteMapping("/{seatGradeId}")
     public ResponseEntity<Void> deleteSeatGrade(@PathVariable long seatGradeId) {
-        deleteSeatGradeUseCase.deleteSeatGrade(seatGradeId);
+        deleteSeatGradeUseCase.handle(seatGradeId);
         return ResponseEntity.noContent()
                 .build();
     }

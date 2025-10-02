@@ -19,7 +19,7 @@ public class UpdateSeatGradeUseCaseImpl implements UpdateSeatGradeUseCase {
 
     @Override
     @Transactional
-    public void update(long seatGradeId, SeatGradeDto commandDto) {
+    public void handle(long seatGradeId, SeatGradeDto commandDto) {
         SeatGrade seatGrade = seatGradeQueryRepository.findById(seatGradeId)
                 .orElseThrow(() -> new SeatGradeException(SeatGradeErrorCode.SEAT_GRADE_NOT_FOUND));
         seatGrade.changeGrade(commandDto.grade());
