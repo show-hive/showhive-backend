@@ -10,6 +10,8 @@ public interface CategoryQueryJpaRepository extends JpaRepository<Category, Long
     @EntityGraph(attributePaths = {"children"})
     Optional<Category> findWithChildrenById(@Param("id") Long id);
 
+    Optional<Category> findByIdAndIsActiveIsTrue(@Param("id") Long id);
+
     boolean existsByGroupCodeAndValue(String groupCode, String value);
 
     @EntityGraph(attributePaths = {"children"})

@@ -22,16 +22,16 @@ public class CategoryGenerator {
 
     public Category generateNodeCategory(String parentCode, String value, String description) {
         Category parent = null;
-        if(parentCode != null && !parentCode.isBlank()) {
+        if (parentCode != null && !parentCode.isBlank()) {
             parent = queryRepository.findByValueWithChildren(parentCode)
                     .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_PARENT_NOT_FOUND));
         }
 
         int size = parent != null && parent.getChildren() != null ? parent.getChildren().size() : 0;
         short sortOrder = (short) (size + 1);
-        Category category = Category.createNodeCategory(GROUP_CODE, parent, value, description,  sortOrder, IS_ACTIVE);
+        Category category = Category.createNodeCategory(GROUP_CODE, parent, value, description, sortOrder, IS_ACTIVE);
 
-        return commandRepository.createCategory(category);
+        return commandRepository.saveCategory(category);
     }
 
     public void generateRootCategory() {
@@ -51,7 +51,7 @@ public class CategoryGenerator {
                     (short) sortOrder.getAndIncrement(),
                     IS_ACTIVE
             );
-            commandRepository.createCategory(category);
+            commandRepository.saveCategory(category);
         });
     }
 }
