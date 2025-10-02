@@ -66,17 +66,18 @@ public class Category extends BaseEntity {
     }
 
     public static Category createNodeCategory(String groupCode, Category parent, String value, String description,
-                                              Short level, Short sortOrder, Boolean isActive) {
+                                              Short sortOrder, Boolean isActive) {
         if (parent == null) {
             throw new CategoryException(CategoryErrorCode.CATEGORY_PARENT_NOT_FOUND);
         }
+        short childLevel = parent.getLevel() != null ? (short) (parent.getLevel() + 1) : 0;
 
         return Category.builder()
                 .groupCode(groupCode)
                 .parent(parent)
                 .value(value)
                 .description(description)
-                .level(level)
+                .level(childLevel)
                 .sortOrder(sortOrder)
                 .isActive(isActive)
                 .build();
