@@ -1,10 +1,10 @@
 package com.showhive.admin.interfaces.category.resource;
 
 import com.showhive.admin.application.command.dto.category.CreateCategoryDto;
+import com.showhive.admin.application.command.dto.category.DetailCategoryResult;
 import com.showhive.admin.application.command.usecase.category.CreateCategoryUseCase;
 import com.showhive.admin.application.command.usecase.category.DeleteCategoryUseCase;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
-import com.showhive.admin.application.command.usecase.category.dto.CategoryResult;
 import com.showhive.admin.interfaces.category.dto.CreateCategoryRequest;
 import com.showhive.admin.interfaces.category.dto.DetailCategoryResponse;
 import jakarta.validation.Valid;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Validated
-@RequestMapping("/admin/v1/category")
+@RequestMapping("/admin/v1/categories")
 @RestController
 @RequiredArgsConstructor
 public class CategoryResource implements CategoryFacade {
@@ -42,7 +42,7 @@ public class CategoryResource implements CategoryFacade {
 
     @GetMapping("/{categoryId}")
     public DetailCategoryResponse detail(@PathVariable Long categoryId) {
-        CategoryResult result = detailCategoryUseCase.handle(categoryId);
+        DetailCategoryResult result = detailCategoryUseCase.handle(categoryId);
         return DetailCategoryResponse.from(result);
     }
 }
