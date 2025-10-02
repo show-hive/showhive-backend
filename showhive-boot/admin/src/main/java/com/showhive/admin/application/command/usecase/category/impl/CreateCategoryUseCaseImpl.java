@@ -32,7 +32,7 @@ public class CreateCategoryUseCaseImpl implements CreateCategoryUseCase {
         // 부모 카테고리 존재시 Root가 아닌 Node로 추가 됨
         if (commandDto.parentId() != null) {
             Category parentCategory = queryRepository.findById(commandDto.parentId())
-                                                     .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
+                    .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
 
             category = Category.createNodeCategory(commandDto.groupCode(), parentCategory, commandDto.value(),
                     commandDto.description(), commandDto.sortOrder(), commandDto.isActive());
@@ -41,6 +41,6 @@ public class CreateCategoryUseCaseImpl implements CreateCategoryUseCase {
                     commandDto.description(), commandDto.sortOrder(), commandDto.isActive());
         }
 
-        commandRepository.createCategory(category);
+        commandRepository.saveCategory(category);
     }
 }

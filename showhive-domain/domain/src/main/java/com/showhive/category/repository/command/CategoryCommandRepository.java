@@ -3,5 +3,5 @@ package com.showhive.category.repository.command;
 import com.showhive.category.domain.Category;
 
 public interface CategoryCommandRepository {
-    Category createCategory(Category category);
+    Category saveCategory(Category category);
 }
