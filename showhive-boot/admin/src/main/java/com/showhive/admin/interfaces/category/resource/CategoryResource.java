@@ -5,11 +5,11 @@ import com.showhive.admin.application.command.dto.category.DetailCategoryResult;
 import com.showhive.admin.application.command.dto.category.UpdateCategoryDto;
 import com.showhive.admin.application.command.usecase.category.CreateCategoryUseCase;
 import com.showhive.admin.application.command.usecase.category.DeleteCategoryUseCase;
-import com.showhive.admin.application.command.usecase.category.UpdateCategoryUseCase;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
+import com.showhive.admin.application.command.usecase.category.UpdateCategoryUseCase;
 import com.showhive.admin.interfaces.category.dto.CreateCategoryRequest;
-import com.showhive.admin.interfaces.category.dto.UpdateCategoryRequest;
 import com.showhive.admin.interfaces.category.dto.DetailCategoryResponse;
+import com.showhive.admin.interfaces.category.dto.UpdateCategoryRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -41,9 +41,8 @@ public class CategoryResource implements CategoryFacade {
 
     @Override
     @PutMapping("/{categoryId}")
-    public void update(Long categoryId, UpdateCategoryRequest updateRequest) {
+    public void update(@PathVariable Long categoryId, UpdateCategoryRequest updateRequest) {
         UpdateCategoryDto updateCategoryDto = UpdateCategoryDto.of(updateRequest);
-
         updateCategoryUseCase.handle(categoryId, updateCategoryDto);
     }
 
