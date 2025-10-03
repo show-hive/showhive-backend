@@ -1,6 +1,7 @@
 package com.showhive.admin.interfaces;
 
 import com.showhive.admin.DataBaseCleaner;
+import com.showhive.admin.fixture.CouponInfoGenerator;
 import com.showhive.admin.fixture.MemberGenerator;
 import com.showhive.admin.fixture.SeatGenerator;
 import com.showhive.admin.fixture.SeatGradeGenerator;
@@ -37,6 +38,9 @@ public abstract class BaseResourceTest {
 
     @Autowired
     protected VenueGenerator venueGenerator;
+
+    @Autowired
+    protected CouponInfoGenerator couponInfoGenerator;
 
     @LocalServerPort
     private int port;

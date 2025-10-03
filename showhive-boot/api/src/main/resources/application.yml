@@ -46,6 +46,9 @@ springdoc:
     filter: true # Tag로 검색
     url: /api-docs
 
+server:
+  port: 8081
+
 cors:
   origin: http://localhost:5173
 

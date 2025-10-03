@@ -30,6 +30,16 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 7001:6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: 레포 내 코드 불러오기
         uses: actions/checkout@v4

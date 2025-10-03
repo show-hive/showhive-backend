@@ -14,5 +14,10 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
 
+  data:
+    redis:
+      host: localhost
+      port: 7001 # node1
+
 jwt:
   secret: asdgabaahdstfavassgyhjuuuuutjgddsfadgrtshfgsdhydsrthtrssssssssssf

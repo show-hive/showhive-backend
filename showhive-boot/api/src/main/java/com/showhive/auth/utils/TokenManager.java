@@ -53,10 +53,10 @@ public class TokenManager {
 
     public long parseToken(String token) {
         try {
-            if (token != null && token.startsWith(PREFIX)) {
-                token = token.substring(PREFIX.length());
+            if (token == null || !token.startsWith(PREFIX)) {
+                throw new ShowHiveException(ErrorCode.INVALID_TOKEN.getMessage(), ErrorCode.INVALID_TOKEN.getStatusCode());
             }
-            Claims claims = parseClaims(token);
+            Claims claims = parseClaims(token.substring(PREFIX.length()));
             return Long.parseLong(claims.getSubject());
         } catch (ExpiredJwtException exception) {
             throw new ShowHiveException(ErrorCode.EXPIRED_TOKEN.getMessage(), ErrorCode.EXPIRED_TOKEN.getStatusCode());
