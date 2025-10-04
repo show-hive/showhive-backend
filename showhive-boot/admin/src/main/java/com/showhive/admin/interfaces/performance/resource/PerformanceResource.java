@@ -3,12 +3,15 @@ package com.showhive.admin.interfaces.performance.resource;
 import com.showhive.admin.application.command.dto.CreatePerformanceDto;
 import com.showhive.admin.application.command.usecase.performance.CreatePerformanceUseCase;
 import com.showhive.admin.interfaces.performance.dto.CreatePerformanceRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Validated
 @RequestMapping("/admin/v1/performance")
 @Controller
 @RequiredArgsConstructor
@@ -16,7 +19,7 @@ public class PerformanceResource {
     private final CreatePerformanceUseCase createPerformanceUseCase;
 
     @PostMapping
-    public void createPerformance(@RequestBody CreatePerformanceRequest createRequest) {
+    public void createPerformance(@Valid @RequestBody CreatePerformanceRequest createRequest) {
         CreatePerformanceDto commandDto = CreatePerformanceDto.of(createRequest);
 
         createPerformanceUseCase.handle(commandDto);

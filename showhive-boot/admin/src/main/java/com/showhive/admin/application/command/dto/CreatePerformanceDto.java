@@ -3,6 +3,7 @@ package com.showhive.admin.application.command.dto;
 import com.showhive.admin.interfaces.performance.dto.CreatePerformanceRequest;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Builder;
 
 @Builder
@@ -13,6 +14,7 @@ public record CreatePerformanceDto(
         Short ageRating,
         String advantage,
         String performanceInfo,
+        List<Long> categoryIds,
         LocalDateTime bookStartedAt,
         LocalDateTime bookEndedAt
 ) {
@@ -23,6 +25,7 @@ public record CreatePerformanceDto(
                 .ageRating(request.ageRating())
                 .advantage(request.advantage())
                 .performanceInfo(request.performanceInfo())
+                .categoryIds(request.categoryIds())
                 .bookStartedAt(request.bookStartedAt())
                 .bookEndedAt(request.bookEndedAt())
                 .build();

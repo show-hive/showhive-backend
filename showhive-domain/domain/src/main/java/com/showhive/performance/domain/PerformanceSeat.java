@@ -10,7 +10,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,4 +40,8 @@ public class PerformanceSeat extends BaseEntity {
 
     @Column(name = "seat_grade")
     private String grade;
+
+    public PerformanceSeat create() {
+        return null;
+    }
 }

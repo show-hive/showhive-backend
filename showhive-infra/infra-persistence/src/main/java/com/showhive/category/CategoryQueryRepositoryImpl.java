@@ -3,6 +3,7 @@ package com.showhive.category;
 import com.showhive.category.domain.Category;
 import com.showhive.category.query.CategoryQueryJpaRepository;
 import com.showhive.category.repository.query.CategoryQueryRepository;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,11 @@ public class CategoryQueryRepositoryImpl implements CategoryQueryRepository {
     @Override
     public Optional<Category> findById(Long id) {
         return queryRepository.findById(id);
+    }
+
+    @Override
+    public List<Category> findByIds(List<Long> categoryIds) {
+        return queryRepository.findAllByIdIn(categoryIds);
     }
 
     @Override

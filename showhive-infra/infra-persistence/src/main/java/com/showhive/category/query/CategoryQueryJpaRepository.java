@@ -1,6 +1,7 @@
 package com.showhive.category.query;
 
 import com.showhive.category.domain.Category;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,6 @@ public interface CategoryQueryJpaRepository extends JpaRepository<Category, Long
 
     @EntityGraph(attributePaths = {"children"})
     Optional<Category> findWithChildrenByValue(String value);
+
+    List<Category> findAllByIdIn(List<Long> ids);
 }
