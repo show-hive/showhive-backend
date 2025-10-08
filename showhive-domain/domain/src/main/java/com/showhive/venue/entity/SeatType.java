@@ -1,10 +1,9 @@
-package com.showhive.venue.domain;
+package com.showhive.venue.entity;
 
 import com.showhive.venue.exception.SeatErrorCode;
 import com.showhive.venue.exception.SeatException;
-import lombok.Getter;
-
 import java.util.Arrays;
+import lombok.Getter;
 
 @Getter
 public enum SeatType {
