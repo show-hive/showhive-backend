@@ -1,7 +1,6 @@
-package com.showhive.reservation.domain;
+package com.showhive.performance.entity;
 
 import com.showhive.BaseEntity;
-import com.showhive.performance.entity.PerformanceSeat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,37 +8,35 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "reservation_items")
+@Table(name = "performance_sessions")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class ReservationItem extends BaseEntity {
+public class PerformanceSession extends BaseEntity {
 
+    @Column(name = "session_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reservation_item_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reservation_id")
-    private Reservation reservation;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "performance_id", nullable = false)
+    private Performance performance;
 
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "seat_id", referencedColumnName = "seat_id"),
-            @JoinColumn(name = "performance_id", referencedColumnName = "performance_id")
-    })
-    private PerformanceSeat performanceSeat;
+    private LocalTime startAt;
 
+    private LocalTime endAt;
+
+    private Short sessionName;
 }

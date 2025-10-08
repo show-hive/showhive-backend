@@ -1,7 +1,7 @@
 package com.showhive.venue;
 
 import com.showhive.venue.command.SeatGradeCommandJpaRepository;
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.entity.SeatGrade;
 import com.showhive.venue.repository.command.SeatGradeCommandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

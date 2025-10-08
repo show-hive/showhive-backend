@@ -1,9 +1,9 @@
 package com.showhive.admin.fixture;
 
-import com.showhive.venue.domain.Seat;
-import com.showhive.venue.domain.SeatGrade;
-import com.showhive.venue.domain.SeatType;
-import com.showhive.venue.domain.Venue;
+import com.showhive.venue.entity.Seat;
+import com.showhive.venue.entity.SeatGrade;
+import com.showhive.venue.entity.SeatType;
+import com.showhive.venue.entity.Venue;
 import com.showhive.venue.repository.command.SeatCommandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

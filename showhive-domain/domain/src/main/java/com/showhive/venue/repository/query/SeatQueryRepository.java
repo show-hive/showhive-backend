@@ -1,7 +1,6 @@
 package com.showhive.venue.repository.query;
 
-import com.showhive.venue.domain.Seat;
-
+import com.showhive.venue.entity.Seat;
 import java.util.Optional;
 
 public interface SeatQueryRepository {

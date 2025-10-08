@@ -2,7 +2,7 @@ package com.showhive.admin.application.command.usecase.venue.seatgrade.impl;
 
 import com.showhive.admin.application.command.dto.venue.SeatGradeDto;
 import com.showhive.admin.application.command.usecase.venue.seatgrade.UpdateSeatGradeUseCase;
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.entity.SeatGrade;
 import com.showhive.venue.exception.SeatGradeErrorCode;
 import com.showhive.venue.exception.SeatGradeException;
 import com.showhive.venue.repository.query.SeatGradeQueryRepository;

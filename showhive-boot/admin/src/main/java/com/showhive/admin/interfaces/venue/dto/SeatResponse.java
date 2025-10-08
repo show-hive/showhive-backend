@@ -1,7 +1,7 @@
 package com.showhive.admin.interfaces.venue.dto;
 
 import com.showhive.admin.application.command.dto.venue.VenueResult;
-import com.showhive.venue.domain.Seat;
+import com.showhive.venue.entity.Seat;
 
 public record SeatResponse(
         long seatId,

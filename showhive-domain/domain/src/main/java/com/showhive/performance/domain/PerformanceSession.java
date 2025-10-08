@@ -1,42 +1,48 @@
 package com.showhive.performance.domain;
 
-import com.showhive.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import java.time.LocalTime;
+import com.showhive.performance.domain.vo.Money;
+import com.showhive.performance_seat.domain.PerformanceSeatPrice;
+import com.showhive.venue.domain.SeatGrade;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "performance_sessions")
-@Entity
+/**
+ * 공연 회차
+ */
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class PerformanceSession extends BaseEntity {
+public class PerformanceSession {
+    private PerformanceSessionId id;
+    private LocalDateTime startAt;
+    private LocalDateTime endAt;
+    private String name;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    @Column(name = "session_id")
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private List<Casting> castings = new ArrayList<>();
+    private List<PerformanceSeatPrice> gradePrices = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "performance_id", nullable = false)
-    private Performance performance;
+    public void addCasting(Casting casting) {
+        castings.add(casting);
+    }
 
-    private LocalTime startAt;
+    public void setGradePrice(SeatGrade grade, Money price) {
+        gradePrices.add(new PerformanceSeatPrice(grade, price));
+    }
 
-    private LocalTime endAt;
-
-    private Short sessionName;
+    public Money getPriceForGrade(SeatGrade grade) {
+        return gradePrices.stream()
+                .filter(g -> g.grade().equals(grade))
+                .findFirst()
+                .map(PerformanceSeatPrice::price)
+                .orElseThrow(() -> new IllegalArgumentException("가격이 설정되지 않은 등급입니다."));
+    }
 }

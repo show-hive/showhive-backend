@@ -1,4 +1,4 @@
-package com.showhive.performance.domain;
+package com.showhive.performance.entity;
 
 import com.showhive.BaseEntity;
 import com.showhive.performance.exception.PerformanceErrorCode;

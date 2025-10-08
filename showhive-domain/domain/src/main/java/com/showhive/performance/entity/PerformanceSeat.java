@@ -1,7 +1,7 @@
-package com.showhive.performance.domain;
+package com.showhive.performance.entity;
 
 import com.showhive.BaseEntity;
-import com.showhive.venue.domain.Seat;
+import com.showhive.venue.entity.Seat;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -10,7 +10,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
