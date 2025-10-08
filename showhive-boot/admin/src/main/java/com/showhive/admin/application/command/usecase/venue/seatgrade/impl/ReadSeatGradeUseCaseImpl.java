@@ -4,16 +4,15 @@ import com.showhive.admin.application.command.usecase.venue.seatgrade.ReadSeatGr
 import com.showhive.admin.interfaces.venue.dto.SeatGradeListResponse;
 import com.showhive.admin.interfaces.venue.dto.SeatGradeResponse;
 import com.showhive.common.CursorPage;
-import com.showhive.venue.domain.Direction;
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.entity.Direction;
+import com.showhive.venue.entity.SeatGrade;
 import com.showhive.venue.exception.SeatGradeErrorCode;
 import com.showhive.venue.exception.SeatGradeException;
 import com.showhive.venue.repository.query.SeatGradeQueryRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

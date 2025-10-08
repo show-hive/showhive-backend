@@ -3,7 +3,7 @@ package com.showhive.admin.application.command.usecase.venue;
 
 import com.showhive.admin.application.command.dto.venue.CreateVenueDto;
 import com.showhive.admin.application.command.dto.venue.VenueResult;
-import com.showhive.venue.domain.Venue;
+import com.showhive.venue.entity.Venue;
 import com.showhive.venue.exception.VenueErrorCode;
 import com.showhive.venue.exception.VenueException;
 import com.showhive.venue.repository.command.VenueCommandRepository;
