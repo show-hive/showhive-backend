@@ -61,7 +61,6 @@ public class Category extends BaseEntity {
                 .value(value)
                 .description(description)
                 .sortOrder(sortOrder)
-                .level((short) 0)
                 .isActive(isActive)
                 .build();
     }
@@ -71,16 +70,38 @@ public class Category extends BaseEntity {
         if (parent == null) {
             throw new CategoryException(CategoryErrorCode.CATEGORY_PARENT_NOT_FOUND);
         }
+        short childLevel = parent.getLevel() != null ? (short) (parent.getLevel() + 1) : 0;
 
         return Category.builder()
                 .groupCode(groupCode)
                 .parent(parent)
                 .value(value)
                 .description(description)
-                .level((short) (parent.getLevel() + 1))
+                .level(childLevel)
                 .sortOrder(sortOrder)
                 .isActive(isActive)
                 .build();
+    }
+
+    public void updateNode(String groupCode, Category parent, String value, String description, Short level,
+                           Short sortOrder, Boolean isActive) {
+        this.groupCode = groupCode;
+        this.parent = parent;
+        this.value = value;
+        this.description = description;
+        this.level = level;
+        this.sortOrder = sortOrder;
+        this.isActive = isActive;
+    }
+
+    public void updateRoot(String groupCode, String value, String description, Short level, Short sortOrder,
+                           Boolean isActive) {
+        this.groupCode = groupCode;
+        this.value = value;
+        this.description = description;
+        this.level = level;
+        this.sortOrder = sortOrder;
+        this.isActive = isActive;
     }
 
     public void deactivate() {
