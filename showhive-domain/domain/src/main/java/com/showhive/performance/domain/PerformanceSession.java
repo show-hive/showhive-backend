@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,9 +34,17 @@ public class PerformanceSession extends BaseEntity {
     @JoinColumn(name = "performance_id", nullable = false)
     private Performance performance;
 
-    private LocalTime startAt;
+    private LocalDateTime startAt;
 
-    private LocalTime endAt;
+    private LocalDateTime endAt;
 
     private Short sessionName;
+
+    public static PerformanceSession create(Performance performance, LocalDateTime startAt, LocalDateTime endAt) {
+        return PerformanceSession.builder()
+                .performance(performance)
+                .startAt(startAt)
+                .endAt(endAt)
+                .build();
+    }
 }

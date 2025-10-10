@@ -2,9 +2,14 @@ package com.showhive.admin.application.command.dto;
 
 import com.showhive.admin.interfaces.performance.dto.CreatePerformanceRequest;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 public record CreatePerformanceDto(
@@ -15,6 +20,7 @@ public record CreatePerformanceDto(
         String advantage,
         String performanceInfo,
         List<Long> categoryIds,
+        List<ScheduleDto> scheduleDtoList,
         LocalDateTime bookStartedAt,
         LocalDateTime bookEndedAt
 ) {
@@ -29,5 +35,23 @@ public record CreatePerformanceDto(
                 .bookStartedAt(request.bookStartedAt())
                 .bookEndedAt(request.bookEndedAt())
                 .build();
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ScheduleDto {
+        private LocalDate scheduledAt;
+        private List<SessionDto> sessions;
+
+        @Getter
+        @Setter
+        @NoArgsConstructor
+        @AllArgsConstructor
+        public static class SessionDto {
+            String scheduleName;
+            String scheduledTime;
+        }
     }
 }
