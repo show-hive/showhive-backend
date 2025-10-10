@@ -2,7 +2,7 @@ package com.showhive.performance.domain;
 
 import com.showhive.performance.domain.vo.Money;
 import com.showhive.performance_seat.domain.PerformanceSeatPrice;
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.domain.SeatGradeDomain;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +34,11 @@ public class PerformanceSession {
         castings.add(casting);
     }
 
-    public void setGradePrice(SeatGrade grade, Money price) {
+    public void setGradePrice(SeatGradeDomain grade, Money price) {
         gradePrices.add(new PerformanceSeatPrice(grade, price));
     }
 
-    public Money getPriceForGrade(SeatGrade grade) {
+    public Money getPriceForGrade(SeatGradeDomain grade) {
         return gradePrices.stream()
                 .filter(g -> g.grade().equals(grade))
                 .findFirst()

@@ -1,6 +1,6 @@
 package com.showhive.admin.fixture;
 
-import com.showhive.category.domain.Category;
+import com.showhive.category.entity.Category;
 import com.showhive.category.exception.CategoryErrorCode;
 import com.showhive.category.exception.CategoryException;
 import com.showhive.category.repository.command.CategoryCommandRepository;
@@ -29,7 +29,8 @@ public class CategoryGenerator {
 
         int size = parent != null && parent.getChildren() != null ? parent.getChildren().size() : 0;
         short sortOrder = (short) (size + 1);
-        Category category = Category.createNodeCategory(GROUP_CODE, parent, value, description, sortOrder, IS_ACTIVE);
+        Category category = Category.createNodeCategory(GROUP_CODE, parent, value, description, sortOrder,
+                IS_ACTIVE);
 
         return commandRepository.saveCategory(category);
     }

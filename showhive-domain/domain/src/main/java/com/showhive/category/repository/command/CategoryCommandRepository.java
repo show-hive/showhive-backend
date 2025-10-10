@@ -1,6 +1,6 @@
 package com.showhive.category.repository.command;
 
-import com.showhive.category.domain.Category;
+import com.showhive.category.entity.Category;
 
 public interface CategoryCommandRepository {
     Category saveCategory(Category category);

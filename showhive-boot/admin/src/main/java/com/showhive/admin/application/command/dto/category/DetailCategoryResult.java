@@ -1,6 +1,6 @@
 package com.showhive.admin.application.command.dto.category;
 
-import com.showhive.category.domain.CategoryDomain;
+import com.showhive.category.entity.Category;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ public record DetailCategoryResult(
         Short sortOrder,
         List<DetailCategoryResult> children
 ) {
-    public static DetailCategoryResult from(CategoryDomain category) {
+    public static DetailCategoryResult from(Category category) {
         return new DetailCategoryResult(
                 category.getId(),
                 category.getValue(),

@@ -1,6 +1,6 @@
 package com.showhive.category.query;
 
-import com.showhive.category.domain.Category;
+import com.showhive.category.entity.Category;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

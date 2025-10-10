@@ -1,5 +1,6 @@
 package com.showhive.performance_seat.domain;
 
+import java.util.Arrays;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -12,4 +13,11 @@ public enum SessionSeatStatus {
     ;
 
     private final String description;
+
+    public static SessionSeatStatus fromString(String description) {
+        return Arrays.stream(SessionSeatStatus.values())
+                .filter(sessionSeatStatus ->  sessionSeatStatus.name().equals(description))
+                .findFirst()
+                .orElse(SessionSeatStatus.AVAILABLE);
+    }
 }
