@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CreatePerformanceUseCaseImpl implements CreatePerformanceUseCase {
-    private final PerformanceCommandRepository performanceRepository;
+//    private final PerformanceCommandRepository performanceRepository;
 
     @Override
     public void handle(CreatePerformanceDto commandDto) {

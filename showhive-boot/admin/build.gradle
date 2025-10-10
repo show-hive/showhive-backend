@@ -11,7 +11,7 @@ dependencies {
 
     implementation project(':showhive-domain:domain')
     implementation project(':showhive-infra:infra-persistence')
-    implementation project(':showhive-infra:infra-performance-seat')
+    implementation project(':showhive-infra:infra-ticketing-seat')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
