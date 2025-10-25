@@ -1,6 +1,5 @@
 package com.showhive.performance.domain;
 
-import com.showhive.BaseEntity;
 import com.showhive.category.domain.CategoryDomain;
 import com.showhive.venue.domain.VenueDomain;
 import java.time.Duration;
@@ -19,18 +18,33 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class PerformanceDomain extends BaseEntity {
+public class PerformanceDomain {
+
     private PerformanceId id;
+
     private String title;
+
     private VenueDomain venue;
+
     private Duration runningTime;
+
     private Short ageRating;
+
     private String advantage;
+
     private String performanceInfo;
+
     private String posterImageUrl;
+
     private CategoryDomain category;
+
     private LocalDateTime bookStartedAt;
+
     private LocalDateTime bookEndedAt;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 
     private List<PerformanceSession> performanceSessions;
 }
