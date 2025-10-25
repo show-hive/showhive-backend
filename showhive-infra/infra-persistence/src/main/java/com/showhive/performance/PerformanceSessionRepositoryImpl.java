@@ -22,7 +22,7 @@ public class PerformanceSessionRepositoryImpl implements PerformanceSessionRepos
                     performanceSession.getEndAt());
 
             if (duplicate) {
-                throw new PerformanceException(PerformanceErrorCode.PERFORMANCE_DUPLICATED);
+                throw new PerformanceException(PerformanceErrorCode.PERFORMANCE_SESSION_DUPLICATED);
             }
         });
 
