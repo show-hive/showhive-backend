@@ -19,4 +19,5 @@ public interface CategoryQueryJpaRepository extends JpaRepository<Category, Long
     Optional<Category> findWithChildrenByValue(String value);
 
     List<Category> findAllByIdIn(List<Long> ids);
+    Optional<Category> findOneByGroupCodeAndValue(String groupCode, String value);
 }
