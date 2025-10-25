@@ -27,6 +27,12 @@ dependencies {
     // DB
     runtimeOnly 'com.mysql:mysql-connector-j'
 
+    // XSS 방어를 위한 Jsoup
+    implementation 'org.jsoup:jsoup:1.17.2'
+
+    // JSON 처리
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
     // Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
 
