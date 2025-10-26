@@ -1,6 +1,6 @@
 package com.showhive.admin.application.command.dto.category;
 
-import com.showhive.category.domain.Category;
+import com.showhive.category.entity.Category;
 import java.util.List;
 
 /**

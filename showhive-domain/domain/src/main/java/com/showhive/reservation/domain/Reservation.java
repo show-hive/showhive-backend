@@ -2,7 +2,7 @@ package com.showhive.reservation.domain;
 
 import com.showhive.BaseEntity;
 import com.showhive.member.domain.Member;
-import com.showhive.performance.domain.PerformanceSession;
+import com.showhive.performance.entity.PerformanceSession;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

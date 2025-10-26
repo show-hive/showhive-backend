@@ -1,6 +1,6 @@
 package com.showhive.venue.repository.command;
 
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.entity.SeatGrade;
 
 public interface SeatGradeCommandRepository {
 

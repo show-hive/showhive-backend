@@ -1,8 +1,7 @@
-package com.showhive.performance.domain;
+package com.showhive.performance.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
@@ -25,8 +24,12 @@ public class PerformanceCategoryId implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof PerformanceCategoryId)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof PerformanceCategoryId)) {
+            return false;
+        }
         PerformanceCategoryId that = (PerformanceCategoryId) obj;
         return Objects.equals(performanceId, that.performanceId) &&
                 Objects.equals(categoryId, that.categoryId);

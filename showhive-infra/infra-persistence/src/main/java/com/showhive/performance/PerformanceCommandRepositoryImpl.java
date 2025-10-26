@@ -1,7 +1,7 @@
 package com.showhive.performance;
 
 import com.showhive.performance.command.PerformanceCommandJpaRepository;
-import com.showhive.performance.domain.Performance;
+import com.showhive.performance.entity.Performance;
 import com.showhive.performance.repository.command.PerformanceCommandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

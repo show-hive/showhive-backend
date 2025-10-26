@@ -1,12 +1,11 @@
 package com.showhive.venue;
 
-import com.showhive.venue.domain.Venue;
+import com.showhive.venue.entity.Venue;
 import com.showhive.venue.query.VenueQueryJpaRepository;
 import com.showhive.venue.repository.query.VenueQueryRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
