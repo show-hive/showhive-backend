@@ -1,4 +1,4 @@
-package com.showhive.performance.domain;
+package com.showhive.performance.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -24,8 +24,12 @@ public class PerformanceSeatId implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof PerformanceSeatId)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof PerformanceSeatId)) {
+            return false;
+        }
         PerformanceSeatId that = (PerformanceSeatId) obj;
         return Objects.equals(seatId, that.seatId) &&
                 Objects.equals(performanceId, that.performanceId);

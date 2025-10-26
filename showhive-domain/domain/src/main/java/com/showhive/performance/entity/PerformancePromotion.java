@@ -1,4 +1,4 @@
-package com.showhive.performance.domain;
+package com.showhive.performance.entity;
 
 import com.showhive.BaseEntity;
 import com.showhive.file.domain.File;
@@ -23,18 +23,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class PerformancePromotion extends BaseEntity {
 
-        @Id
-        @Column(name = "promotion_id")
-        private Long id;
+    @Id
+    @Column(name = "promotion_id")
+    private Long id;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "performance_id", nullable = false)
-        private Performance performance;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "performance_id", nullable = false)
+    private Performance performance;
 
-        // File 엔티티와 ManyToOne 관계 (아이콘)
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "icon_id")
-        private File icon;
+    // File 엔티티와 ManyToOne 관계 (아이콘)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "icon_id")
+    private File icon;
 
-        private String description;
+    private String description;
 }

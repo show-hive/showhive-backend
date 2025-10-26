@@ -1,7 +1,7 @@
 package com.showhive.venue;
 
 import com.showhive.venue.command.SeatCommandJpaRepository;
-import com.showhive.venue.domain.Seat;
+import com.showhive.venue.entity.Seat;
 import com.showhive.venue.repository.command.SeatCommandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -2,8 +2,8 @@ package com.showhive.admin.application.command.usecase.venue.seat.impl;
 
 import com.showhive.admin.application.command.usecase.venue.seat.ReadSeatUseCase;
 import com.showhive.admin.interfaces.venue.dto.SeatResponse;
-import com.showhive.venue.domain.Seat;
-import com.showhive.venue.domain.Venue;
+import com.showhive.venue.entity.Seat;
+import com.showhive.venue.entity.Venue;
 import com.showhive.venue.exception.SeatErrorCode;
 import com.showhive.venue.exception.SeatException;
 import com.showhive.venue.exception.VenueErrorCode;

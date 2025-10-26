@@ -1,7 +1,7 @@
-package com.showhive.performance.domain;
+package com.showhive.performance.entity;
 
 import com.showhive.BaseEntity;
-import com.showhive.category.domain.Category;
+import com.showhive.venue.entity.Seat;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -16,27 +16,32 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "performance_category_maps")
+@Table(name = "performance_seats")
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class PerformanceCategoryMap extends BaseEntity {
-
+public class PerformanceSeat extends BaseEntity {
     @EmbeddedId
-    private PerformanceCategoryId id;
+    private PerformanceSeatId id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("seatId")
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("performanceId")
     @JoinColumn(name = "performance_id")
     private Performance performance;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("categoryId")
-    @JoinColumn(name = "category_id")
-    private Category category;
+    private int price;
 
-    @Column(name = "priority")
-    private Integer priority;
+    @Column(name = "seat_grade")
+    private String grade;
+
+    public PerformanceSeat create() {
+        return null;
+    }
 }

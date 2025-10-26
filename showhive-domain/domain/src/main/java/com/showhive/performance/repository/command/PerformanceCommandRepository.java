@@ -1,6 +1,6 @@
 package com.showhive.performance.repository.command;
 
-import com.showhive.performance.domain.Performance;
+import com.showhive.performance.entity.Performance;
 import java.util.Optional;
 
 public interface PerformanceCommandRepository {

@@ -10,3 +10,4 @@ include 'showhive-domain:domain'
 // infra
 include 'showhive-infra:infra-import'
 include 'showhive-infra:infra-persistence'
+include 'showhive-infra:infra-ticketing-seat'

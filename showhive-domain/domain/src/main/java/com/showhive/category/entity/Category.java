@@ -1,4 +1,4 @@
-package com.showhive.category.domain;
+package com.showhive.category.entity;
 
 import com.showhive.BaseEntity;
 import com.showhive.category.exception.CategoryErrorCode;

@@ -1,6 +1,6 @@
 package com.showhive.venue.query;
 
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.entity.SeatGrade;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -2,7 +2,7 @@ package com.showhive.admin.application.command.usecase.venue.seatgrade.impl;
 
 import com.showhive.admin.application.command.dto.venue.SeatGradeDto;
 import com.showhive.admin.application.command.usecase.venue.seatgrade.CreateSeatGradeUseCase;
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.entity.SeatGrade;
 import com.showhive.venue.repository.command.SeatGradeCommandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

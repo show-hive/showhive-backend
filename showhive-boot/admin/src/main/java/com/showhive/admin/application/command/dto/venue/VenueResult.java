@@ -1,6 +1,6 @@
 package com.showhive.admin.application.command.dto.venue;
 
-import com.showhive.venue.domain.Venue;
+import com.showhive.venue.entity.Venue;
 
 public record VenueResult(
         long venueId,

@@ -8,7 +8,7 @@ import com.showhive.admin.application.command.dto.category.DetailCategoryResult;
 import com.showhive.admin.application.command.usecase.BaseUseCaseTest;
 import com.showhive.admin.application.command.usecase.category.DetailCategoryUseCase;
 import com.showhive.admin.fixture.CategoryGenerator;
-import com.showhive.category.domain.Category;
+import com.showhive.category.entity.Category;
 import com.showhive.category.exception.CategoryException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

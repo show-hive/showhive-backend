@@ -1,7 +1,7 @@
 package com.showhive.category;
 
 import com.showhive.category.command.CategoryCommandJpaRepository;
-import com.showhive.category.domain.Category;
+import com.showhive.category.entity.Category;
 import com.showhive.category.query.CategoryQueryJpaRepository;
 import com.showhive.category.repository.command.CategoryCommandRepository;
 import lombok.RequiredArgsConstructor;

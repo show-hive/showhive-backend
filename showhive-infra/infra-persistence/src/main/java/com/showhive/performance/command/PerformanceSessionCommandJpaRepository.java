@@ -1,6 +1,6 @@
 package com.showhive.performance.command;
 
-import com.showhive.performance.domain.PerformanceSession;
+import com.showhive.performance.entity.PerformanceSession;
 import java.time.LocalDateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,16 +1,15 @@
 package com.showhive.venue;
 
 import com.showhive.common.CursorPage;
-import com.showhive.venue.domain.Direction;
-import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.entity.Direction;
+import com.showhive.venue.entity.SeatGrade;
 import com.showhive.venue.query.SeatGradeQueryJpaRepository;
 import com.showhive.venue.repository.query.SeatGradeQueryRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
