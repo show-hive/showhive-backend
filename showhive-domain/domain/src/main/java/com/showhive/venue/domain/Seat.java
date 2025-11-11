@@ -14,11 +14,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class SeatDomain {
+public class Seat {
     private SeatId id;
     private String column;
     private Short row;
     private Short floor;
-    private SeatGradeDomain grade;
+    private SeatGrade grade;
     private SeatType type;
+    private VenueId venueId;
 }

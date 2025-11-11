@@ -1,4 +1,4 @@
-package com.showhive.venue.domain;
+package com.showhive.performance.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -6,14 +6,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-/**
- * 좌석 등급
- */
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class SeatGradeDomain {
-    private SeatGradeId id;
-    private String grade;
+public class PerformanceCategoryMap {
+    private PerformanceCategoryId id;
+    private Integer priority;
 }

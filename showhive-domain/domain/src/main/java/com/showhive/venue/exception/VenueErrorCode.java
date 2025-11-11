@@ -8,7 +8,7 @@ public enum VenueErrorCode {
     //4XX
     VENUE_NOT_FOUND(404, "존재하지 않는 공연장입니다."),
     VENUE_ALREADY_EXISTS(400, "이미 존재하는 공연장입니다.");
-
+    
     private final int statusCode;
     private final String message;
 

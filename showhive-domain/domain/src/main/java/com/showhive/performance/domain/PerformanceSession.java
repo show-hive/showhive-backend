@@ -2,7 +2,7 @@ package com.showhive.performance.domain;
 
 import com.showhive.performance.domain.vo.Money;
 import com.showhive.performance_seat.domain.PerformanceSeatPrice;
-import com.showhive.venue.domain.SeatGradeDomain;
+import com.showhive.venue.domain.SeatGrade;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,27 +30,32 @@ public class PerformanceSession {
     private List<Casting> castings = new ArrayList<>();
     private List<PerformanceSeatPrice> gradePrices = new ArrayList<>();
 
+    public static PerformanceSession create(Performance performance, LocalDateTime startAt, LocalDateTime endAt,
+                                            String name) {
+        return PerformanceSession.builder()
+                .id(PerformanceSessionId.builder()
+                        .performanceId(performance.getId().getPerformanceId())
+                        .build()
+                )
+                .startAt(startAt)
+                .endAt(endAt)
+                .name(name)
+                .build();
+    }
+
     public void addCasting(Casting casting) {
         castings.add(casting);
     }
 
-    public void setGradePrice(SeatGradeDomain grade, Money price) {
+    public void setGradePrice(SeatGrade grade, Money price) {
         gradePrices.add(new PerformanceSeatPrice(grade, price));
     }
 
-    public Money getPriceForGrade(SeatGradeDomain grade) {
+    public Money getPriceForGrade(SeatGrade grade) {
         return gradePrices.stream()
                 .filter(g -> g.grade().equals(grade))
                 .findFirst()
                 .map(PerformanceSeatPrice::price)
                 .orElseThrow(() -> new IllegalArgumentException("가격이 설정되지 않은 등급입니다."));
-    }
-
-    public static PerformanceSession create(Performance performance, LocalDateTime startAt, LocalDateTime endAt) {
-        return PerformanceSession.builder()
-                .performance(performance)
-                .startAt(startAt)
-                .endAt(endAt)
-                .build();
     }
 }

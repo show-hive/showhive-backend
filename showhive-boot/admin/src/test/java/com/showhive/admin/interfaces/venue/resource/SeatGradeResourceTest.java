@@ -8,7 +8,7 @@ import com.showhive.admin.interfaces.venue.dto.SeatGradeListResponse;
 import com.showhive.admin.interfaces.venue.dto.SeatGradeRequest;
 import com.showhive.admin.interfaces.venue.dto.SeatGradeResponse;
 import com.showhive.member.domain.Member;
-import com.showhive.venue.entity.SeatGrade;
+import com.showhive.venue.entity.SeatGradeEntity;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -64,7 +64,7 @@ class SeatGradeResourceTest extends BaseResourceTest {
     @DisplayName("특정 좌석 등급을 조회할 수 있다.")
     @Test
     void read_seat_grade() {
-        SeatGrade seatGrade = seatGradeGenerator.generateSeatGrade("R");
+        SeatGradeEntity seatGrade = seatGradeGenerator.generateSeatGrade("R");
 
         SeatGradeResponse seatGradeResponse = given()
                 .contentType(ContentType.JSON)
@@ -80,7 +80,7 @@ class SeatGradeResourceTest extends BaseResourceTest {
     @DisplayName("특정 좌석 등급을 수정할 수 있다.")
     @Test
     void edit_seat_grade() {
-        SeatGrade seatGrade = seatGradeGenerator.generateSeatGrade("R");
+        SeatGradeEntity seatGrade = seatGradeGenerator.generateSeatGrade("R");
         SeatGradeRequest updateRequest = new SeatGradeRequest("S");
 
         given()
@@ -96,7 +96,7 @@ class SeatGradeResourceTest extends BaseResourceTest {
     @DisplayName("특정 좌석 등급을 삭제할 수 있다.")
     @Test
     void delete_seat_grade() {
-        SeatGrade seatGrade = seatGradeGenerator.generateSeatGrade("R");
+        SeatGradeEntity seatGrade = seatGradeGenerator.generateSeatGrade("R");
 
         given()
                 .contentType(ContentType.JSON)
@@ -110,7 +110,7 @@ class SeatGradeResourceTest extends BaseResourceTest {
     @DisplayName("존재하지 않는 특정 좌석 등급을 삭제할 시 예외가 발생한다.")
     @Test
     void cannot_delete_when_seat_grade_not_exists() {
-        SeatGrade seatGrade = seatGradeGenerator.generateSeatGrade("R");
+        SeatGradeEntity seatGrade = seatGradeGenerator.generateSeatGrade("R");
 
         given()
                 .contentType(ContentType.JSON)

@@ -26,16 +26,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Seat extends BaseEntity {
+public class SeatEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "venue_id")
-    private Venue venue;
+    private VenueEntity venue;
 
     private String seatColumn;
 
@@ -47,14 +47,14 @@ public class Seat extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SeatType seatType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seat_grade_id")
-    private SeatGrade seatGrade;
+    private SeatGradeEntity seatGrade;
 
-    public static Seat create(Venue venue, String seatColumn,
-                              Short seatRow, Short seatFloor,
-                              SeatType seatType, SeatGrade seatGrade) {
-        return Seat.builder()
+    public static SeatEntity create(VenueEntity venue, String seatColumn,
+                                    Short seatRow, Short seatFloor,
+                                    SeatType seatType, SeatGradeEntity seatGrade) {
+        return SeatEntity.builder()
                 .venue(venue)
                 .seatColumn(seatColumn)
                 .seatRow(seatRow)
@@ -64,7 +64,7 @@ public class Seat extends BaseEntity {
                 .build();
     }
 
-    public boolean isInVenue(Venue venue) {
+    public boolean isInVenue(VenueEntity venue) {
         return Objects.equals(this.getVenue().getId(), venue.getId());
     }
 }

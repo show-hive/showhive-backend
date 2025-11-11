@@ -1,13 +1,14 @@
 package com.showhive.performance.entity;
 
 import com.showhive.BaseEntity;
-import com.showhive.file.domain.File;
+import com.showhive.category.entity.CategoryEntity;
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,26 +16,27 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Table(name = "performance_category_maps")
+@Entity
 @Getter
 @Builder
-@Entity
-@Table(name = "performance_promotions")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class PerformancePromotion extends BaseEntity {
+public class PerformanceCategoryMapEntity extends BaseEntity {
 
-    @Id
-    @Column(name = "promotion_id")
-    private Long id;
+    @EmbeddedId
+    private PerformanceCategoryEntityId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "performance_id", nullable = false)
+    @MapsId("performanceId")
+    @JoinColumn(name = "performance_id")
     private PerformanceEntity performance;
 
-    // File 엔티티와 ManyToOne 관계 (아이콘)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "icon_id")
-    private File icon;
+    @MapsId("categoryId")
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
 
-    private String description;
+    @Column(name = "priority")
+    private Integer priority;
 }

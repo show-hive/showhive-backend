@@ -1,7 +1,7 @@
 package com.showhive.performance.entity;
 
 import com.showhive.BaseEntity;
-import com.showhive.venue.entity.Seat;
+import com.showhive.venue.entity.SeatEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -29,12 +29,12 @@ public class PerformanceSeat extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("seatId")
     @JoinColumn(name = "seat_id")
-    private Seat seat;
+    private SeatEntity seat;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("performanceId")
     @JoinColumn(name = "performance_id")
-    private Performance performance;
+    private PerformanceEntity performance;
 
     private int price;
 

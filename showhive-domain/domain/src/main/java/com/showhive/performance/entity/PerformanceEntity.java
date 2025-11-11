@@ -1,8 +1,10 @@
 package com.showhive.performance.entity;
 
 import com.showhive.BaseEntity;
+import com.showhive.performance.domain.PerformanceStatus;
 import com.showhive.performance.exception.PerformanceErrorCode;
 import com.showhive.performance.exception.PerformanceException;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,15 +12,18 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Table(name = "performances")
 @Entity
@@ -26,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Performance extends BaseEntity {
+public class PerformanceEntity extends BaseEntity {
 
     @Column(name = "performance_id")
     @Id
@@ -54,10 +59,19 @@ public class Performance extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private PerformanceStatus status;
 
+    private String posterImageUrl;
 
-    public static Performance create(String title, Long venueId, Long runningTime, Short ageRating,
-                                     String advantage, String performanceInfo, LocalDateTime bookStartedAt,
-                                     LocalDateTime bookEndedAt) {
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "performance_id")
+    private List<PerformanceSessionEntity> performanceSessions = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "performance_id")
+    private List<PerformanceCategoryMapEntity> categories = new ArrayList<>();
+
+    public static PerformanceEntity create(String title, Long venueId, Long runningTime, Short ageRating,
+                                           String advantage, String performanceInfo, LocalDateTime bookStartedAt,
+                                           LocalDateTime bookEndedAt) {
         bookStartedAt = bookStartedAt.withSecond(0).withNano(0);
         bookEndedAt = bookEndedAt.withSecond(0).withNano(0);
         if (bookStartedAt.isAfter(bookEndedAt)) {
@@ -70,7 +84,7 @@ public class Performance extends BaseEntity {
             status = PerformanceStatus.ONGOING;
         }
 
-        return Performance.builder()
+        return PerformanceEntity.builder()
                 .title(title)
                 .venueId(venueId)
                 .runningTime(runningTime)
@@ -83,19 +97,11 @@ public class Performance extends BaseEntity {
                 .build();
     }
 
-    @Getter
-    @RequiredArgsConstructor
-    public enum PerformanceStatus {
-        READY("예매 정보 및 회차 세팅 완료. 오픈 준비 중"),
-        ONGOING("예매 진행 중"),
-        SOLD_OUT("전 회차 매진"),
-        FINISHED("전 회차가 종료"),
-        CLOSED("예매 종료"),
-        CANCELED("주최 측 사정으로 공연 취소 됨"),
-        POSTPONED("공연이 연기"),
-        ARCHIVED("끝난 공연을 이력 보관용으로 유지"),
-        ;
+    public void addPerformanceSession(List<PerformanceSessionEntity> performanceSessionEntities) {
+        performanceSessions.addAll(performanceSessionEntities);
+    }
 
-        private final String description;
+    public void addCategory(List<PerformanceCategoryMapEntity> performanceCategoryMapEntities) {
+        categories.addAll(performanceCategoryMapEntities);
     }
 }

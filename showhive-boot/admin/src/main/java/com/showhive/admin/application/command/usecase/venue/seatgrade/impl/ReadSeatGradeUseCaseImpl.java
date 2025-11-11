@@ -5,7 +5,7 @@ import com.showhive.admin.interfaces.venue.dto.SeatGradeListResponse;
 import com.showhive.admin.interfaces.venue.dto.SeatGradeResponse;
 import com.showhive.common.CursorPage;
 import com.showhive.venue.entity.Direction;
-import com.showhive.venue.entity.SeatGrade;
+import com.showhive.venue.entity.SeatGradeEntity;
 import com.showhive.venue.exception.SeatGradeErrorCode;
 import com.showhive.venue.exception.SeatGradeException;
 import com.showhive.venue.repository.query.SeatGradeQueryRepository;
@@ -30,9 +30,9 @@ public class ReadSeatGradeUseCaseImpl implements ReadSeatGradeUseCase {
             lastGradeId = Long.MAX_VALUE;
         }
 
-        CursorPage<SeatGrade> seatGradeSlice = seatGradeQueryRepository.findSeatGradesBy(lastGradeId, pageSize,
+        CursorPage<SeatGradeEntity> seatGradeSlice = seatGradeQueryRepository.findSeatGradesBy(lastGradeId, pageSize,
                 keyword, validDirection);
-        List<SeatGrade> seatGrades = seatGradeSlice.contents();
+        List<SeatGradeEntity> seatGrades = seatGradeSlice.contents();
         boolean loadable = seatGradeSlice.hasNext();
 
         return new SeatGradeListResponse(seatGrades.stream()
@@ -43,7 +43,7 @@ public class ReadSeatGradeUseCaseImpl implements ReadSeatGradeUseCase {
 
     @Override
     public SeatGradeResponse readSeatGrade(long seatGradeId) {
-        SeatGrade seatGrade = seatGradeQueryRepository.findById(seatGradeId)
+        SeatGradeEntity seatGrade = seatGradeQueryRepository.findById(seatGradeId)
                 .orElseThrow(() -> new SeatGradeException(SeatGradeErrorCode.SEAT_GRADE_NOT_FOUND));
         return new SeatGradeResponse(seatGrade.getId(), seatGrade.getGrade());
     }

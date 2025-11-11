@@ -1,12 +1,11 @@
 package com.showhive.performance.repository.command;
 
-import com.showhive.performance.entity.Performance;
-import java.util.Optional;
+import com.showhive.performance.domain.Performance;
 
 public interface PerformanceCommandRepository {
     Performance savePerformance(Performance performance);
 
-    Optional<Performance> findPerformanceById(Long id);
+    Performance findPerformanceById(Long performanceId);
 
     boolean existsPerformanceById(Long id);
 }

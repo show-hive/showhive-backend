@@ -1,12 +1,12 @@
 package com.showhive.venue.query;
 
+import com.showhive.venue.entity.SeatEntity;
 import java.util.List;
 import org.springframework.data.jpa.repository.EntityGraph;
-import com.showhive.venue.entity.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SeatQueryJpaRepository extends JpaRepository<Seat, Long> {
+public interface SeatQueryJpaRepository extends JpaRepository<SeatEntity, Long> {
 
     @EntityGraph(attributePaths = {"seatGrade"})
-    List<Seat> findByVenue_Id(Long venueId);
+    List<SeatEntity> findByVenue_Id(Long venueId);
 }

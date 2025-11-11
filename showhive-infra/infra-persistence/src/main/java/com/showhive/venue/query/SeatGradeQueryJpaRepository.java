@@ -1,29 +1,29 @@
 package com.showhive.venue.query;
 
-import com.showhive.venue.entity.SeatGrade;
+import com.showhive.venue.entity.SeatGradeEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface SeatGradeQueryJpaRepository extends JpaRepository<SeatGrade, Long> {
+public interface SeatGradeQueryJpaRepository extends JpaRepository<SeatGradeEntity, Long> {
 
     @Query("""
-                SELECT sg FROM SeatGrade sg
+                SELECT sg FROM SeatGradeEntity sg
                 WHERE sg.id < :lastGradeId
                           AND (:keyword IS NULL OR sg.grade LIKE %:keyword%)
                 ORDER BY sg.id DESC
             """)
-    Slice<SeatGrade> findSliceByKeywordAndIdLessThan(@Param("lastGradeId") long lastGradeId, Pageable pageable,
-                                                     @Param("keyword") String keyword);
+    Slice<SeatGradeEntity> findSliceByKeywordAndIdLessThan(@Param("lastGradeId") long lastGradeId, Pageable pageable,
+                                                           @Param("keyword") String keyword);
 
     @Query("""
-                SELECT sg FROM SeatGrade sg
+                SELECT sg FROM SeatGradeEntity sg
                 WHERE sg.id > :lastGradeId
                           AND (:keyword IS NULL OR sg.grade LIKE %:keyword%)
                 ORDER BY sg.id ASC
             """)
-    Slice<SeatGrade> findSliceByKeywordAndIdGreaterThan(@Param("lastGradeId") long lastGradeId, Pageable pageable,
-                                                        @Param("keyword") String keyword);
+    Slice<SeatGradeEntity> findSliceByKeywordAndIdGreaterThan(@Param("lastGradeId") long lastGradeId, Pageable pageable,
+                                                              @Param("keyword") String keyword);
 }

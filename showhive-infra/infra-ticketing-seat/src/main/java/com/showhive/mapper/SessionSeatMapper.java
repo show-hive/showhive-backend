@@ -23,7 +23,11 @@ public class SessionSeatMapper {
     public SessionSeatDomain toDomain(SessionSeatDocument entity) {
         return SessionSeatDomain.builder()
                 .sessionSeatId(SessionSeatIdConverter.fromCompositeKey(entity.getId()))
-                .performanceSessionId(new PerformanceSessionId(entity.getPerformanceSessionId()))
+                .performanceSessionId(PerformanceSessionId.builder()
+                        .performanceId(entity.getPerformanceId())
+                        .performanceSessionId(entity.getPerformanceSessionId())
+                        .build()
+                )
                 .sessionSeatId(new SessionSeatId(entity.getSeatId(), entity.getPerformanceId()))
                 .status(SessionSeatStatus.fromString(entity.getStatus().name()))
                 .build();
