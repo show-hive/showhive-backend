@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CastringId {
+public class CastingId {
     private Long castingId;
 }
