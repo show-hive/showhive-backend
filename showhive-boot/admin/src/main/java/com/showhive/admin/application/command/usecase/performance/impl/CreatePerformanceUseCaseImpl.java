@@ -9,7 +9,6 @@ import com.showhive.category.exception.CategoryException;
 import com.showhive.category.repository.query.CategoryQueryRepository;
 import com.showhive.performance.domain.Performance;
 import com.showhive.performance.domain.PerformanceCategoryMap;
-import com.showhive.performance.mapper.PerformanceCategoryMapper;
 import com.showhive.performance.repository.command.PerformanceCommandRepository;
 import com.showhive.performance.repository.query.PerformanceCategoryMapQueryRepository;
 import com.showhive.venue.domain.Venue;
@@ -28,7 +27,6 @@ public class CreatePerformanceUseCaseImpl implements CreatePerformanceUseCase {
     private final VenueQueryRepository venueQueryRepository;
     private final PerformanceCategoryMapQueryRepository categoryPerformanceQueryRepository;
     private final CategoryQueryRepository categoryQueryRepository;
-    private final PerformanceCategoryMapper performanceCategoryMapper;
 
     @Override
     public void handle(CreatePerformanceDto commandDto) {

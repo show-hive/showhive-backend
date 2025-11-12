@@ -13,4 +13,11 @@ import lombok.NoArgsConstructor;
 public class PerformanceSessionId {
     private Long performanceSessionId;
     private Long performanceId;
+
+    public static PerformanceSessionId of(Long performanceSessionId, Long performanceId) {
+        return PerformanceSessionId.builder()
+                .performanceSessionId(performanceSessionId)
+                .performanceId(performanceId)
+                .build();
+    }
 }
