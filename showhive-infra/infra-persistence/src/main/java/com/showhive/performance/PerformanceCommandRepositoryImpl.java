@@ -27,8 +27,10 @@ public class PerformanceCommandRepositoryImpl implements PerformanceCommandRepos
     public Performance savePerformance(Performance performance) {
         PerformanceEntity performanceEntity = performanceEntityMapper.toEntity(performance);
         commandRepository.save(performanceEntity);
+
         List<PerformanceCategoryMapEntity> performanceCategoryMapEntities =
                 categoryMapQueryJpaRepository.findAllByPerformanceId(performanceEntity.getId());
+
         return performanceDomainMapper.toDomain(performanceEntity, performanceCategoryMapEntities);
     }
 

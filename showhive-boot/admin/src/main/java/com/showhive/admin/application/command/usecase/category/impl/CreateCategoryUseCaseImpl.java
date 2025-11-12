@@ -2,7 +2,7 @@ package com.showhive.admin.application.command.usecase.category.impl;
 
 import com.showhive.admin.application.command.dto.category.CreateCategoryDto;
 import com.showhive.admin.application.command.usecase.category.CreateCategoryUseCase;
-import com.showhive.category.entity.Category;
+import com.showhive.category.domain.Category;
 import com.showhive.category.exception.CategoryErrorCode;
 import com.showhive.category.exception.CategoryException;
 import com.showhive.category.repository.command.CategoryCommandRepository;
@@ -20,7 +20,7 @@ public class CreateCategoryUseCaseImpl implements CreateCategoryUseCase {
 
     @Override
     public void handle(CreateCategoryDto commandDto) {
-        Category category = null;
+        Category category;
 
         // 카테고리 그룹코드, 값으로 중복 검사
         boolean existCategory = queryRepository.existsCategory(commandDto.groupCode(), commandDto.value());

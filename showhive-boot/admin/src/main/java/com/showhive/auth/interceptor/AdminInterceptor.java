@@ -23,7 +23,8 @@ public class AdminInterceptor implements HandlerInterceptor {
     private final TokenManager tokenManager;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
         if (handler instanceof HandlerMethod handlerMethod) {
             checkRequiredRole(handlerMethod, request);
         }

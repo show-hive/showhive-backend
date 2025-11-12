@@ -2,10 +2,9 @@ package com.showhive.member;
 
 import com.showhive.member.domain.Member;
 import com.showhive.member.repository.MemberRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor

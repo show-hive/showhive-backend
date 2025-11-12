@@ -1,6 +1,7 @@
 package com.showhive.category.repository.query;
 
-import com.showhive.category.entity.Category;
+import com.showhive.category.domain.Category;
+import java.util.List;
 import java.util.Optional;
 
 public interface CategoryQueryRepository {

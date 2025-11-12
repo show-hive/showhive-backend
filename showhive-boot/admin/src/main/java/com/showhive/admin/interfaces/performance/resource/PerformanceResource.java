@@ -2,11 +2,12 @@ package com.showhive.admin.interfaces.performance.resource;
 
 import com.showhive.admin.application.command.dto.CreatePerformanceDto;
 import com.showhive.admin.application.command.usecase.performance.CreatePerformanceUseCase;
-import com.showhive.admin.application.command.usecase.performance.CreateSessionUsecase;
+import com.showhive.admin.application.command.usecase.performance.CreateSessionUseCase;
 import com.showhive.admin.interfaces.category.dto.CreateSessionRequest;
 import com.showhive.admin.interfaces.performance.dto.CreatePerformanceRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class PerformanceResource {
     private final CreatePerformanceUseCase createPerformanceUseCase;
-    private final CreateSessionUsecase createSessionUsecase;
+    private final CreateSessionUseCase createSessionUsecase;
 
     @PostMapping
     public void createPerformance(@Valid @RequestBody CreatePerformanceRequest createRequest) {
@@ -31,7 +32,7 @@ public class PerformanceResource {
 
 
     @PostMapping("/{performanceId}/sessions")
-    public void addSession(
+    public ResponseEntity<Void> addSession(
             @PathVariable Long performanceId,
             @RequestBody @Valid CreateSessionRequest request) {
 

@@ -1,7 +1,7 @@
 package com.showhive.venue.repository.command;
 
-import com.showhive.venue.entity.SeatEntity;
+import com.showhive.venue.domain.Seat;
 
 public interface SeatCommandRepository {
-    SeatEntity create(SeatEntity seat);
+    Seat create(Seat seat);
 }

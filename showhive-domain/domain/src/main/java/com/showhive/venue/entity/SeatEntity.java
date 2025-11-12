@@ -13,7 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,9 +61,5 @@ public class SeatEntity extends BaseEntity {
                 .seatType(seatType)
                 .seatGrade(seatGrade)
                 .build();
-    }
-
-    public boolean isInVenue(VenueEntity venue) {
-        return Objects.equals(this.getVenue().getId(), venue.getId());
     }
 }

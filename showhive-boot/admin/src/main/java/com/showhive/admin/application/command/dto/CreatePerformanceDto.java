@@ -43,6 +43,9 @@ public record CreatePerformanceDto(
         @Schema(description = "공연 상세 정보 (HTML 형식)", example = "<p>세계적인 명작 뮤지컬을 새롭게 만나다!</p>", requiredMode = RequiredMode.REQUIRED)
         String performanceInfo,
 
+        @Schema(description = "공연 썸네일 이미지. presigned url 이용", example = "<p>세계적인 명작 뮤지컬을 새롭게 만나다!</p>", requiredMode = RequiredMode.NOT_REQUIRED)
+        String posterImageUrl,
+
         @NotNull(message = "공연 카테고리 ID 목록은 필수입니다.")
         @Size(min = 1, message = "최소 한 개 이상의 카테고리를 선택해야 합니다.")
         @Schema(description = "공연 카테고리 ID 목록", example = "[1, 3, 5]", requiredMode = RequiredMode.REQUIRED)

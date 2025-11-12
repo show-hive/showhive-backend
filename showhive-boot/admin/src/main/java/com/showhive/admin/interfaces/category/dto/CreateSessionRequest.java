@@ -34,7 +34,7 @@ public class CreateSessionRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class SessionRequest {
-
+        // 25.11.15 일
         @NotNull(message = "공연 일자는 필수입니다.")
         @FutureOrPresent(message = "공연 일자는 오늘 이후여야 합니다.")
         @Schema(description = "공연 일자", example = "2025-12-24", requiredMode = RequiredMode.REQUIRED)

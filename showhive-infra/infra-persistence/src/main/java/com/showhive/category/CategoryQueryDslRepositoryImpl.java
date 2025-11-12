@@ -1,7 +1,7 @@
 package com.showhive.category;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.showhive.category.entity.Category;
+import com.showhive.category.entity.CategoryEntity;
 import com.showhive.category.query.CategoryQueryDslRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ public class CategoryQueryDslRepositoryImpl implements CategoryQueryDslRepositor
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Category> findActiveWithChildrenById(Long parentId) {
+    public List<CategoryEntity> findActiveWithChildrenById(Long parentId) {
         return List.of();
     }
 }
