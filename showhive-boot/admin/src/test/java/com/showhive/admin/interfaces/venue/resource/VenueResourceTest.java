@@ -7,7 +7,7 @@ import com.showhive.admin.interfaces.BaseResourceTest;
 import com.showhive.admin.interfaces.venue.dto.CreateVenueRequest;
 import com.showhive.admin.interfaces.venue.dto.VenueResponse;
 import com.showhive.member.domain.Member;
-import com.showhive.venue.entity.VenueEntity;
+import com.showhive.venue.domain.Venue;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -62,7 +62,7 @@ class VenueResourceTest extends BaseResourceTest {
     @DisplayName("특정 공연장을 조회할 수 있다.")
     @Test
     void read_seat() {
-        VenueEntity venue = venueGenerator.generateVenue("임지현 아트 센터");
+        Venue venue = venueGenerator.generateVenue("임지현 아트 센터");
 
         VenueResponse venueResponse = given()
                 .contentType(ContentType.JSON)
@@ -73,7 +73,7 @@ class VenueResourceTest extends BaseResourceTest {
                 .extract().as(VenueResponse.class);
 
         assertAll(
-                () -> assertThat(venueResponse.venueId()).isEqualTo(venue.getId()),
+                () -> assertThat(venueResponse.venueId()).isEqualTo(venue.getId().getVenueId()),
                 () -> assertThat(venueResponse.name()).isEqualTo(venue.getName())
         );
     }
