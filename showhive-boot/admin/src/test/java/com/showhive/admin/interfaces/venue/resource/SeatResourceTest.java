@@ -1,16 +1,18 @@
 package com.showhive.admin.interfaces.venue.resource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.showhive.admin.interfaces.BaseResourceTest;
 import com.showhive.admin.interfaces.venue.dto.SeatRequest;
 import com.showhive.admin.interfaces.venue.dto.SeatResponse;
 import com.showhive.member.domain.Member;
-import com.showhive.venue.entity.SeatEntity;
+import com.showhive.venue.domain.Seat;
+import com.showhive.venue.domain.SeatGrade;
+import com.showhive.venue.domain.SeatGradeId;
+import com.showhive.venue.domain.Venue;
 import com.showhive.venue.entity.SeatGradeEntity;
 import com.showhive.venue.entity.SeatType;
-import com.showhive.venue.entity.VenueEntity;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +33,7 @@ class SeatResourceTest extends BaseResourceTest {
     @DisplayName("좌석을 생성할 수 있다.")
     @Test
     void create_seat() {
-        VenueEntity venue = venueGenerator.generateVenue("임지현 아트 센터");
+        Venue venue = venueGenerator.generateVenue("임지현 아트 센터");
         SeatGradeEntity seatGrade = seatGradeGenerator.generateSeatGrade("A");
 
         SeatRequest createRequest = new SeatRequest(seatGrade.getId(), null,
@@ -49,7 +51,7 @@ class SeatResourceTest extends BaseResourceTest {
     @DisplayName("유효한 좌석 타입이 아니면 예외가 발생한다.")
     @Test
     void throw_exception_when_seat_type_is_invalid() {
-        VenueEntity venue = venueGenerator.generateVenue("임지현 아트 센터");
+        Venue venue = venueGenerator.generateVenue("임지현 아트 센터");
         SeatGradeEntity seatGrade = seatGradeGenerator.generateSeatGrade("A");
 
         String invalidSeatType = "stand";
@@ -68,9 +70,15 @@ class SeatResourceTest extends BaseResourceTest {
     @DisplayName("특정 좌석을 조회할 수 있다.")
     @Test
     void read_seat() {
-        VenueEntity venue = venueGenerator.generateVenue("임지현 아트 센터");
-        SeatGradeEntity seatGrade = seatGradeGenerator.generateSeatGrade("A");
-        SeatEntity seat = seatGenerator.generateSeat(venue, seatGrade);
+        Venue venue = venueGenerator.generateVenue("임지현 아트 센터");
+        SeatGradeEntity seatGradeEntity = seatGradeGenerator.generateSeatGrade("A");
+
+        SeatGrade seatGradeDoamin = SeatGrade.builder()
+                .id(new SeatGradeId(seatGradeEntity.getId()))
+                .grade(seatGradeEntity.getGrade())
+                .build();
+
+        Seat seat = seatGenerator.generateSeat(venue, seatGradeDoamin);
 
         SeatResponse seatResponse = given()
                 .contentType(ContentType.JSON)

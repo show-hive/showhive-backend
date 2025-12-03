@@ -4,7 +4,7 @@ import com.showhive.performance.domain.PerformanceCategoryMap;
 import java.util.List;
 
 public interface PerformanceCategoryMapCommandRepository {
-    void savePerformanceCategoryList(List<PerformanceCategoryMap> performanceCategoryMaps);
+    List<PerformanceCategoryMap> savePerformanceCategoryList(List<PerformanceCategoryMap> performanceCategoryMaps);
 
-    void savePerformanceCategory(PerformanceCategoryMap performanceCategoryMap);
+    PerformanceCategoryMap savePerformanceCategory(PerformanceCategoryMap performanceCategoryMap);
 }

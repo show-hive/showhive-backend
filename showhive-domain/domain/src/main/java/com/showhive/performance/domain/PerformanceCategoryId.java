@@ -16,4 +16,11 @@ public class PerformanceCategoryId {
 
     private Long performanceId;
     private Long categoryId;
+
+    public static PerformanceCategoryId of(Long performanceId, Long categoryId) {
+        return PerformanceCategoryId.builder()
+                .performanceId(performanceId)
+                .categoryId(categoryId)
+                .build();
+    }
 }

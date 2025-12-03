@@ -5,7 +5,10 @@ import com.showhive.category.exception.CategoryErrorCode;
 import com.showhive.category.exception.CategoryException;
 import com.showhive.category.repository.command.CategoryCommandRepository;
 import com.showhive.category.repository.query.CategoryQueryRepository;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,10 +24,13 @@ public class CategoryGenerator {
     private CategoryQueryRepository queryRepository;
 
     public Category generateNodeCategory(String parentCode, String value, String description) {
-        Category parent = null;
+        generateRootCategory();
+        Category parent;
         if (parentCode != null && !parentCode.isBlank()) {
             parent = queryRepository.findByValueWithChildren(parentCode)
                     .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_PARENT_NOT_FOUND));
+        } else {
+            parent = generateNodeCategory(value);
         }
 
         int size = parent != null && parent.getChildren() != null ? parent.getChildren().size() : 0;
@@ -34,7 +40,23 @@ public class CategoryGenerator {
         return commandRepository.saveCategory(category);
     }
 
-    public void generateRootCategory() {
+    public Category generateNodeCategory(String value) {
+        generateRootCategory();
+        Optional<Category> rootCategoryOptional = queryRepository.findCategoryByGroupCodeAndValue(GROUP_CODE, "ticket");
+
+        if (rootCategoryOptional.isEmpty()) {
+            return null;
+        }
+
+        Category rootCategory = rootCategoryOptional.get();
+
+        Category category = Category.createNodeCategory(GROUP_CODE, rootCategory, value,
+                "테스트 설명", (short) rootCategory.getChildren().size(), IS_ACTIVE);
+
+        return commandRepository.saveCategory(category);
+    }
+
+    public List<Category> generateRootCategory() {
         Map<String, String> menu = Map.of(
                 "home", "홈",
                 "tour", "투어",
@@ -43,6 +65,7 @@ public class CategoryGenerator {
 
         AtomicInteger sortOrder = new AtomicInteger(0);
 
+        List<Category> categories = new ArrayList<>();
         menu.forEach((categoryName, categoryValue) -> {
             Category category = Category.createRoot(
                     GROUP_CODE,
@@ -51,7 +74,10 @@ public class CategoryGenerator {
                     (short) sortOrder.getAndIncrement(),
                     IS_ACTIVE
             );
-            commandRepository.saveCategory(category);
+            Category savedCategory = commandRepository.saveCategory(category);
+            categories.add(savedCategory);
         });
+
+        return categories;
     }
 }

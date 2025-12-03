@@ -8,25 +8,35 @@ import com.showhive.performance.repository.command.PerformanceCategoryMapCommand
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional
 public class PerformanceCategoryMapCommandRepositoryImpl implements PerformanceCategoryMapCommandRepository {
     private final PerformanceCategoryMapQueryJpaRepository jpaRepository;
     private final PerformanceCategoryMapper performanceCategoryMapper;
 
     @Override
-    public void savePerformanceCategoryList(List<PerformanceCategoryMap> performanceCategoryMaps) {
+    public List<PerformanceCategoryMap> savePerformanceCategoryList(
+            List<PerformanceCategoryMap> performanceCategoryMaps) {
         List<PerformanceCategoryMapEntity> performanceCategoryMapEntities =
                 performanceCategoryMaps.stream()
                         .map(performanceCategoryMapper::toEntity)
                         .toList();
 
         jpaRepository.saveAll(performanceCategoryMapEntities);
+
+        return performanceCategoryMapEntities.stream()
+                .map(performanceCategoryMapper::toDomain)
+                .toList();
     }
 
     @Override
-    public void savePerformanceCategory(PerformanceCategoryMap performanceCategoryMap) {
-        jpaRepository.save(performanceCategoryMapper.toEntity(performanceCategoryMap));
+    public PerformanceCategoryMap savePerformanceCategory(PerformanceCategoryMap performanceCategoryMap) {
+        PerformanceCategoryMapEntity performanceCategoryMapEntity =
+                jpaRepository.save(performanceCategoryMapper.toEntity(performanceCategoryMap));
+
+        return performanceCategoryMapper.toDomain(performanceCategoryMapEntity);
     }
 }

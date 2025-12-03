@@ -1,7 +1,6 @@
 package com.showhive.admin.fixture;
 
 import com.showhive.venue.domain.Venue;
-import com.showhive.venue.entity.VenueEntity;
 import com.showhive.venue.mapper.VenueMapper;
 import com.showhive.venue.repository.command.VenueCommandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,8 @@ public class VenueGenerator {
     @Autowired
     private VenueMapper venueMapper;
 
-    public VenueEntity generateVenue(String name) {
+    public Venue generateVenue(String name) {
         Venue venue = Venue.create(name, null, null, null, null, "link.com");
-
-        venue = venueCommandRepository.create(venue);
-        return venueMapper.toEntity(venue);
+        return venueCommandRepository.create(venue);
     }
 }
