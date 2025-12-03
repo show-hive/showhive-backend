@@ -15,8 +15,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * Controller 메서드에서 @AuthMember 애노테이션이 붙은 파라미터를 해석해,
- * 현재 로그인한 사용자의 Member 객체를 주입해주는 ArgumentResolver.
+ * Controller 메서드에서 @AuthMember 애노테이션이 붙은 파라미터를 해석해, 현재 로그인한 사용자의 Member 객체를 주입해주는 ArgumentResolver.
  * <p>
  * 즉, 컨트롤러에서는 토큰 파싱이나 멤버 조회 로직을 몰라도
  *

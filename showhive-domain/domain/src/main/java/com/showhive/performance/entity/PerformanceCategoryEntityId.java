@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PerformanceCategoryId implements Serializable {
+public class PerformanceCategoryEntityId implements Serializable {
 
     @Column(name = "performance_id")
     private Long performanceId;
@@ -27,10 +27,10 @@ public class PerformanceCategoryId implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof PerformanceCategoryId)) {
+        if (!(obj instanceof PerformanceCategoryEntityId)) {
             return false;
         }
-        PerformanceCategoryId that = (PerformanceCategoryId) obj;
+        PerformanceCategoryEntityId that = (PerformanceCategoryEntityId) obj;
         return Objects.equals(performanceId, that.performanceId) &&
                 Objects.equals(categoryId, that.categoryId);
     }

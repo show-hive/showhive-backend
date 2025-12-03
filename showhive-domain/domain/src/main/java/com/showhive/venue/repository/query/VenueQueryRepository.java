@@ -1,11 +1,10 @@
 package com.showhive.venue.repository.query;
 
-import com.showhive.venue.entity.Venue;
-import java.util.Optional;
+import com.showhive.venue.domain.Venue;
 
 public interface VenueQueryRepository {
 
-    Optional<Venue> findById(long venueId);
+    Venue findById(long venueId);
 
     boolean existsByName(String name);
 }

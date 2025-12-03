@@ -1,6 +1,5 @@
 package com.showhive.venue.domain;
 
-import com.showhive.venue.entity.SeatType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,17 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 좌석 정보
+ * 좌석 등급
  */
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class SeatDomain {
-    private SeatId id;
-    private String column;
-    private Short row;
-    private Short floor;
-    private SeatGradeDomain grade;
-    private SeatType type;
+public class SeatGrade {
+    private SeatGradeId id;
+    private String grade;
 }

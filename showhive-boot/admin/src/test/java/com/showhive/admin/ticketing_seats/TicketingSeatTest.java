@@ -16,13 +16,14 @@ public class TicketingSeatTest {
     @Autowired
     SessionSeatCommandRepository sessionSeatCommandRepository;
 
-
     @Test
     public void createSeat() {
         SessionSeatDomain domain =
                 SessionSeatDomain.builder()
                         .sessionSeatId(new SessionSeatId(1L, 2L))
-                        .performanceSessionId(new PerformanceSessionId(1L))
+                        .performanceSessionId(
+                                PerformanceSessionId.of(1L, 1L)
+                        )
                         .status(SessionSeatStatus.AVAILABLE)
                         .build();
         sessionSeatCommandRepository.save(domain);

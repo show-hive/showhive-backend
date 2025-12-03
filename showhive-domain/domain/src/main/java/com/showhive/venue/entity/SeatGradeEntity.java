@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class SeatGrade extends BaseEntity {
+public class SeatGradeEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +31,11 @@ public class SeatGrade extends BaseEntity {
     @Column(name = "seat_grade")
     private String grade;
 
-    public static SeatGrade create(String grade) {
+    public static SeatGradeEntity create(String grade) {
         if (grade.isBlank()) {
             throw new SeatGradeException(SeatGradeErrorCode.SEAT_GRADE_NOT_VALID);
         }
-        return SeatGrade.builder()
+        return SeatGradeEntity.builder()
                 .grade(grade)
                 .build();
     }

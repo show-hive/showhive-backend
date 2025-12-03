@@ -7,7 +7,7 @@ import com.showhive.admin.interfaces.BaseResourceTest;
 import com.showhive.admin.interfaces.venue.dto.CreateVenueRequest;
 import com.showhive.admin.interfaces.venue.dto.VenueResponse;
 import com.showhive.member.domain.Member;
-import com.showhive.venue.entity.Venue;
+import com.showhive.venue.domain.Venue;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -73,7 +73,7 @@ class VenueResourceTest extends BaseResourceTest {
                 .extract().as(VenueResponse.class);
 
         assertAll(
-                () -> assertThat(venueResponse.venueId()).isEqualTo(venue.getId()),
+                () -> assertThat(venueResponse.venueId()).isEqualTo(venue.getId().getVenueId()),
                 () -> assertThat(venueResponse.name()).isEqualTo(venue.getName())
         );
     }

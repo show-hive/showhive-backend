@@ -1,9 +1,12 @@
 package com.showhive.venue;
 
-import com.showhive.venue.entity.Venue;
+import com.showhive.venue.domain.Venue;
+import com.showhive.venue.entity.VenueEntity;
+import com.showhive.venue.exception.VenueErrorCode;
+import com.showhive.venue.exception.VenueException;
+import com.showhive.venue.mapper.VenueMapper;
 import com.showhive.venue.query.VenueQueryJpaRepository;
 import com.showhive.venue.repository.query.VenueQueryRepository;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,10 +15,14 @@ import org.springframework.stereotype.Repository;
 public class VenueQueryRepositoryImpl implements VenueQueryRepository {
 
     private final VenueQueryJpaRepository venueQueryJpaRepository;
+    private final VenueMapper venueMapper;
 
     @Override
-    public Optional<Venue> findById(long venueId) {
-        return venueQueryJpaRepository.findById(venueId);
+    public Venue findById(long venueId) {
+        VenueEntity venueEntity = venueQueryJpaRepository.findById(venueId)
+                .orElseThrow(() -> new VenueException(VenueErrorCode.VENUE_NOT_FOUND));
+
+        return venueMapper.toDomain(venueEntity);
     }
 
     @Override

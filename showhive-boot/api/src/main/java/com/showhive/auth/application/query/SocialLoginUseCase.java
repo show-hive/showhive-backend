@@ -124,4 +124,3 @@ public class SocialLoginUseCase {
         return new LoginResponse(accessToken, refreshToken);
     }
 }
-

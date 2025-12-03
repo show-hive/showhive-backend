@@ -29,7 +29,7 @@ public class PerformancePromotion extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "performance_id", nullable = false)
-    private Performance performance;
+    private PerformanceEntity performance;
 
     // File 엔티티와 ManyToOne 관계 (아이콘)
     @ManyToOne(fetch = FetchType.LAZY)

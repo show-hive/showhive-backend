@@ -2,7 +2,7 @@ package com.showhive.admin.application.command.usecase.category.impl;
 
 import com.showhive.admin.application.command.dto.category.UpdateCategoryDto;
 import com.showhive.admin.application.command.usecase.category.UpdateCategoryUseCase;
-import com.showhive.category.entity.Category;
+import com.showhive.category.domain.Category;
 import com.showhive.category.exception.CategoryErrorCode;
 import com.showhive.category.exception.CategoryException;
 import com.showhive.category.repository.command.CategoryCommandRepository;
@@ -42,7 +42,7 @@ public class UpdateCategoryUseCaseImpl implements UpdateCategoryUseCase {
             Category parentCategory = queryRepository.findById(commandDto.parentId())
                     .orElseThrow(() -> new CategoryException(CategoryErrorCode.CATEGORY_NOT_FOUND));
 
-            category.updateNode(commandDto.groupCode(), parentCategory, commandDto.value(),
+            category.updateNode(commandDto.groupCode(), parentCategory.getParentId(), commandDto.value(),
                     commandDto.description(), commandDto.level(), commandDto.sortOrder(), commandDto.isActive());
         } else {
             category.updateRoot(commandDto.groupCode(), commandDto.value(),

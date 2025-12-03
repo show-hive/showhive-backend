@@ -2,7 +2,7 @@ package com.showhive.reservation.domain;
 
 import com.showhive.BaseEntity;
 import com.showhive.member.domain.Member;
-import com.showhive.performance.entity.PerformanceSession;
+import com.showhive.performance.entity.PerformanceSessionEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,5 +40,5 @@ public class Reservation extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "session_id")
-    private PerformanceSession performanceSession;
+    private PerformanceSessionEntity performanceSession;
 }

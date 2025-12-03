@@ -1,10 +1,10 @@
 package com.showhive.venue.repository.command;
 
-import com.showhive.venue.entity.SeatGrade;
+import com.showhive.venue.entity.SeatGradeEntity;
 
 public interface SeatGradeCommandRepository {
 
-    void create(SeatGrade seatGrade);
+    void create(SeatGradeEntity seatGrade);
 
     boolean existsById(long seatGradeId);
 

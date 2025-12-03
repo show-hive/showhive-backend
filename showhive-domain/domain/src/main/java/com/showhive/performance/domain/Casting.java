@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Casting {
-    private CastringId id;
+    private CastingId id;
     private String actorName;
     private String castRole;
 }
